@@ -126,7 +126,7 @@ This section contains business rules, technical requirements and restrictions on
 
 |Identifier|Name|Description|
 |:---:|:---:|:---:|
-|R01|Deadline|The system should be ready to use at the end of the semester|
+|C01|Deadline|The system should be ready to use at the end of the semester|
 
 
 ## A3: Information Architecture
