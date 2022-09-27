@@ -165,6 +165,6 @@ Changes made to the first submission:
 GROUP22132, 26/09/2022
 
 * Miguel Tavares, up202002811@up.pt (Editor)
-* Gonçalo Ferreira, 202004761@up.pt
-* Domingos Santos, 201906680@up.pt 
-* João Félix , 202008867@up.pt
+* Gonçalo Ferreira, up202004761@up.pt
+* Domingos Santos, up201906680@up.pt 
+* João Félix , up202008867@up.pt
