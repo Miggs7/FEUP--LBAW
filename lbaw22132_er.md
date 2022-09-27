@@ -85,6 +85,7 @@ Table 3: User User Stories
 |US21 | Auction | High |As a Auctioneer I want to be able to put up items for auction.
 |US22 | Monitor | High |As a Auctioneer I want to be able to monitor the progress of the auction.
 |US23 | Statistics | High |As a Auctioneer I want to be able to view and review the sales statistics and ratings.
+|US24 | Remove Auction | High | As a Auctioneer I want to be able to remove an auction.
 
 Table 4: Auctioneer User Stories
 
@@ -93,9 +94,11 @@ Table 4: Auctioneer User Stories
 |Identifier|Name|Priority|Description|
 |:---:|:---:|:---:|:---:|
 | US31 | Bidding | High | As a Bidder I want to bid in auctions.
-| US32 | Cancel auction | High | As a Bidder I want to cancel auctions.
+| US32 | Cancel bid | High | As a Bidder I want to cancel my bids.
 | US33 | Review | High | As a Bidder I want to leave review or feedback of auctioneers.
 | US34 | View Statistics | High | As a Bidder I want to check the Statistics of the auctioneer.
+| US35 | View Description | High | As a Bidder I want to check a full description of the product.
+| US36 | Watchlist | Medium | As a Bidder I want to add items to the watchlist.
 
 Table 5: Bidder User Stories
 
