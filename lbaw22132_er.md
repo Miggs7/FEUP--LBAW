@@ -51,6 +51,8 @@ Figure 1: The Actors
 |Guest| Can be able to browse and to sign-up or sign-in.|
 |Manager| Can be able to manage auctions and users.|
 
+Table 1: Actors Identification
+
 
 ### 2. User Stories
 
@@ -62,7 +64,7 @@ This section includes each user stories by each type of actors.
 |US01 | Sign-in | High | As a Guest, I want to authenticate into the system so that I can access priviliged information.|
 |US02 | Sing-up | High | As a Guest, I want to register into the system so that I can authenticate myself into the system.
 
-Table 1: Guest User Stories 
+Table 2: Guest User Stories 
 
 #### 2.2. User
 
@@ -74,7 +76,7 @@ Table 1: Guest User Stories
 | US14 | Consult Contacts | Medium | As a User, I want to access contacts, so that I can come in touch with the platform creators.
 | US15 | Search | High | As a User, I want to be able to search for 
 
-Table 2: User User Stories
+Table 3: User User Stories
 
 #### 2.3 Auctioneer
 
@@ -84,7 +86,7 @@ Table 2: User User Stories
 |US22 | Monitor | High |As a Auctioneer I want to be able to monitor the progress of the auction.
 |US23 | Statistics | High |As a Auctioneer I want to be able to view and review the sales statistics and ratings.
 
-Table 3: Auctioneer User Stories
+Table 4: Auctioneer User Stories
 
 #### 2.4 Bidder
 
@@ -95,7 +97,7 @@ Table 3: Auctioneer User Stories
 | US33 | Review | High | As a Bidder I want to leave review or feedback of auctioneers.
 | US34 | View Statistics | High | As a Bidder I want to check the Statistics of the auctioneer.
 
-Table 4: Bidder User Stories
+Table 5: Bidder User Stories
 
 ### 2.5 Manager
 
@@ -105,7 +107,7 @@ Table 4: Bidder User Stories
 | US42 | Ban User | High | As a Manager I want to ban users who disrespect the rules.
 | US43 | Moderate Auction | High | As a Manager I want to be able to moderate the auctions.
 
-Table 5: Manager User Stories
+Table 6: Manager User Stories
 
 
 ### 3. Supplementary Requirements
@@ -120,7 +122,7 @@ This section contains business rules, technical requirements and restrictions on
 |BR02|Completed auction|When the auction is marked as complete future bids are closed|
 |BR03|Bidding|A item is only available for bidding if the user is logged|
 
-Table 6: Bussiness rules
+Table 7: Bussiness rules
 
 #### 3.2. Technical requirements
 
@@ -134,7 +136,7 @@ Table 6: Bussiness rules
 |TR06|Web Application|The website should be implemented as a Web application with dynamic pages (HTML, JavaScript, CSS and PHP)|
 |TR07|Scalability|The system must be prepared to deal with the growth in the number of users and their actions|
 
-Table 7: Technical requirements
+Table 8: Technical requirements
 
 #### 3.3. Restrictions
 
@@ -142,7 +144,7 @@ Table 7: Technical requirements
 |:---:|:---:|:---:|
 |C01|Deadline|The system should be ready to use at the end of the semester|
 
-Table 8: Restrictions
+Table 9: Restrictions
 
 
 ## A3: Information Architecture
