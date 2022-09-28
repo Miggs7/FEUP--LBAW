@@ -77,10 +77,10 @@ Table 3: User User Stories
 
 |Identifier|Name|Priority|Description|
 |:---:|:---:|:---:|:---:|
-|US21 | Auction | High |As a Auctioneer I want to be able to put up items for auction.|
-|US22 | Monitor | High |As a Auctioneer I want to be able to monitor the progress of the auction.|
-|US23 | Statistics | High |As a Auctioneer I want to be able to view and review the sales statistics and ratings.|
-|US24 | Remove Auction | High | As a Auctioneer I want to be able to remove an auction.|
+|US21 | Auction | High |As an Auctioneer I want to be able to put up items for auction.|
+|US22 | Monitor | High |As an Auctioneer I want to be able to monitor the progress of the auction.|
+|US23 | Statistics | High |As an Auctioneer I want to be able to view and review the sales statistics and ratings.|
+|US24 | Remove Auction | High | As an Auctioneer I want to be able to remove an auction.|
 
 Table 4: Auctioneer User Stories
 
@@ -149,7 +149,7 @@ Table 9: Restrictions
 
 ### 1. Sitemap
 
-![Figure 2, Sitemap](./assets/a3-sitemap.png) 
+![Figure 2, Sitemap](./assets/a3-sitemap.drawio.png) 
 
 Figure 2: Sitemap
 
