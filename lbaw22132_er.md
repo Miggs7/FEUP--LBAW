@@ -165,7 +165,7 @@ Figure 2: Sitemap
 
 #### UIXX: User Profile
 
-![Figure 3, User Profile](./assets/user_profile.png) 
+![Figure 4, User Profile](./assets/user_profile.png) 
 
 
 
