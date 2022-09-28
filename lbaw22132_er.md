@@ -70,6 +70,8 @@ Table 2: Guest User Stories
 | US13 | Check FAQs | Medium | As a User, I want to access the FAQs, so that I can get quick answers to common questions.|
 | US14 | Consult Contacts | Medium | As a User, I want to access contacts, so that I can come in touch with the platform creators.|
 | US15 | Search | High | As a User, I want to be able to search for items being auctioned.|
+| US16 | Check Current Bid | High | As a User I want to check the current bid of the auction.|
+| US17 | View Description | Medium | As a User I want to check a full description of the product.|
 
 
 Table 3: User User Stories
@@ -94,9 +96,8 @@ Table 4: Auctioneer User Stories
 | US32 | Cancel bid | High | As a Bidder I want to cancel my bids.|
 | US33 | Review | High | As a Bidder I want to leave review or feedback of auctioneers.|
 | US34 | View Statistics | High | As a Bidder I want to check the Statistics of the auctioneer.|
-| US35 | View Description | High | As a Bidder I want to check a full description of the product.|
-| US36 | Watchlist | Medium | As a Bidder I want to add items to the watchlist.|
-| US37 | Check Current Bid | High | As a Bidder I want to check the current bid of the auction.|
+| US35 | Watchlist | Medium | As a Bidder I want to add items to the watchlist.|
+
 
 Table 5: Bidder User Stories
 
@@ -165,10 +166,12 @@ Figure 2: Sitemap
 #### UI01: Homepage
 
 ![Figure 3, Homepage](./assets/homepage.png) 
+Figure 3: Homepage
 
-#### UIXX: User Profile
+#### UI02: User Profile
 
 ![Figure 4, User Profile](./assets/user_profile.png) 
+Figure 4: User Profile
 
 
 
