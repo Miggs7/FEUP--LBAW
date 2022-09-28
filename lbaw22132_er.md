@@ -77,10 +77,10 @@ Table 3: User User Stories
 
 |Identifier|Name|Priority|Description|
 |:---:|:---:|:---:|:---:|
-|US21 | Auction | High |As an Auctioneer I want to be able to put up items for auction.|
-|US22 | Monitor | High |As an Auctioneer I want to be able to monitor the progress of the auction.|
-|US23 | Statistics | High |As an Auctioneer I want to be able to view and review the sales statistics and ratings.|
-|US24 | Remove Auction | High | As an Auctioneer I want to be able to remove an auction.|
+|US21 | Auction | High |As a Auctioneer I want to be able to put up items for auction.|
+|US22 | Monitor | High |As a Auctioneer I want to be able to monitor the progress of the auction.|
+|US23 | Statistics | High |As a Auctioneer I want to be able to view and review the sales statistics and ratings.|
+|US24 | Remove Auction | High | As a Auctioneer I want to be able to remove an auction.|
 
 Table 4: Auctioneer User Stories
 
@@ -119,6 +119,7 @@ This section contains business rules, technical requirements and restrictions on
 |BR01|Deleted Client|When a Client(Auctioneer/Bidder) deletes his account, his actions will be also deleted.|
 |BR02|Completed auction|When the auction is marked as complete future bids are closed.|
 |BR03|Bidding|A item is only available for bidding if the user is logged.|
+|BR04|Product|A product is visible by logged and non logged users.|
 
 Table 7: Bussiness rules
 
@@ -133,6 +134,7 @@ Table 7: Bussiness rules
 |TR05|Usability|The website should be simple and easy to use.|
 |TR06|Web Application|The website should be implemented as a Web application with dynamic pages (HTML, JavaScript, CSS and PHP).|
 |TR07|Scalability|The system must be prepared to deal with the growth in the number of users and their actions.|
+|TR08|Database|The PostgreSQL database management system must be used.|
 
 Table 8: Technical requirements
 
@@ -147,20 +149,24 @@ Table 9: Restrictions
 
 ## A3: Information Architecture
 
+This artefact's main goals are: previewing the user interface of the web app, specify multiple interactions between the user and the interface and identify the previously described user requirements.
+
 ### 1. Sitemap
 
-![Figure 2, Sitemap](./assets/a3-sitemap.drawio.png) 
+![Figure 2, Sitemap](./assets/a3-sitemap.png) 
 
 Figure 2: Sitemap
 
 ### 2. Wireframes
 
-> Wireframes for, at least, two main pages of the web application.
-> Do not include trivial use cases.
+#### UI01: Homepage
 
-#### UIxx: Page Name
+![Figure 3, Homepage](./assets/homepage.png) 
 
-#### UIxx: Page Name
+#### UIXX: User Profile
+
+![Figure 3, User Profile](./assets/user_profile.png) 
+
 
 
 ---
