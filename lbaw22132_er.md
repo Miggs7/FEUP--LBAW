@@ -71,16 +71,18 @@ Table 2: Guest User Stories
 | US14 | Consult Contacts | Medium | As a User, I want to access contacts, so that I can come in touch with the platform creators.|
 | US15 | Search | High | As a User, I want to be able to search for items being auctioned.|
 
+
 Table 3: User User Stories
 
 #### 2.3 Auctioneer
 
 |Identifier|Name|Priority|Description|
 |:---:|:---:|:---:|:---:|
-|US21 | Auction | High |As an Auctioneer I want to be able to put up items for auction.|
+|US21 | Start Auction | High |As an Auctioneer I want to be able to put up items for auction.|
 |US22 | Monitor | High |As an Auctioneer I want to be able to monitor the progress of the auction.|
 |US23 | Statistics | High |As an Auctioneer I want to be able to view and review the sales statistics and ratings.|
 |US24 | Remove Auction | High | As an Auctioneer I want to be able to remove an auction.|
+|US25 | Manage Winning Bid | High | As an Auctioneer I want to be able to manage the winning bid.|
 
 Table 4: Auctioneer User Stories
 
@@ -94,6 +96,7 @@ Table 4: Auctioneer User Stories
 | US34 | View Statistics | High | As a Bidder I want to check the Statistics of the auctioneer.|
 | US35 | View Description | High | As a Bidder I want to check a full description of the product.|
 | US36 | Watchlist | Medium | As a Bidder I want to add items to the watchlist.|
+| US37 | Check Current Bid | High | As a Bidder I want to check the current bid of the auction.|
 
 Table 5: Bidder User Stories
 
