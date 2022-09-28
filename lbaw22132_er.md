@@ -1,7 +1,5 @@
 # ER: Requirements Specification Component
 
-> Project vision.
-
 # A1: PROJECT PRESENTATION - ONLINE AUCTIONS
 
 ### Context & Motivation
@@ -32,14 +30,11 @@
 
 ## A2: Actors and User stories
 
-> Brief presentation of the artefact goals.
-
-
 ### 1. Actors
 
 Users are represented in this diagram:
 
-![Figure 1, the Actors](/assets/A2.png) 
+![Figure 1, the Actors](./assets/A2.png) 
 
 Figure 1: The Actors
 
@@ -62,7 +57,7 @@ This section includes each user stories by each type of actors.
 |Identifier|Name|Priority|Description|
 |:---:|:---:|:---:|:---:|
 |US01 | Sign-in | High | As a Guest, I want to authenticate into the system so that I can access priviliged information.|
-|US02 | Sing-up | High | As a Guest, I want to register into the system so that I can authenticate myself into the system.
+|US02 | Sing-up | High | As a Guest, I want to register into the system so that I can authenticate myself into the system.|
 
 Table 2: Guest User Stories 
 
@@ -70,11 +65,11 @@ Table 2: Guest User Stories
 
 |Identifier|Name|Priority|Description|
 |:---:|:---:|:---:|:---:|
-| US11 | See Home | High | As a User, I want to access the home page, so that I can see a brief presentation of the website.
-| US12 | See About | Medium | As a User, I want to access the about page, so that I can see a complete description of the website and its creators.
-| US13 | Check FAQs | Medium | As a User, I want to access the FAQs, so that I can get quick answers to common questions.
-| US14 | Consult Contacts | Medium | As a User, I want to access contacts, so that I can come in touch with the platform creators.
-| US15 | Search | High | As a User, I want to be able to search for 
+| US11 | See Home | High | As a User, I want to access the home page, so that I can see a brief presentation of the website.|
+| US12 | See About | Medium | As a User, I want to access the about page, so that I can see a complete description of the website and its creators.|
+| US13 | Check FAQs | Medium | As a User, I want to access the FAQs, so that I can get quick answers to common questions.|
+| US14 | Consult Contacts | Medium | As a User, I want to access contacts, so that I can come in touch with the platform creators.|
+| US15 | Search | High | As a User, I want to be able to search for items being auctioned.|
 
 Table 3: User User Stories
 
@@ -82,10 +77,10 @@ Table 3: User User Stories
 
 |Identifier|Name|Priority|Description|
 |:---:|:---:|:---:|:---:|
-|US21 | Auction | High |As a Auctioneer I want to be able to put up items for auction.
-|US22 | Monitor | High |As a Auctioneer I want to be able to monitor the progress of the auction.
-|US23 | Statistics | High |As a Auctioneer I want to be able to view and review the sales statistics and ratings.
-|US24 | Remove Auction | High | As a Auctioneer I want to be able to remove an auction.
+|US21 | Auction | High |As a Auctioneer I want to be able to put up items for auction.|
+|US22 | Monitor | High |As a Auctioneer I want to be able to monitor the progress of the auction.|
+|US23 | Statistics | High |As a Auctioneer I want to be able to view and review the sales statistics and ratings.|
+|US24 | Remove Auction | High | As a Auctioneer I want to be able to remove an auction.|
 
 Table 4: Auctioneer User Stories
 
@@ -93,12 +88,12 @@ Table 4: Auctioneer User Stories
 
 |Identifier|Name|Priority|Description|
 |:---:|:---:|:---:|:---:|
-| US31 | Bidding | High | As a Bidder I want to bid in auctions.
-| US32 | Cancel bid | High | As a Bidder I want to cancel my bids.
-| US33 | Review | High | As a Bidder I want to leave review or feedback of auctioneers.
-| US34 | View Statistics | High | As a Bidder I want to check the Statistics of the auctioneer.
-| US35 | View Description | High | As a Bidder I want to check a full description of the product.
-| US36 | Watchlist | Medium | As a Bidder I want to add items to the watchlist.
+| US31 | Bidding | High | As a Bidder I want to bid in auctions.|
+| US32 | Cancel bid | High | As a Bidder I want to cancel my bids.|
+| US33 | Review | High | As a Bidder I want to leave review or feedback of auctioneers.|
+| US34 | View Statistics | High | As a Bidder I want to check the Statistics of the auctioneer.|
+| US35 | View Description | High | As a Bidder I want to check a full description of the product.|
+| US36 | Watchlist | Medium | As a Bidder I want to add items to the watchlist.|
 
 Table 5: Bidder User Stories
 
@@ -106,9 +101,9 @@ Table 5: Bidder User Stories
 
 |Identifier|Name|Priority|Description|
 |:---:|:---:|:---:|:---:|
-| US41 | Cancel Auction | High | As a Manager I want to cancel inapropriate auctions.
-| US42 | Ban User | High | As a Manager I want to ban users who disrespect the rules.
-| US43 | Moderate Auction | High | As a Manager I want to be able to moderate the auctions.
+| US41 | Cancel Auction | High | As a Manager I want to cancel inapropriate auctions.|
+| US42 | Ban User | High | As a Manager I want to ban users who disrespect the rules.|
+| US43 | Moderate Auction | High | As a Manager I want to be able to moderate the auctions.|
 
 Table 6: Manager User Stories
 
@@ -121,9 +116,9 @@ This section contains business rules, technical requirements and restrictions on
 
 |Identifier|Name|Description|
 |:---:|:---:|:---:|
-|BR01|Deleted Client|When a Client deletes his account, his actions will be also deleted|
-|BR02|Completed auction|When the auction is marked as complete future bids are closed|
-|BR03|Bidding|A item is only available for bidding if the user is logged|
+|BR01|Deleted Client|When a Client(Auctioneer/Bidder) deletes his account, his actions will be also deleted.|
+|BR02|Completed auction|When the auction is marked as complete future bids are closed.|
+|BR03|Bidding|A item is only available for bidding if the user is logged.|
 
 Table 7: Bussiness rules
 
@@ -131,13 +126,13 @@ Table 7: Bussiness rules
 
 |Identifier|Name|Description|
 |:---:|:---:|:---:|
-|TR01|Availability|The website must be available 99 percent of the time in each 24-hour period|
-|TR02|Accessibility|The website must ensure that everyone can access the pages, regardless of the Web browser they use|
-|TR03|Portability|The server-side system should work across multiple platforms (Linux, macOS, etc.)|
-|TR04|Security|The system shall protect information from unauthorized access through the use of an authentication and verification system|
-|TR05|Usability|The website should be simple and easy to use|
-|TR06|Web Application|The website should be implemented as a Web application with dynamic pages (HTML, JavaScript, CSS and PHP)|
-|TR07|Scalability|The system must be prepared to deal with the growth in the number of users and their actions|
+|TR01|Availability|The website must be available 99 percent of the time in each 24-hour period.|
+|TR02|Accessibility|The website must ensure that everyone can access the pages, regardless of the Web browser they use.|
+|TR03|Portability|The server-side system should work across multiple platforms (Linux, macOS, etc.).|
+|TR04|Security|The system shall protect information from unauthorized access through the use of an authentication and verification system.|
+|TR05|Usability|The website should be simple and easy to use.|
+|TR06|Web Application|The website should be implemented as a Web application with dynamic pages (HTML, JavaScript, CSS and PHP).|
+|TR07|Scalability|The system must be prepared to deal with the growth in the number of users and their actions.|
 
 Table 8: Technical requirements
 
@@ -145,28 +140,23 @@ Table 8: Technical requirements
 
 |Identifier|Name|Description|
 |:---:|:---:|:---:|
-|C01|Deadline|The system should be ready to use at the end of the semester|
+|C01|Deadline|The system should be ready to use at the end of the semester.|
 
 Table 9: Restrictions
 
 
 ## A3: Information Architecture
 
-> Brief presentation of the artefact goals.
-
-
 ### 1. Sitemap
 
-> Sitemap presenting the overall structure of the web application.  
-> Each page must be identified in the sitemap.  
-> Multiple instances of the same page (e.g. student profile in SIGARRA) are presented as page stacks.
+![Figure 2, Sitemap](./assets/a3-sitemap.png) 
 
+Figure 2: Sitemap
 
 ### 2. Wireframes
 
 > Wireframes for, at least, two main pages of the web application.
 > Do not include trivial use cases.
-
 
 #### UIxx: Page Name
 
