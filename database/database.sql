@@ -46,9 +46,11 @@ CREATE TABLE auction
     _name TEXT NOT NULL,
     starting_date DATE,
     ending_date DATE,
-    current_bid MONEY,
-    starting_bid MONEY,
+    current_bid INT,
+    starting_bid INT,
     current_winner bidder,
     CONSTRAINT current_bid check (current_bid>= starting_bid),
+    CONSTRAINT starting_bid check (starting_bid>= 0),
+    CONSTRAINT current_bid check (current_bid>=0),
     CONSTRAINT starting_date check (starting_date < ending_date)
 }
