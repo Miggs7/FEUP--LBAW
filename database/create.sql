@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS notification CASCADE;
 DROP TABLE IF EXISTS category CASCADE;
 DROP TABLE IF EXISTS auction_category CASCADE;
 DROP TABLE IF EXISTS auction_image CASCADE;
+DROP TABLE IF EXISTS bid CASCADE;
 
 -----------------------------------------
 -- Types
@@ -87,7 +88,6 @@ CREATE TABLE transaction(
 
 CREATE TABLE bidder(
     "id_bidder" INTEGER PRIMARY KEY REFERENCES _user(id) ON DELETE CASCADE,
-    "auction_id" INTEGER REFERENCES auction(id) ON DELETE CASCADE,
     "transaction_id" INTEGER REFERENCES transaction(id) ON DELETE CASCADE
 );
 
@@ -148,4 +148,10 @@ CREATE TABLE auction_image(
 	id SERIAL PRIMARY KEY UNIQUE,
     link TEXT NOT NULL UNIQUE,
     "id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE
+);
+
+CREATE TABLE bid(
+    "id_bidder" INT PRIMARY KEY REFERENCES bidder("id_bidder") ON DELETE CASCADE,
+    "id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE,
+    bid_value FLOAT NOT NULL CHECK (bid_value >= 5.00)
 );
