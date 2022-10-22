@@ -1,5 +1,3 @@
-
-
 -----------------------------------------
 -- Domain schema
 -----------------------------------------
@@ -10,7 +8,6 @@ CREATE DOMAIN "Today" AS date NOT NULL DEFAULT ('now'::text)::date;
 -----------------------------------------
 -- Drop old schema
 -----------------------------------------
-
 
 DROP TABLE IF EXISTS manager CASCADE;
 DROP TABLE IF EXISTS _user CASCADE;
@@ -28,6 +25,17 @@ DROP TABLE IF EXISTS notification CASCADE;
 DROP TABLE IF EXISTS category CASCADE;
 DROP TABLE IF EXISTS auction_category CASCADE;
 DROP TABLE IF EXISTS auction_image CASCADE;
+
+-----------------------------------------
+-- Types
+-----------------------------------------
+DROP TYPE IF EXISTS notification_type;
+DROP TYPE IF EXISTS transaction_type;
+DROP TYPE IF EXISTS category_name;
+
+CREATE TYPE notification_type AS ENUM  ('Auction Status Notification', 'Review Notification');
+CREATE TYPE transaction_type AS ENUM ('Sell', 'Buy', 'Deposit', 'Cash Out');
+CREATE TYPE category_name AS ENUM ('Jewelry', 'Cars', 'Clothing', 'Furnitures', 'Memorabilia', 'Accessories', 'Other');
 
 -----------------------------------------
 -- Tables
@@ -65,7 +73,7 @@ CREATE TABLE auction(
     "ending_date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
     current_bid INT,
     starting_bid INT,
-    "id_item" INTEGER REFERENCES item(id)
+    "id_item" INTEGER NOT NULL REFERENCES item(id),
     CONSTRAINT current_bid check (current_bid>= starting_bid AND current_bid >= 0),
     CONSTRAINT starting_bid check (starting_bid>= 0),
     CONSTRAINT starting_date check (starting_date < ending_date)
@@ -74,8 +82,7 @@ CREATE TABLE auction(
 CREATE TABLE transaction(
     id SERIAL PRIMARY KEY,
     value INTEGER NOT NULL CHECK (value > 0),
-    transaction_type text NOT NULL,
-    CONSTRAINT transaction_type CHECK ((transaction_type = ANY(ARRAY['Sell'::text, 'Buy'::text,'Deposit'::text,'Cash Out'::text])))
+    type transaction_type NOT NULL
 );
 
 CREATE TABLE bidder(
@@ -121,17 +128,15 @@ CREATE TABLE notification(
     id SERIAL PRIMARY KEY,
     "date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
     text TEXT NOT NULL,
-    notification_type TEXT NOT NULL,
-    CONSTRAINT notification_type CHECK (("notification_type" = ANY(ARRAY['Auction Status Notification'::text,'Review Notification'::text]))),
-    "id_user" INT REFERENCES _user(id) ON DELETE CASCADE,
-    "id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE,
+    type notification_type NOT NULL,
+    "id_user" INT NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
+    "id_auction" INT REFERENCES auction(id) ON DELETE CASCADE,
     "id_review" INT REFERENCES review(id) ON DELETE CASCADE
 );
 
 CREATE TABLE category(
 	id SERIAL PRIMARY KEY UNIQUE,
-    "name" TEXT NOT NULL,
-    CONSTRAINT "name" CHECK (("name" = ANY(ARRAY['Jewelry'::text, 'Cars'::text,'Clothing'::text,'Furnitures'::text,'Memorabilia'::text,'Accessories'::text,'Other'::text])))
+    type category_name NOT NULL
 );
 
 CREATE TABLE auction_category(
