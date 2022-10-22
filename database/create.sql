@@ -141,6 +141,6 @@ CREATE TABLE auction_category(
 
 CREATE TABLE auction_image(
 	id SERIAL PRIMARY KEY UNIQUE,
-    NAME TEXT NOT NULL UNIQUE,
+    link TEXT NOT NULL UNIQUE,
     "id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE
 );
