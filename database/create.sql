@@ -1,4 +1,33 @@
+
+
+-----------------------------------------
+-- Domain schema
+-----------------------------------------
+
+DROP DOMAIN IF EXISTS "Today";
 CREATE DOMAIN "Today" AS date NOT NULL DEFAULT ('now'::text)::date;
+
+-----------------------------------------
+-- Drop old schema
+-----------------------------------------
+
+
+DROP TABLE IF EXISTS manager CASCADE;
+DROP TABLE IF EXISTS _user CASCADE;
+DROP TABLE IF EXISTS item CASCADE;
+DROP TABLE IF EXISTS auction CASCADE;
+DROP TABLE IF EXISTS transaction CASCADE;
+DROP TABLE IF EXISTS bidder CASCADE;
+DROP TABLE IF EXISTS auctioneer CASCADE;
+DROP TABLE IF EXISTS review CASCADE;
+DROP TABLE IF EXISTS auction_list CASCADE;
+DROP TABLE IF EXISTS watch_list CASCADE;
+DROP TABLE IF EXISTS manage CASCADE;
+DROP TABLE IF EXISTS moderate CASCADE;
+DROP TABLE IF EXISTS notification CASCADE;
+DROP TABLE IF EXISTS category CASCADE;
+DROP TABLE IF EXISTS auction_category CASCADE;
+DROP TABLE IF EXISTS auction_image CASCADE;
 
 -----------------------------------------
 -- Tables
