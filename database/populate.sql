@@ -1,23 +1,23 @@
-INSERT INTO user VALUES(1,'Harry_Warren3153@nanoff.biz','gmcleoid0','Harry Warren','#3ac1bb',40);
-INSERT INTO user VALUES(2,'Bree_Hepburn4560@bauros.biz','asmewin1','Bree Hepburn','#92000A',99);
-INSERT INTO user VALUES(3,'Tony_Wellington1196@naiker.biz','apoulden2','Tony Wellington','#144187',90);
-INSERT INTO user VALUES(4,'Harvey_Briggs7652@corti.com','etraynor3','Harvey Briggs','	#964B00',48);
-INSERT INTO user VALUES(5,'Allison_Appleton3129@twace.org','ghanvey4','Allison Appleton','#0e4210',86);
-INSERT INTO user VALUES(6,'Benjamin_Vince3261@nickia.com','abickle5','Benjamin Vince','	#FFC0CB',92);
-INSERT INTO user VALUES(7,'Henry_Barrett1954@deons.tech','gmaisey6','Henry Barrett','#4286f4',95);
-INSERT INTO user VALUES(8,'Rocco_Dunbar6506@bretoux.com','sgavahan7', 'Rocco Dunbar','#e5c427',55);
-INSERT INTO user VALUES(9,'Cristal_Pearce6806@supunk.biz','sbolesma8','Cristal Pearce','#e5c427',80);
-INSERT INTO user VALUES(10,'Chris_Johnson6157@guentu.biz','ggallelli9','Chris Johnson','#e03ecd',61);
-INSERT INTO user VALUES(11,'Daron_Baxter1161@ovock.tech','mwaytea','Daron Baxter','	#C0C0C0',36);
-INSERT INTO user VALUES(12,'William_Purvis4083@liret.org','mludyb','William Purvis','	#964B00',72);
-INSERT INTO user VALUES(13,'Lucas_Newman8198@nimogy.biz','awardesworthc','Lucas Newman','	#FFC0CB',28);
-INSERT INTO user VALUES(14,'Hailey_Stanley2818@corti.com','mhuied','Hailey Stanley','#efe6d7',93);
-INSERT INTO user VALUES(15,'Doug_Bailey1953@famism.biz','lfowlse','Doug Bailey','#4a1d99',53);
-INSERT INTO user VALUES(16,'Allison_Buckley3465@bulaffy.com','cscannellf','Allison Buckley','#4286f4',19);
-INSERT INTO user VALUES(17,'Ramon_Adams1655@kideod.biz','hkeithg','Ramon Adams','#FF0000',80);
-INSERT INTO user VALUES(18,'Chris_Wise1974@naiker.biz','hmanuellih','Chris Wise','#b2aea7',70);
-INSERT INTO user VALUES(19,'Cherish_Waterhouse4762@qater.org','bbrainsbyi','Cherish Waterhouse','#f22e2b',30);
-INSERT INTO user VALUES(20,'Wendy_Jennson1741@yahoo.com','jmcgawj','Wendy Jennson','#4286f4',27);
+INSERT INTO _user VALUES(1,'Harry_Warren3153@nanoff.biz','gmcleoid0','Harry Warren','#3ac1bb',40);
+INSERT INTO _user VALUES(2,'Bree_Hepburn4560@bauros.biz','asmewin1','Bree Hepburn','#92000A',99);
+INSERT INTO _user VALUES(3,'Tony_Wellington1196@naiker.biz','apoulden2','Tony Wellington','#144187',90);
+INSERT INTO _user VALUES(4,'Harvey_Briggs7652@corti.com','etraynor3','Harvey Briggs','	#964B00',48);
+INSERT INTO _user VALUES(5,'Allison_Appleton3129@twace.org','ghanvey4','Allison Appleton','#0e4210',86);
+INSERT INTO _user VALUES(6,'Benjamin_Vince3261@nickia.com','abickle5','Benjamin Vince','	#FFC0CB',92);
+INSERT INTO _user VALUES(7,'Henry_Barrett1954@deons.tech','gmaisey6','Henry Barrett','#4286f4',95);
+INSERT INTO _user VALUES(8,'Rocco_Dunbar6506@bretoux.com','sgavahan7', 'Rocco Dunbar','#e5c427',55);
+INSERT INTO _user VALUES(9,'Cristal_Pearce6806@supunk.biz','sbolesma8','Cristal Pearce','#e5c427',80);
+INSERT INTO _user VALUES(10,'Chris_Johnson6157@guentu.biz','ggallelli9','Chris Johnson','#e03ecd',61);
+INSERT INTO _user VALUES(11,'Daron_Baxter1161@ovock.tech','mwaytea','Daron Baxter','	#C0C0C0',36);
+INSERT INTO _user VALUES(12,'William_Purvis4083@liret.org','mludyb','William Purvis','	#964B00',72);
+INSERT INTO _user VALUES(13,'Lucas_Newman8198@nimogy.biz','awardesworthc','Lucas Newman','	#FFC0CB',28);
+INSERT INTO _user VALUES(14,'Hailey_Stanley2818@corti.com','mhuied','Hailey Stanley','#efe6d7',93);
+INSERT INTO _user VALUES(15,'Doug_Bailey1953@famism.biz','lfowlse','Doug Bailey','#4a1d99',53);
+INSERT INTO _user VALUES(16,'Allison_Buckley3465@bulaffy.com','cscannellf','Allison Buckley','#4286f4',19);
+INSERT INTO _user VALUES(17,'Ramon_Adams1655@kideod.biz','hkeithg','Ramon Adams','#FF0000',80);
+INSERT INTO _user VALUES(18,'Chris_Wise1974@naiker.biz','hmanuellih','Chris Wise','#b2aea7',70);
+INSERT INTO _user VALUES(19,'Cherish_Waterhouse4762@qater.org','bbrainsbyi','Cherish Waterhouse','#f22e2b',30);
+INSERT INTO _user VALUES(20,'Wendy_Jennson1741@yahoo.com','jmcgawj','Wendy Jennson','#4286f4',27);
 
 
 -- create admins
@@ -55,11 +55,14 @@ INSERT INTO bidder VALUES (3, 1, 1);
 INSERT INTO auctioneer VALUES (6, 1);
 INSERT INTO auctioneer VALUES (5, 1);
 
-INSERT INTO _notification VALUES(0, 'Saturday, October 1, 2022 9:42 PM', 'You won the auction', 'Auction Status Notification',1, 1, 1);
+INSERT INTO review VALUES(0, 'Annonymous clown', 'Product does not match the description! It is awful', 1, 6);
+INSERT INTO review VALUES(1, 'Grandma', 'Amazing, this car will make my friends jealous', 1, 6);
 
-INSERT INTO auctionImage VALUES(1, 'Jacker', 'https://cdn.shopify.com/s/files/1/0017/2100/8243/products/QX-1_FRONT_BrightRed_400x.jpg?v=1610646148');
-INSERT INTO auctionImage VALUES(2, 'Vodka', 'https://france-export-fv-online.com/6484-large_default/absolut-vodka.jpg');
-INSERT INTO auctionImage VALUES(3, 'Ben-u-ron', 'https://s0.minipreco.pt/medias/h9b/hf3/9005083033630.jpg');
+INSERT INTO notification VALUES(0, 'Saturday, October 1, 2022 9:42 PM', 'You won the auction', 'Auction Status Notification',1, 1, 1);
+
+INSERT INTO auction_image VALUES(1, 'https://cdn.shopify.com/s/files/1/0017/2100/8243/products/QX-1_FRONT_BrightRed_400x.jpg?v=1610646148',1);
+INSERT INTO auction_image VALUES(2, 'https://france-export-fv-online.com/6484-large_default/absolut-vodka.jpg',2);
+INSERT INTO auction_image VALUES(3, 'https://s0.minipreco.pt/medias/h9b/hf3/9005083033630.jpg',3);
 
 
 INSERT INTO category VALUES(1, 'Clothing');
@@ -70,18 +73,15 @@ INSERT INTO category VALUES(5, 'Furnitures');
 INSERT INTO category VALUES(6, 'Accessories');
 INSERT INTO category VALUES(7, 'Memorabilia');
 
-INSERT INTO auction_category VALUES(1, 1, 'Memorabilia');
-INSERT INTO auction_category VALUES(2, 2, 'Memorabilia');
-INSERT INTO auction_category VALUES(2, 3, 'Memorabilia');
+INSERT INTO auction_category VALUES(1, 1);
+INSERT INTO auction_category VALUES(2, 2);
+INSERT INTO auction_category VALUES(2, 3);
 
-INSERT INTO review VALUES(0, 'Annonymous clown', 'Product does not match the description! It is awful', 1, 6);
-INSERT INTO review VALUES(1, 'Hot grandma', 'Amazing, this car will make my friends jealous', 1, 6);
-
-INSERT INTO manage VALUES(1, 2);
+INSERT INTO manage VALUES(1, 3);
 INSERT INTO manage VALUES(2, 1);
 
 INSERT INTO moderate VALUES(1, 2);
 INSERT INTO moderate VALUES(2, 1);
 
-INSERT INTO auction_list VALUES(1, 1);
+INSERT INTO auction_list VALUES(6, 1);
 INSERT INTO watch_list VALUES(1, 1);
