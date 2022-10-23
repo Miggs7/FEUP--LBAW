@@ -55,3 +55,42 @@ BEFORE UPDATE ON auction
 FOR EACH ROW
 EXECUTE PROCEDURE check_bid();
 
+--TRIGGER 04 add auction to watch list after bidding
+
+DROP FUNCTION IF EXISTS add_auction_to_watch_list CASCADE;
+CREATE FUNCTION add_auction_to_watch_list() RETURNS trigger AS
+$BODY$
+BEGIN
+    INSERT INTO watch_list VALUES (NEW.id_bidder, NEW.id_auction);
+    RETURN NEW;
+END;
+$BODY$
+LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS add_auction_to_watch_list on bid CASCADE;
+CREATE TRIGGER add_auction_to_watch_list
+AFTER INSERT ON bid
+FOR EACH ROW
+EXECUTE PROCEDURE add_auction_to_watch_list();
+
+--TRIGGER 05 remove auction from watch_list after cancelling 
+
+DROP FUNCTION IF EXISTS remove_auction_from_watch_list CASCADE;
+CREATE FUNCTION remove_auction_from_watch_list() RETURNS trigger AS
+$BODY$
+BEGIN
+    DELETE FROM watch_list WHERE id_auction = OLD.id_auction;
+    RETURN OLD;
+END;
+$BODY$
+LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS remove_auction_from_watch_list on bid CASCADE;
+CREATE TRIGGER remove_auction_from_watch_list
+AFTER DELETE ON bid
+FOR EACH ROW
+EXECUTE PROCEDURE remove_auction_from_watch_list();
+
+
+
+
