@@ -74,6 +74,7 @@ CREATE TABLE auction(
     "ending_date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
     current_bid FLOAT,
     starting_bid FLOAT,
+    ongoing BOOLEAN DEFAULT TRUE,
     "id_item" INTEGER NOT NULL REFERENCES item(id),
     CONSTRAINT current_bid check (current_bid>= starting_bid AND current_bid >= 0),
     CONSTRAINT starting_bid check (starting_bid>= 0),
@@ -153,5 +154,5 @@ CREATE TABLE auction_image(
 CREATE TABLE bid(
     "id_bidder" INT PRIMARY KEY REFERENCES bidder("id_bidder") ON DELETE CASCADE,
     "id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE,
-    bid_value FLOAT NOT NULL CHECK (bid_value >= 5.00)
+    bid_value FLOAT NOT NULL
 );
