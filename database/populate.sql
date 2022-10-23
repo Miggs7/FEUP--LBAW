@@ -47,10 +47,10 @@ INSERT INTO auction VALUES(1,'Orange Bird','This is an auction', 'Saturday, Octo
 INSERT INTO auction VALUES(2,'Malibu', 'This is an auction','Saturday, October 1, 2022 9:42 PM', 'Monday, October 17, 2022 8:42 PM', 42289, 42289, 4);
 INSERT INTO auction VALUES(3,'Makena', 'This is an auction','Friday, October 7, 2022 5:01 PM', 'Monday, October 17, 2022 8:42 PM',53087, 51079, 1);
 
-INSERT INTO transaction VALUES(1, 25500, 'Buy'); /*not sure*/
+INSERT INTO transaction VALUES(1, 25500, 'Buy');
 
-INSERT INTO bidder VALUES (1, 1, 1);
-INSERT INTO bidder VALUES (3, 1, 1);
+INSERT INTO bidder VALUES (1, 1);
+INSERT INTO bidder VALUES (3, 1);
 
 INSERT INTO auctioneer VALUES (6, 1);
 INSERT INTO auctioneer VALUES (5, 1);
