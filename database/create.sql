@@ -17,8 +17,6 @@ DROP TABLE IF EXISTS transaction CASCADE;
 DROP TABLE IF EXISTS bidder CASCADE;
 DROP TABLE IF EXISTS auctioneer CASCADE;
 DROP TABLE IF EXISTS review CASCADE;
-DROP TABLE IF EXISTS auction_list CASCADE;
-DROP TABLE IF EXISTS watch_list CASCADE;
 DROP TABLE IF EXISTS manage CASCADE;
 DROP TABLE IF EXISTS moderate CASCADE;
 DROP TABLE IF EXISTS notification CASCADE;
@@ -59,28 +57,6 @@ CREATE TABLE _user(
     CONSTRAINT age CHECK (age >= 17)
 );
 
-CREATE TABLE item(
-    id SERIAL PRIMARY KEY ,
-    name TEXT NOT NULL,
-    description TEXT NOT NULL,
-	"id_bidder" INTEGER REFERENCES _user(id) ON DELETE CASCADE
-);
-
-CREATE TABLE auction(
-    id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL,
-    description TEXT NOT NULL,
-    "starting_date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
-    "ending_date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
-    current_bid FLOAT,
-    starting_bid FLOAT,
-    ongoing BOOLEAN DEFAULT TRUE,
-    "id_item" INTEGER NOT NULL REFERENCES item(id),
-    CONSTRAINT current_bid check (current_bid>= starting_bid AND current_bid >= 0),
-    CONSTRAINT starting_bid check (starting_bid>= 0),
-    CONSTRAINT starting_date check (starting_date < ending_date)
-);
-
 CREATE TABLE transaction(
     id SERIAL PRIMARY KEY,
     value INTEGER NOT NULL CHECK (value > 0),
@@ -97,22 +73,36 @@ CREATE TABLE auctioneer(
     "transaction_id" INTEGER REFERENCES transaction(id) ON DELETE CASCADE
 );
 
+CREATE TABLE item(
+    id SERIAL PRIMARY KEY ,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+	"id_bidder" INTEGER REFERENCES bidder("id_bidder") ON DELETE CASCADE
+);
+
+CREATE TABLE auction(
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    "starting_date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
+    "ending_date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
+    current_bid FLOAT,
+    starting_bid FLOAT,
+    ongoing BOOLEAN DEFAULT TRUE,
+    "id_item" INTEGER NOT NULL REFERENCES item(id) ON DELETE CASCADE,
+    "id_bidder" INTEGER REFERENCES bidder("id_bidder") ON DELETE CASCADE,
+    "id_auctioneer" INTEGER REFERENCES auctioneer("id_auctioneer") ON DELETE CASCADE,
+    CONSTRAINT current_bid check (current_bid>= starting_bid AND current_bid >= 0),
+    CONSTRAINT starting_bid check (starting_bid>= 0),
+    CONSTRAINT starting_date check (starting_date < ending_date)
+);
+
 CREATE TABLE review(
     id SERIAL PRIMARY KEY,
 	author TEXT NOT NULL,
     comment TEXT NOT NULL,
     "id_bidder" INTEGER NOT NULL REFERENCES bidder("id_bidder") ON DELETE CASCADE,
     "id_auctioneer" INTEGER NOT NULL REFERENCES auctioneer("id_auctioneer") ON DELETE CASCADE
-);
-
-CREATE TABLE auction_list(
-    "id_auctioneer" INT NOT NULL REFERENCES auctioneer("id_auctioneer") ON DELETE CASCADE,
-	"id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE
-);
-
-CREATE TABLE watch_list(
-    "id_bidder" INT NOT NULL REFERENCES bidder("id_bidder") ON DELETE CASCADE,
-	"id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE
 );
 
 CREATE TABLE manage(

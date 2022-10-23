@@ -26,26 +26,25 @@ INSERT INTO manager VALUES(DEFAULT,'Marvin_Marshall2818@typill.biz','Marvin Mars
 INSERT INTO manager VALUES(DEFAULT,'Lauren_Reyes2900@irrepsy.com','Lauren Reyes','#f22e2b');
 INSERT INTO manager VALUES(DEFAULT,'Mike_Lee7536@ubusive.com','Mike Lee','#ff9400');
 
-
 -- create items
-INSERT INTO item VALUES(DEFAULT, 'Makena','This is a medicine', 8);
-INSERT INTO item VALUES(DEFAULT,'Symbicort','This is a medicine', 10);
-INSERT INTO item VALUES(DEFAULT,'Zoloft', 'This is a medicine', 7);
+INSERT INTO item VALUES(DEFAULT, 'Makena','This is a medicine');
+INSERT INTO item VALUES(DEFAULT,'Symbicort','This is a medicine');
+INSERT INTO item VALUES(DEFAULT,'Zoloft', 'This is a medicine');
 
-INSERT INTO item VALUES(DEFAULT, 'Orange Bird', 'This is a drink', 5);
-INSERT INTO item VALUES(DEFAULT, 'Guaranito','This is a drink', 5);
-INSERT INTO item VALUES(DEFAULT,'Malibu','This is a drink', 4);
+INSERT INTO item VALUES(DEFAULT, 'Orange Bird', 'This is a drink');
+INSERT INTO item VALUES(DEFAULT, 'Guaranito','This is a drink');
+INSERT INTO item VALUES(DEFAULT,'Malibu','This is a drink');
 
-INSERT INTO item VALUES(DEFAULT,'Forever 21', 'This is clothing', 8);
-INSERT INTO item VALUES(DEFAULT,'Angels Jeanswear','This is clothing', 7);
-INSERT INTO item VALUES(DEFAULT,'SABA','This is clothing', 1);
+INSERT INTO item VALUES(DEFAULT,'Forever 21', 'This is clothing');
+INSERT INTO item VALUES(DEFAULT,'Angels Jeanswear','This is clothing');
+INSERT INTO item VALUES(DEFAULT,'SABA','This is clothing');
 
 -- create auction
-
 
 INSERT INTO auction VALUES(DEFAULT,'Orange Bird','This is an auction', 'Saturday, October 1, 2022 5:58 PM', 'Monday, October 3, 2022 5:58 PM',13333, 12136,DEFAULT, 7);
 INSERT INTO auction VALUES(DEFAULT,'Malibu', 'This is an auction','Saturday, October 1, 2022 9:42 PM', 'Monday, October 17, 2022 8:42 PM', 42289, 42289,DEFAULT, 4);
 INSERT INTO auction VALUES(DEFAULT,'Makena', 'This is an auction','Friday, October 7, 2022 5:01 PM', 'Monday, October 17, 2022 8:42 PM',53087, 51079,DEFAULT,1);
+
 
 INSERT INTO transaction VALUES(DEFAULT, 25500, 'Buy');
 
@@ -82,6 +81,3 @@ INSERT INTO manage VALUES(2, 1);
 
 INSERT INTO moderate VALUES(1, 2);
 INSERT INTO moderate VALUES(2, 1);
-
-INSERT INTO auction_list VALUES(6, 1);
-INSERT INTO watch_list VALUES(1, 1);
