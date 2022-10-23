@@ -49,7 +49,7 @@ END;
 $BODY$
 LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS auction_time_expired on auction CASCADE;
+DROP TRIGGER IF EXISTS check_bid on auction CASCADE;
 CREATE TRIGGER check_bid
 BEFORE UPDATE ON auction
 FOR EACH ROW
