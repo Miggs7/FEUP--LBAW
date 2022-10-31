@@ -1,19 +1,32 @@
---TR01
+--TRAN01
+-- CREATE SQL TRANSACTION
 BEGIN TRANSACTION;
-SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 
--- fetch bid history for a given auction
-SELECT _user.username as username, bid.bid_value as bid_value
-	FROM bid 
-	INNER JOIN _user 
-	ON _user.id = bid.id_bidder AND bid.id_auction = id_auction
-	ORDER BY bid_value DESC LIMIT 10;
+-- INSERT NEW ITEM INTO DATABASE
 
--- get highest bid for a given auction
-SELECT bid.bid_value as bid_value
-	FROM bid
-	INNER JOIN auction
-	ON auction.id = bid.id_auction
-	ORDER BY bid_value DESC LIMIT 1;
+INSERT INTO item(id, name, description,"id_bidder") 
+VALUES($id, $name, $description, $id_bidder);
+
+INSERT INTO auction(id, name, description, "starting_date", "ending_date", current_bid, starting_bid, ongoing, "id_item") 
+VALUES($id, $name, $description, $starting_date, $ending_date, $current_bid, $starting_bid, $ongoing, currval('item_id_seq'));
+
+END TRANSACTION;    
 
 COMMIT;
+
+--TRAN02
+-- CREATE SQL TRANSACTION
+BEGIN TRANSACTION;
+
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+
+-- update current bid value in auction
+UPDATE auction SET current_bid = $bid_value WHERE id = $id_auction;
+
+--insert bid
+INSERT INTO bid(id_bidder,id_auction,bid_value)
+VALUES($id_bidder,$id_auction,$bid_value);
+
+COMMIT;
+
