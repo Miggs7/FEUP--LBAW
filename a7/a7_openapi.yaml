@@ -443,9 +443,8 @@ paths:
       responses:
         '200':
           description: 'Show the Form'
-  
-  /auction/new/{id}:
-      post:
+   
+    post:
        operationId: R404
        summary: 'R404: Create Auction'
        description: 'Create Auction. Access: AUC'
