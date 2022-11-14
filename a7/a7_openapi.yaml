@@ -15,7 +15,7 @@ externalDocs:
 
 tags:
   - name: "M01: Authentication and Individual Profile"
-  - name: "M02: Works"
+  - name: "M02: Items"
   - name: "M03: Reviews and Watchlist"
   - name: "M04: Auctions"
   - name: "M05: User and Auction Administration and Static pages"
@@ -157,13 +157,13 @@ paths:
         "200":
           description: "Ok. Show User Profile UI02"
 
-  /api/works/{id}:
+  /items/{id}:
     get:
       operationId: R201
       summary: "R201: View item page"
       description: "Show the item page. Access: USR"
       tags:
-        - "M02: Works"
+        - "M02: Items"
 
       parameters:
         - in: path
@@ -176,14 +176,14 @@ paths:
         "200":
           description: "Ok. Show Item Page UI"
 
-  /api/works:
+  /api/items:
     get:
       operationId: R202
       summary: "R202: Search Works API"
       description: "Searches for items and returns the results as JSON. Access: PUB."
 
       tags:
-        - "M02: Works"
+        - "M02: Items"
 
       parameters:
         - in: query
@@ -292,6 +292,11 @@ paths:
 
       parameters:
         - in: path
+          name: id_bidder
+          schema:
+            type: integer
+          required: true
+        - in: path
           name: id_auction
           schema:
             type: integer
@@ -301,11 +306,11 @@ paths:
         "200":
           description: "Ok. Show User watchlist page UI"
 
-  /watchlist/{id_item}:
+  /watchlist/{id}/add:
     put:
       operationId: R303
-      summary: "R303: Add item to watchlist Action"
-      description: "Add item to watchlist. Access: USR"
+      summary: "R303: Add auction to watchlist Action"
+      description: "Add auction to watchlist. Access: USR"
       tags:
         - "M03: Reviews and Watchlist"
 
@@ -315,12 +320,13 @@ paths:
             schema:
               type: object
               properties:
-                item_id: # <!--- form field name
+                id_auction: # <!--- form field name
                   type: integer
-                id_user:
+                id_bidder:
                   type: integer
               required:
-                - id_user
+                - id_bidder
+                - id_auction
 
       responses:
         "302":
@@ -332,10 +338,45 @@ paths:
               examples:
                 302Success:
                   description: "Successful update!"
-                  value: "/users/{id_user}"
+                  value: "/watchlist/{id_bidder}"
                 302Failure:
                   description: "Failed update."
-                  value: "/users/{id_user}"
+                  value: "/watchlist/{id_bidder}"
+
+  /watchlist/{id}/delete:
+    delete:
+      operationId: R304
+      summary: "R304: Delete auction from watchlist"
+      description: "Delete auction from watchlist. Access: AUC"
+      tags:
+        - "M03: Reviews and Watchlist"
+      
+      parameters:
+        - in: path
+          name: id_bidder
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: id_auction
+          schema:
+            type: integer
+          required: true
+          
+      responses:
+        '302':
+          description: 'Redirect after auction removal from watchlist.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Auction Removed! Redirect to watchlist'
+                  value: '/watchlist/{id_bidder}'
+                302Failure:
+                  description: 'Failed to remove auction. Redirect to watchlist'
+                  value: '/watchlist/{id_bidder}'
 
   /auction/{id}:
     get:
@@ -354,10 +395,11 @@ paths:
 
       responses:
         "200":
-          description: "Ok. Show Manager Profile UI"
+          description: "Ok. Show Auction Page UI"
+  
 
   /auction/{id}/bid:
-    get:
+    post:
       operationId: R402
       summary: "R402: Make a Bid"
       description: "Update current auction bid. Access: BID"
@@ -428,6 +470,37 @@ paths:
           '200':
             description: 'Create Auction'
 
+  /auction/{id}/delete:
+    delete:
+      operationId: R405
+      summary: "R405: Delete Auction Page"
+      description: "Delete Auction page. Access: AUC,MAN"
+      tags:
+        - "M04: Auctions"
+        - "M05: User and Auction Administration and Static pages"
+      
+      parameters:
+        - in: path
+          name: id_auction
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '302':
+          description: 'Redirect after comment removal.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Auction Removed! Redirect to homepage'
+                  value: '/'
+                302Failure:
+                  description: 'Failed to remove auction. Redirect to auction page'
+                  value: '/auctions/{id_auction}'
+
   /managers/{id}:
     get:
       operationId: R501
@@ -497,3 +570,64 @@ paths:
       responses:
         "200":
           description: "Ok. Show Contacts UI"  
+  
+  /users/{id}/ban:
+    delete:
+      operationId: R506
+      summary: "R506: Ban user"
+      description: "Ban user. Access: MAN"
+      tags:
+        - "M05: User and Auction Administration and Static pages"
+      
+      parameters:
+        - in: path
+          name: id_user
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '302':
+          description: 'Redirect after comment removal.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'User Banned Forever! Redirect to homepage'
+                  value: '/'
+                302Failure:
+                  description: 'Failed to ban user. Redirect to user page'
+                  value: '/user/{id_user}'
+
+  /reviews/{id}/delete:
+    delete:
+      operationId: R507
+      summary: "R507: Delete review"
+      description: "Delete review. Access: MAN,USR"
+      tags:
+        - "M03: Reviews and Watchlist"
+        - "M05: User and Auction Administration and Static pages"
+      
+      parameters:
+        - in: path
+          name: id_review
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '302':
+          description: 'Redirect after review removal.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Review Deleted! Redirect to homepage'
+                  value: '/'
+                302Failure:
+                  description: 'Review Deleted. Redirect to review page'
+                  value: '/reviews/{id_review}'
