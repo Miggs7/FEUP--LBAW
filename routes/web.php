@@ -10,8 +10,25 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Home
-Route::get('/', 'Auth\LoginController@home');
+
+//Static Pages
+Route::get('/', function () {
+    return view('pages.home');
+});
+
+Route::get('/faq', function() {
+    return view('pages.faq');
+});
+
+Route::get('/contact', function() {
+    return view('pages.contact');
+});
+
+Route::get('/about', function() {
+    return view('pages.about');
+});
+
+//Route::get('/', 'Auth\LoginController@home');
 
 // Cards
 Route::get('cards', 'CardController@list');
@@ -30,3 +47,5 @@ Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\RegisterController@register');
+
+

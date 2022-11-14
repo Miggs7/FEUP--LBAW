@@ -23,14 +23,23 @@
   <body>
     <main>
       <header>
-        <h1><a href="{{ url('/cards') }}">Thingy!</a></h1>
+        <h1><a href="{{ url('/') }}">Online Auction</a></h1>
         @if (Auth::check())
         <a class="button" href="{{ url('/logout') }}"> Logout </a> <span>{{ Auth::user()->name }}</span>
+        @else
+        <a class="button" href="{{ url('/login') }}"> Login </a> <span></span>
         @endif
       </header>
       <section id="content">
         @yield('content')
       </section>
+      <footer id="footer">
+        <div class="footer-container">
+          <a class="faq" href="{{url('/faq')}}">FAQ</span>
+          <a class="contact" href="{{url('/contact')}}">Contact US</span>
+          <a class="about" href="{{url('/about')}}" >About</span>
+        </div>
+      </footer>
     </main>
   </body>
 </html>
