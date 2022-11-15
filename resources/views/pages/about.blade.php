@@ -1,3 +1,5 @@
 @extends('layouts.app')
 
-<div>This the about page</div>
+@section('content')
+<div>This is a LBAW project</div>
+@endsection

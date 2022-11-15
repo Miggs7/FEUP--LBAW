@@ -1,3 +1,5 @@
 @extends('layouts.app')
 
-<div>This contact page</div>
+@section('content')
+<div>This is the Contact Page</div>
+@endsection
