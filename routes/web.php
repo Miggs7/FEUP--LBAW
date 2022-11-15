@@ -35,6 +35,11 @@ Route::get('/user/{id}',function(){
     return view('pages.user');
 });
 
+//auction
+Route::get('/auction/{id}',function(){
+    return view('pages.auction');
+});
+
 // Cards
 Route::get('cards', 'CardController@list');
 Route::get('cards/{id}', 'CardController@show');

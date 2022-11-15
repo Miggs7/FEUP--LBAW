@@ -9,10 +9,18 @@ class Item extends Model
   // Don't add create and update timestamps in database.
   public $timestamps  = false;
 
-  /**
-   * The card this item belongs to.
-   */
-  public function card() {
-    return $this->belongsTo('App\Models\Card');
+  protected $table = "item";
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+      'name','description'
+  ];
+
+  public function auction() {
+    return $this->belongsToMany('App\Models\Auction');
   }
 }
