@@ -1,22 +1,24 @@
 body {
   background-image: url('../css/background.png');
   background-size: 100%;
-  color: #9b4dca;
+  color: white;
 }
 main > header {
   display: grid;
   grid-template-columns: 1fr auto auto;
   align-items: center;
-  background-color: #d2afe7;
+  background-color: black;
   padding: 1em;
+  opacity: 50%;
   margin: 1em;
   
 }
 main > header h1 {
   margin: 0;
-
+  
 
   font-family: Georgia, 'Times New Roman', Times, serif;
+  
 }
 
 
@@ -96,7 +98,7 @@ main > header span {
   margin: 0 auto;
   padding: 1em;
   max-width: 20em;
-  border: 1px solid #d2afe7;
+  border: 1px solid white;
 }
 #content > form .error {
   font-weight: bold;
@@ -155,15 +157,15 @@ a.button {
   border-color: #9b4dca;
 }
 a.button.button-outline {
-  color: #9b4dca;
+  color: white;
 }
 a {
-  color: #9b4dca;
+  color: white;
 }
 input[type=text]:focus,
 input[type=email]:focus,
 input[type=password]:focus {
-  border-color: #9b4dca;
+  border-color: white;
 }
 
 /*added CSS to layout */
