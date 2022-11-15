@@ -25,7 +25,8 @@
       <header>
       <h1><a href="{{ url('/') }}">Online Auction</a></h1>
         @if (Auth::check())
-        <a class="button" href="{{ url('/logout') }}"> Logout </a> <span>{{ Auth::user()->name }}</span>
+        @php $id = Auth::user()->id @endphp
+        <a class="button" href="{{ url('/logout') }}"> Logout </a> <a class="button" href="{{url('/user/'.$id)}}">{{ Auth::user()->name }}<a>
         @else
         <a class="button" href="{{ url('/login') }}"> Login </a> <span></span>
         @endif

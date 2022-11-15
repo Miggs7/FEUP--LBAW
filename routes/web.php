@@ -30,6 +30,11 @@ Route::get('/about', function() {
     return view('pages.about');
 });
 
+//user
+Route::get('/user/{id}',function(){
+    return view('pages.user');
+});
+
 // Cards
 Route::get('cards', 'CardController@list');
 Route::get('cards/{id}', 'CardController@show');

@@ -1,3 +1,5 @@
 @extends('layouts.app')
 
-<div>This is the FAQ</div>
+@section('content')
+<div>This is a FAQ</div>
+@endsection
