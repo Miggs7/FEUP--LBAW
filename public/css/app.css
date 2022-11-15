@@ -155,26 +155,3 @@ input[type=email]:focus,
 input[type=password]:focus {
   border-color: #9b4dca;
 }
-
-/*added CSS to layout */
-#footer{
-  background-color: #d2afe7;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  color: white;
-  text-align: center;
-}
-
-.footer-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  }
-  
-  .faq { color: #9b4dca; grid-area:  1 / 2 / 2 / 3; }
-  .contact { color: #9b4dca; grid-area: 1 / 3 / 2 / 4; }
-  .about { color: #9b4dca; grid-area: 1 / 4 / 2 / 5; } 
