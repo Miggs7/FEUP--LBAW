@@ -1,5 +1,6 @@
 body {
-  background-color: #ffffff;
+  background-image: url('../css/background.png');
+  background-size: 100%;
   color: #9b4dca;
 }
 main > header {
@@ -9,14 +10,23 @@ main > header {
   background-color: #d2afe7;
   padding: 1em;
   margin: 1em;
+  
 }
 main > header h1 {
   margin: 0;
+
+
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+
 main > header a.button {
   margin: 1em;
+  
   justify-self: center;
 }
+
+
 main > header span {
   margin: 1em;
   justify-self: center;
@@ -165,6 +175,7 @@ input[type=password]:focus {
   width: 100%;
   color: white;
   text-align: center;
+  opacity: 50%;
 }
 
 .footer-container {
@@ -177,5 +188,6 @@ input[type=password]:focus {
   
   .faq { color: #9b4dca; grid-area:  1 / 2 / 2 / 3; }
   .contact { color: #9b4dca; grid-area: 1 / 3 / 2 / 4; }
-  .about { color: #9b4dca; grid-area: 1 / 4 / 2 / 5; } 
+  .about { color: #9b4dca; grid-area: 1 / 4 / 2 / 5; }
+  .copyright { color: white; grid-area: 1 / 5 / 2 / 6; } 
 

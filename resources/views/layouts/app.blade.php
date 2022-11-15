@@ -32,12 +32,17 @@
       </header>
       <section id="content">
         @yield('content')
+
+      </section>
+
         <footer id="footer">
         <div class="footer-container">
           <a class="faq" href="{{url('/faq')}}">FAQ</span>
           <a class="contact" href="{{url('/contact')}}">Contact US</span>
           <a class="about" href="{{url('/about')}}" >About</span>
+          
         </div>
+        <a class="copyright">© 2022 Online Auction</span>
       </footer>
 
       </section>
