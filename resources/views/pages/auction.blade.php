@@ -19,7 +19,14 @@
     <p> Current bid: {{$auction['current_bid']}} $</p>
     <p> Description: {{$auction['description']}}</p>
     <p> Ends in: {{$auction['ending-date']}}</p>
-    <a class="button" href="{{url('/auction/bid/'.$id)}}">Bid</a>
+    {{-- Bid form should only be visible to authenticated users --}}
+    @if(Auth::user())
+    <form method="POST">
+        <label for="bid_value"> Bid Value:</label>
+        <input type="number" id="bid_value" name="bid_value">
+        <input type="submit" value="submit">
+    </form>
+    @endif
 </div>
 
 @endsection
