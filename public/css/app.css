@@ -193,3 +193,25 @@ input[type=password]:focus {
   .about { color: #9b4dca; grid-area: 1 / 4 / 2 / 5; }
   .copyright { color: white; grid-area: 1 / 5 / 2 / 6; } 
 
+  * {
+    box-sizing: border-box;
+  }
+
+  #auction-container p{
+    text-align: center;
+  }
+  
+  .img-column {
+    float: left;
+    /*width: 33.33%;*/
+    padding: 5px;
+  }
+  
+  /* Clearfix (clear floats) */
+  .img-row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+

@@ -17,5 +17,4 @@ class AuctionController extends Controller
     $auction = Auction::find($id_user);
     return $auction;
   }
-
 }
