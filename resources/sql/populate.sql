@@ -53,7 +53,8 @@ INSERT INTO bidder VALUES (1, 1);
 INSERT INTO bidder VALUES (3, 1);
 
 INSERT INTO auctioneer VALUES (6, 1);
-INSERT INTO auctioneer VALUES (5, 1);
+INSERT INTO auctioneer VALUES (1);
+INSERT INTO auctioneer VALUES (7);
 
 INSERT INTO review VALUES(0, 'Annonymous clown', 'Product does not match the description! It is awful', 1, 6);
 INSERT INTO review VALUES(1, 'Grandma', 'Amazing, this car will make my friends jealous', 1, 6);
@@ -84,4 +85,7 @@ INSERT INTO moderate VALUES(1, 2);
 INSERT INTO moderate VALUES(2, 1);
 
 INSERT INTO auction_list VALUES(6, 1);
+INSERT INTO auction_list VALUES(7, 2);
+INSERT INTO auction_list VALUES(1, 3);
+;
 INSERT INTO watch_list VALUES(1, 1);

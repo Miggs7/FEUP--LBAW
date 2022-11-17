@@ -39,13 +39,14 @@ Route::get('/user/{id}',function(){
 Route::get('/auction/{id}',function(){
     return view('pages.auction');
 });
-Route::post('/bid', 'AuctionController@bid')->name('bid');
+Route::post('bid', 'AuctionController@bid')->name('bid');
+Route::post('update', 'AuctionController@updateAuction')->name('updateAuction');
 
 //User
-Route::post('/edit','UserController@updateUser')->name('edit');
+Route::post('edit','UserController@updateUser')->name('edit');
 
 // Cards
-Route::get('cards', 'CardController@list');
+/*Route::get('cards', 'CardController@list');
 Route::get('cards/{id}', 'CardController@show');
 
 // API
@@ -54,6 +55,7 @@ Route::delete('api/cards/{card_id}', 'CardController@delete');
 Route::put('api/cards/{card_id}/', 'ItemController@create');
 Route::post('api/item/{id}', 'ItemController@update');
 Route::delete('api/item/{id}', 'ItemController@delete');
+*/
 
 // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
