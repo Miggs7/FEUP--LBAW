@@ -39,6 +39,10 @@ Route::get('/user/{id}',function(){
 Route::get('/auction/{id}',function(){
     return view('pages.auction');
 });
+Route::post('/bid', 'AuctionController@bid')->name('bid');
+
+//User
+Route::post('/edit','UserController@updateUser')->name('edit');
 
 // Cards
 Route::get('cards', 'CardController@list');

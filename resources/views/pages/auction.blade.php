@@ -21,9 +21,11 @@
     <p> Ends in: {{$auction['ending-date']}}</p>
     {{-- Bid form should only be visible to authenticated users --}}
     @if(Auth::user())
-    <form method="POST">
+    <form method="post" action={{route('bid')}}>
         <label for="bid_value"> Bid Value:</label>
-        <input type="number" id="bid_value" name="bid_value">
+        @csrf
+        <input type="number" name="bid_value">
+        <input type="hidden" name="id" value={{$id}} >
         <input type="submit" value="submit">
     </form>
     @endif

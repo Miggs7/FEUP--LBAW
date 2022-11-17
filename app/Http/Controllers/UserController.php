@@ -19,4 +19,28 @@ class UserController extends Controller
     return $user;
   }
 
+    /**
+   * Update user.
+   *
+   * @param  Request  $request
+   * @return redirect
+   */
+  public static function updateUser(Request $request){
+
+    $input = $request->input();
+    $user = User::find($input['id']);
+
+    if($input['name']){
+      $user->name = $input['name'];
+      $user->save();
+    }
+    
+    if($input['password']){
+      $user->password = bcrypt($input['password']);
+      $user->save();
+    }
+    
+    return redirect('/user/'.$user->id);
+  }
+
 }
