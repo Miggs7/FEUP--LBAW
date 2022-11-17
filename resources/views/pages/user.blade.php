@@ -14,8 +14,36 @@
 @endphp
 
 @section('content')
-    <section id="user-profile">
-    <p>This is the {{ $user['name']}}'s Profile Page</p>
+  <section id="about-section" class="pt-5 pb-5">
+    <div class="container wrapabout">
+        <div class="red"></div>
+        <div class="row">
+            <div class="col-lg-6 align-items-center justify-content-left d-flex mb-5 mb-lg-0">
+                <div class="blockabout">
+                    <div class="blockabout-inner text-center text-sm-start">
+                        <div class="title-big pb-3 mb-3">
+                            <h3>{{ $user['name']}}</h3>
+                        </div>
+                        <p class="description-p text-muted pe-0 pe-lg-0">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus quas optio reiciendis deleniti voluptatem facere sequi, quia, est sed dicta aliquid quidem facilis culpa iure perferendis? Dolor ad quia deserunt.
+                        </p>
+                        <p class="description-p text-muted pe-0 pe-lg-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus quas optio reiciendis deleniti voluptatem facere.</p>
+
+                        <a href="#" class="btn rey-btn mt-3">See More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mt-5 mt-lg-0">
+                <figure class="potoaboutwrap">
+                    <img src="https://picsum.photos/400/700" alt="photoabout" />
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--    <p>This is the {{ $user['name']}}'s Profile Page</p>
     <p>Username: {{ $user['username']}} </p>
     <p>E-mail: {{ $user['email']}} </p>
         {{-- display a form to edit if user in it's own profile --}}
@@ -31,7 +59,7 @@
                           {{ $errors->first('name') }}
                       </span>
                     @endif
-                    
+
                     {{--
                     <label for="email">E-Mail Address</label>
                     <input id="email" type="email" name="email" value="{{ old('email') }}">
@@ -40,7 +68,7 @@
                           {{ $errors->first('email') }}
                       </span>
                     @endif
-                
+
                     <label for="username">Username</label>
                     <input id="username" type="text" name="username" value="{{ old('username') }}">
                     @if ($errors->has('name'))
@@ -57,14 +85,14 @@
                           {{ $errors->first('password') }}
                       </span>
                     @endif
-                
+
                     <label for="password-confirm">Confirm Password</label>
                     <input id="password-confirm" type="password" name="password_confirmation">
-                
+
                     <button type="submit">
                       Edit
-                    </button>    
+                    </button>
             </section>
         @endif
-    </section>
+    </section> -->
 @endsection
