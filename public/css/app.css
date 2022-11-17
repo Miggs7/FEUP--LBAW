@@ -11,20 +11,20 @@ main > header {
   padding: 1em;
   opacity: 50%;
   margin: 1em;
-  
+
 }
 main > header h1 {
   margin: 0;
-  
+
 
   font-family: Georgia, 'Times New Roman', Times, serif;
-  
+
 }
 
 
 main > header a.button {
   margin: 1em;
-  
+
   justify-self: center;
 }
 
@@ -160,7 +160,7 @@ a.button.button-outline {
   color: white;
 }
 a {
-  color: white;
+  color: black;
 }
 input[type=text]:focus,
 input[type=email]:focus,
@@ -170,7 +170,6 @@ input[type=password]:focus {
 
 /*added CSS to layout */
 #footer{
-  background-color: #d2afe7;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -178,6 +177,8 @@ input[type=password]:focus {
   color: white;
   text-align: center;
   opacity: 50%;
+  margin: 1em;
+
 }
 
 .footer-container {
@@ -187,11 +188,11 @@ input[type=password]:focus {
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   }
-  
+
   .faq { color: #9b4dca; grid-area:  1 / 2 / 2 / 3; }
   .contact { color: #9b4dca; grid-area: 1 / 3 / 2 / 4; }
   .about { color: #9b4dca; grid-area: 1 / 4 / 2 / 5; }
-  .copyright { color: white; grid-area: 1 / 5 / 2 / 6; } 
+  .copyright { color: white; grid-area: 1 / 5 / 2 / 6; }
 
   * {
     box-sizing: border-box;
@@ -200,18 +201,69 @@ input[type=password]:focus {
   #auction-container p{
     text-align: center;
   }
-  
+
   .img-column {
     float: left;
-    /*width: 33.33%;*/
     padding: 5px;
   }
-  
+
   /* Clearfix (clear floats) */
   .img-row::after {
     content: "";
     clear: both;
     display: table;
   }
+
+  /* PROFILE PAGE */
+  #about-section {
+    width: 100%;
+    background: rgba(32, 33, 36, 0.1);
+    position: relative;
+}
+
+.blockabout {
+    padding: 20px;
+    background: white;
+}
+
+.potoaboutwrap{
+    width: 100%;
+    height: 50%;
+    position: relative;
+    overflow: hidden;
+
+}
+
+.blockabout-inner {
+    padding: 30px;
+    border: 1px solid rgba(32, 33, 36, 0.1);
+}
+
+.sosmed-horizontal a i {
+    border: 1px solid #070707;
+    border-radius: 50%;
+    color: #070707;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    margin: auto 3px;
+    font-size: 15px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.rey-btn {
+    border: 2px solid #070707;
+    padding: 10px 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+
+
 
 
