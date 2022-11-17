@@ -22,9 +22,9 @@
 
     <label for="username">Username</label>
     <input id="username" type="text" name="username" value="{{ old('username') }}" required autofocus>
-    @if ($errors->has('name'))
+    @if ($errors->has('username'))
       <span class="error">
-          {{ $errors->first('name') }}
+          {{ $errors->first('username') }}
       </span>
     @endif
 
