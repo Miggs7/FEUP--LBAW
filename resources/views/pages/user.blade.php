@@ -43,7 +43,7 @@
 </section>
 
 
-<!--    <p>This is the {{ $user['name']}}'s Profile Page</p>
+<!--    <p>This is the {{ $user['name']}}'s Profile Page</p> -->
     <p>Username: {{ $user['username']}} </p>
     <p>E-mail: {{ $user['email']}} </p>
         {{-- display a form to edit if user in it's own profile --}}
@@ -94,5 +94,5 @@
                     </button>
             </section>
         @endif
-    </section> -->
+    </section> 
 @endsection
