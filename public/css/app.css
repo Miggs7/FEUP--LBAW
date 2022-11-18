@@ -13,12 +13,17 @@ main > header {
   margin: 1em;
 
 }
+
 main > header h1 {
   margin: 0;
 
 
   font-family: Georgia, 'Times New Roman', Times, serif;
 
+}
+
+main > header h1 a{
+  color:#9b4dca;
 }
 
 
@@ -178,7 +183,7 @@ input[type=password]:focus {
   text-align: center;
   opacity: 50%;
   margin: 1em;
-
+  background-color: black;
 }
 
 .footer-container {
@@ -187,6 +192,7 @@ input[type=password]:focus {
   grid-template-rows: repeat(5, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+  
   }
 
   .faq { color: #9b4dca; grid-area:  1 / 2 / 2 / 3; }
@@ -262,6 +268,15 @@ input[type=password]:focus {
     font-weight: 700;
     border-radius: 50px;
     transition: all 0.3s;
+}
+/*Edit form*/
+
+form{
+  color:black;
+}
+
+form p{
+  text-align: center;
 }
 
 

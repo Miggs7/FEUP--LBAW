@@ -8,7 +8,11 @@
     /*get auctioneer info*/
     $auctioneer_id = App\Http\Controllers\AuctionListController::getAuctioneer($id);
     $auctioneer = App\Http\Controllers\UserController::getUserById($id);
-    $date = date('Y-m-d', strtotime($auction['ending_date']));
+    
+    /*button will be hidden if time has passed*/
+    $date = ($auction['ending_date']);
+    $now = time();
+    $now_time_stamp = date("Y-m-d H:i:s", $now);
 
 @endphp
 
@@ -26,7 +30,7 @@
     <p> Ends in: {{$date}}</p>
     <p> Username of the auctioneer: {{$auctioneer['username']}}</p>
     {{-- Bid form should only be visible to authenticated users --}}
-    @if(Auth::user() && ($auction['ongoing'] == TRUE))
+    @if(Auth::user() && ($now_time_stamp <= $date))
     <form method="post" action={{route('bid')}}>
         <label for="bid_value"> Bid Value:</label>
         @csrf

@@ -29,11 +29,11 @@ class AuctionController extends Controller
   { 
     $input = $request->input();
     $auction = Auction::find($input['id']);
+    
+    /*Trigger will verify if value is valid*/
+    $auction->current_bid  = $input['bid_value'];
+    $auction->save();
 
-    if($auction->current_bid < $input['bid_value']){
-      $auction->current_bid  = $input['bid_value'];
-      $auction->save();
-    }
     return redirect('/auction/'.$auction->id);
   }
 

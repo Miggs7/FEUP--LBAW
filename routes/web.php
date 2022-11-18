@@ -34,16 +34,14 @@ Route::get('/about', function() {
 Route::get('/user/{id}',function(){
     return view('pages.user');
 });
+Route::post('/user/{id}/edit','UserController@updateUser')->name('edit');
 
 //auction
 Route::get('/auction/{id}',function(){
     return view('pages.auction');
 });
-Route::post('bid', 'AuctionController@bid')->name('bid');
-Route::post('update', 'AuctionController@updateAuction')->name('updateAuction');
-
-//User
-Route::post('edit','UserController@updateUser')->name('edit');
+Route::post('/auction/{id}/bid', 'AuctionController@bid')->name('bid');
+Route::post('/auction/{id}/update', 'AuctionController@updateAuction')->name('updateAuction');
 
 // Cards
 /*Route::get('cards', 'CardController@list');

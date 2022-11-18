@@ -207,8 +207,8 @@ INSERT INTO item VALUES(DEFAULT,'SABA','This is clothing', 1);
 -- create auction
 
 
-INSERT INTO auction VALUES(DEFAULT,'Orange Bird','This is an auction', 'Saturday, October 1, 2022 5:58 PM', 'Monday, October 3, 2022 5:58 PM',13333, 12136,DEFAULT, 7);
-INSERT INTO auction VALUES(DEFAULT,'Malibu', 'This is an auction','Saturday, October 1, 2022 9:42 PM', 'Monday, October 17, 2022 8:42 PM', 42289, 42289,DEFAULT, 4);
+INSERT INTO auction VALUES(DEFAULT,'Orange Bird','This is an auction', 'Saturday, October 1, 2022 5:58 PM', 'Monday, December 3, 2022 5:58 PM',13333, 12136,DEFAULT, 7);
+INSERT INTO auction VALUES(DEFAULT,'Malibu', 'This is an auction','Saturday, October 1, 2022 9:42 PM', 'Monday, December 17, 2022 8:42 PM', 42289, 42289,DEFAULT, 4);
 INSERT INTO auction VALUES(DEFAULT,'Makena', 'This is an auction','Friday, October 7, 2022 5:01 PM', 'Monday, October 17, 2022 8:42 PM',53087, 51079,DEFAULT,1);
 
 INSERT INTO transaction VALUES(DEFAULT, 25500, 'Buy');
@@ -293,10 +293,10 @@ DROP FUNCTION IF EXISTS auction_time_expired CASCADE;
 CREATE FUNCTION auction_time_expired () RETURNS trigger AS
 $BODY$
 BEGIN
-    IF(auction.ending_date == now()) THEN
-        UPDATE auction SET ongoing = 0 WHERE id = OLD.id;
-        RETURN NEW;
+    IF(NEW.ending_date >= now()) THEN
+        NEW.ongoing = 0;
     END IF;
+    RETURN NEW;
 END;
 $BODY$
 LANGUAGE plpgsql;
@@ -314,10 +314,11 @@ DROP FUNCTION IF EXISTS check_bid CASCADE;
 CREATE FUNCTION check_bid () RETURNS trigger AS
 $BODY$
 BEGIN
-    IF(bid.bid_value > auction.current_value && auction.ongoing == 1) THEN
-        UPDATE auction SET current_value = bid.bid_value WHERE id = OLD.id;
+    IF((NEW.current_bid > OLD.current_bid) AND OLD.ongoing = TRUE) THEN
+        NEW.current_bid = NEW.current_bid;
         RETURN NEW;
     END IF;
+    RETURN OLD;
 END;
 $BODY$
 LANGUAGE plpgsql;
