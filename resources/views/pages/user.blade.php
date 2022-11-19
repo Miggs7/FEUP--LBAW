@@ -39,7 +39,7 @@
             <div class="col-lg-6 align-items-center justify-content-left d-flex mb-5 mb-lg-0">
                 <div class="blockabout">
                     <div class="blockabout-inner text-center text-sm-start">
-            <form method="POST" action={{route('edit')}}>
+            <form method="POST" action={{url('/edit')}}>
                 {{ csrf_field() }}
                 <p class="description-p text-muted pe-0 pe-lg-0">
                     Edit user:

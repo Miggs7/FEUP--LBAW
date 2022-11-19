@@ -138,7 +138,7 @@ paths:
                   description: "Failed authentication. Redirect to login form."
                   value: "/login"
 
-  /users/{id}:
+  /user/{id}:
     get:
       operationId: R106
       summary: "R106: View user profile"
@@ -156,6 +156,33 @@ paths:
       responses:
         "200":
           description: "Ok. Show User Profile UI02"
+    
+  /user/{id}/edit:
+    post:
+      operationId: R107
+      summary: "R107: Edit user profile Action"
+      description: "Edit the individual user profile. Access: USR"
+      tags:
+        - "M01: Authentication and Individual Profile"
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: "Ok. Edit User Profile UI02"
 
   /items/{id}:
     get:
@@ -469,11 +496,11 @@ paths:
           '200':
             description: 'Create Auction'
 
-  /auction/{id}/delete:
-    delete:
+  /auction/{id}/edit:
+    post:
       operationId: R405
-      summary: "R405: Delete Auction Page"
-      description: "Delete Auction page. Access: AUC,MAN"
+      summary: "R405: Edit Auction Page"
+      description: "Edit Auction page. Access: AUC,MAN"
       tags:
         - "M04: Auctions"
         - "M05: User and Auction Administration and Static pages"
@@ -485,22 +512,44 @@ paths:
             type: integer
           required: true
 
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                auction_name:
+                  type: string
+                description:
+                  type: string
+                starting_bid:
+                  type: string
+                ongoing:
+                  type: boolean
+                ending_date:
+                  type: string
+                id_item:
+                  type: integer
+
       responses:
         '302':
-          description: 'Redirect after comment removal.'
+          description: 'Redirect after auction edit.'
           headers:
             Location:
               schema:
                 type: string
               examples:
                 302Success:
-                  description: 'Auction Removed! Redirect to homepage'
-                  value: '/'
+                  description: 'Auction Edit! Redirect to Auction page'
+                  value: '/auction/{id}'
                 302Failure:
-                  description: 'Failed to remove auction. Redirect to auction page'
-                  value: '/auctions/{id_auction}'
+                  description: 'Failed to edit auction. Redirect to auction page'
+                  value: '/auction/{id}'
 
-  /managers/{id}:
+  
+
+  /manager/{id}:
     get:
       operationId: R501
       summary: "R501: View Manager profile"
@@ -570,8 +619,8 @@ paths:
         "200":
           description: "Ok. Show Contacts UI"  
   
-  /users/{id}/ban:
-    delete:
+  /user/{id}/ban:
+    post:
       operationId: R506
       summary: "R506: Ban user"
       description: "Ban user. Access: MAN"
@@ -584,6 +633,16 @@ paths:
           schema:
             type: integer
           required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                isBanned:
+                  type: boolean
 
       responses:
         '302':

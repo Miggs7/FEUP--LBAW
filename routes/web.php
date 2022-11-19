@@ -40,8 +40,12 @@ Route::post('/user/{id}/edit','UserController@updateUser')->name('edit');
 Route::get('/auction/{id}',function(){
     return view('pages.auction');
 });
+
 Route::post('/auction/{id}/bid', 'AuctionController@bid')->name('bid');
-Route::post('/auction/{id}/update', 'AuctionController@updateAuction')->name('updateAuction');
+Route::post('/auction/{id}/edit', 'AuctionController@updateAuction')->name('updateAuction');
+
+//Route::post('/bid', 'AuctionController@bid')->name('bid');
+//Route::post('/update', 'AuctionController@updateAuction')->name('updateAuction');
 
 // Cards
 /*Route::get('cards', 'CardController@list');
