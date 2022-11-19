@@ -39,6 +39,16 @@ class UserController extends Controller
       $user->password = bcrypt($input['password']);
       $user->save();
     }
+
+    if($input['username']){
+      $user->username = $input['username'];
+      $user->save();
+    }
+
+    if($input['email']){
+      $user->email = $input['email'];
+      $user->save();
+    }
     
     return redirect('/user/'.$user->id);
   }

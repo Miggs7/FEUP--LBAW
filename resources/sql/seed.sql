@@ -186,9 +186,9 @@ INSERT INTO _user VALUES(DEFAULT,'Wendy_Jennson1741@yahoo.com','jmcgawj','Wendy 
 
 -- create admins
 
-INSERT INTO manager VALUES(DEFAULT,'Marvin_Marshall2818@typill.biz','Marvin Marshall','#b2aea7');
-INSERT INTO manager VALUES(DEFAULT,'Lauren_Reyes2900@irrepsy.com','Lauren Reyes','#f22e2b');
-INSERT INTO manager VALUES(DEFAULT,'Mike_Lee7536@ubusive.com','Mike Lee','#ff9400');
+INSERT INTO manager VALUES(DEFAULT,'Marvin_Marshall2818@typill.biz','Marvin Marshall','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W');
+INSERT INTO manager VALUES(DEFAULT,'Lauren_Reyes2900@irrepsy.com','Lauren Reyes','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W');
+INSERT INTO manager VALUES(DEFAULT,'Mike_Lee7536@ubusive.com','Mike Lee','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W');
 
 
 -- create items
@@ -364,5 +364,7 @@ CREATE TRIGGER remove_auction_from_watch_list
 AFTER DELETE ON bid
 FOR EACH ROW
 EXECUTE PROCEDURE remove_auction_from_watch_list();
+
+
 
 

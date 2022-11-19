@@ -53,7 +53,6 @@
                   </span>
                 @endif
 
-                {{--
                 <label for="email">E-Mail Address</label>
                 <input id="email" type="email" name="email" value="{{ old('email') }}">
                 @if ($errors->has('email'))
@@ -61,7 +60,7 @@
                       {{ $errors->first('email') }}
                   </span>
                 @endif
-
+                  
                 <label for="username">Username</label>
                 <input id="username" type="text" name="username" value="{{ old('username') }}">
                 @if ($errors->has('name'))
@@ -69,7 +68,7 @@
                       {{ $errors->first('name') }}
                   </span>
                 @endif
-                --}}
+                
                 {{-- don't forget to hash passwords in the function of edit user --}}
 
                 <label for="password">Password</label>
