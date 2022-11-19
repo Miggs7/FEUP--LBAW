@@ -40,9 +40,13 @@ Route::post('/user/{id}/edit','UserController@updateUser')->name('edit');
 Route::get('/auction/{id}',function(){
     return view('pages.auction');
 });
-
 Route::post('/auction/{id}/bid', 'AuctionController@bid')->name('bid');
 Route::post('/auction/{id}/edit', 'AuctionController@updateAuction')->name('updateAuction');
+
+//Manager
+Route::get('/manager/{id}',function(){
+    return view('pages.manager');
+});
 
 //Route::post('/bid', 'AuctionController@bid')->name('bid');
 //Route::post('/update', 'AuctionController@updateAuction')->name('updateAuction');
@@ -65,3 +69,10 @@ Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\RegisterController@register');
+
+/*Route::get('/manager_login',function(){
+    return view('auth.loginManager');
+});*/
+
+//Route::post('/manager_login', 'Auth\LoginControllerManager@login');
+//Route::get('/manager_logout', 'Auth\LoginControllerManager@logout')->name('manager.logout');

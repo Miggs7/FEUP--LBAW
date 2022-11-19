@@ -1,9 +1,13 @@
 <?php
 
+
 namespace App\Http\Controllers\Auth;
+
+use Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -32,14 +36,33 @@ class LoginController extends Controller
      *
      * @return void
      */
+
+    /*protected function guard(){
+        return Auth::guard('web');
+    }*/
+
+    /*protected function guard(){
+        return Auth::guard('manager');
+    }*/
+
+    /*Go home if sucessful login */
+    protected function attemptLogin(Request $request) {
+        if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password])) {
+            return redirect('/');
+        }
+        if (Auth::guard('manager')->attempt(['email' => $request->email, 'password' => $request->password])) {
+            return redirect('/');
+        }  
+    }
+    
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
 
-    public function getUser(){
+    /*public function getUser(){
         return $request->user();
-    }
+    }*/
 
     public function home() {
         return redirect('login');

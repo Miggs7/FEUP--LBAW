@@ -52,10 +52,11 @@ CREATE TABLE manager(
 CREATE TABLE _user(
     id SERIAL PRIMARY KEY,
     email TEXT NOT NULL unique,
-	  username TEXT NOT NULL UNIQUE,
+	username TEXT NOT NULL UNIQUE,
     name TEXT NOT NULL,
     password TEXT NOT NULL,
     age INT,
+    is_banned BOOLEAN DEFAULT FALSE,
     CONSTRAINT age CHECK (age >= 17)
 );
 
@@ -161,31 +162,31 @@ CREATE TABLE bid(
 -- Populate
 -----------------------------------------
 
-
-INSERT INTO _user VALUES(DEFAULT,'Harry_Warren3153@nanoff.biz','gmcleoid0','Harry Warren','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',40);
-INSERT INTO _user VALUES(DEFAULT,'Bree_Hepburn4560@bauros.biz','asmewin1','Bree Hepburn','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',99);
-INSERT INTO _user VALUES(DEFAULT,'Tony_Wellington1196@naiker.biz','apoulden2','Tony Wellington','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',90);
-INSERT INTO _user VALUES(DEFAULT,'Harvey_Briggs7652@corti.com','etraynor3','Harvey Briggs','	$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',48);
-INSERT INTO _user VALUES(DEFAULT,'Allison_Appleton3129@twace.org','ghanvey4','Allison Appleton','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',86);
-INSERT INTO _user VALUES(DEFAULT,'Benjamin_Vince3261@nickia.com','abickle5','Benjamin Vince','	$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',92);
-INSERT INTO _user VALUES(DEFAULT,'Henry_Barrett1954@deons.tech','gmaisey6','Henry Barrett','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',95);
-INSERT INTO _user VALUES(DEFAULT,'Rocco_Dunbar6506@bretoux.com','sgavahan7', 'Rocco Dunbar','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',55);
-INSERT INTO _user VALUES(DEFAULT,'Cristal_Pearce6806@supunk.biz','sbolesma8','Cristal Pearce','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',80);
-INSERT INTO _user VALUES(DEFAULT,'Chris_Johnson6157@guentu.biz','ggallelli9','Chris Johnson','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',61);
-INSERT INTO _user VALUES(DEFAULT,'Daron_Baxter1161@ovock.tech','mwaytea','Daron Baxter','	$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',36);
-INSERT INTO _user VALUES(DEFAULT,'William_Purvis4083@liret.org','mludyb','William Purvis','	$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',72);
-INSERT INTO _user VALUES(DEFAULT,'Lucas_Newman8198@nimogy.biz','awardesworthc','Lucas Newman','	$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',28);
-INSERT INTO _user VALUES(DEFAULT,'Hailey_Stanley2818@corti.com','mhuied','Hailey Stanley','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',93);
-INSERT INTO _user VALUES(DEFAULT,'Doug_Bailey1953@famism.biz','lfowlse','Doug Bailey','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',53);
-INSERT INTO _user VALUES(DEFAULT,'Allison_Buckley3465@bulaffy.com','cscannellf','Allison Buckley','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',19);
-INSERT INTO _user VALUES(DEFAULT,'Ramon_Adams1655@kideod.biz','hkeithg','Ramon Adams','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',80);
-INSERT INTO _user VALUES(DEFAULT,'Chris_Wise1974@naiker.biz','hmanuellih','Chris Wise','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',70);
-INSERT INTO _user VALUES(DEFAULT,'Cherish_Waterhouse4762@qater.org','bbrainsbyi','Cherish Waterhouse','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',30);
-INSERT INTO _user VALUES(DEFAULT,'Wendy_Jennson1741@yahoo.com','jmcgawj','Wendy Jennson','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',27);
+INSERT INTO _user VALUES(DEFAULT,'Harry_Warren3153@nanoff.biz','gmcleoid0','Harry Warren','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',40,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Bree_Hepburn4560@bauros.biz','asmewin1','Bree Hepburn','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',99,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Tony_Wellington1196@naiker.biz','apoulden2','Tony Wellington','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',90,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Harvey_Briggs7652@corti.com','etraynor3','Harvey Briggs','	$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',48,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Allison_Appleton3129@twace.org','ghanvey4','Allison Appleton','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',86,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Benjamin_Vince3261@nickia.com','abickle5','Benjamin Vince','	$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',92,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Henry_Barrett1954@deons.tech','gmaisey6','Henry Barrett','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',95,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Rocco_Dunbar6506@bretoux.com','sgavahan7', 'Rocco Dunbar','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',55,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Cristal_Pearce6806@supunk.biz','sbolesma8','Cristal Pearce','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',80,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Chris_Johnson6157@guentu.biz','ggallelli9','Chris Johnson','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',61,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Daron_Baxter1161@ovock.tech','mwaytea','Daron Baxter','	$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',36,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'William_Purvis4083@liret.org','mludyb','William Purvis','	$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',72,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Lucas_Newman8198@nimogy.biz','awardesworthc','Lucas Newman','	$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',28,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Hailey_Stanley2818@corti.com','mhuied','Hailey Stanley','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',93,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Doug_Bailey1953@famism.biz','lfowlse','Doug Bailey','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',53,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Allison_Buckley3465@bulaffy.com','cscannellf','Allison Buckley','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',19,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Ramon_Adams1655@kideod.biz','hkeithg','Ramon Adams','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',80,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Chris_Wise1974@naiker.biz','hmanuellih','Chris Wise','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',70,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Cherish_Waterhouse4762@qater.org','bbrainsbyi','Cherish Waterhouse','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',30,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Wendy_Jennson1741@yahoo.com','jmcgawj','Wendy Jennson','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',27,DEFAULT);
 
 
 -- create admins
 
+INSERT INTO manager VALUES(DEFAULT,'example@admin.com','Admin','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W');
 INSERT INTO manager VALUES(DEFAULT,'Marvin_Marshall2818@typill.biz','Marvin Marshall','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W');
 INSERT INTO manager VALUES(DEFAULT,'Lauren_Reyes2900@irrepsy.com','Lauren Reyes','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W');
 INSERT INTO manager VALUES(DEFAULT,'Mike_Lee7536@ubusive.com','Mike Lee','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W');
@@ -251,7 +252,7 @@ INSERT INTO moderate VALUES(2, 1);
 INSERT INTO auction_list VALUES(6, 1);
 INSERT INTO auction_list VALUES(7, 2);
 INSERT INTO auction_list VALUES(1, 3);
-;
+
 INSERT INTO watch_list VALUES(1, 1);
 
 -----------------------------------------
