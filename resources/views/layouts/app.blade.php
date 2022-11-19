@@ -24,7 +24,8 @@
   <body>
     <main>
       <header>
-      <h1><a href="{{ url('/') }}">Online Auction</a></h1>
+        <h1><a href="{{ url('/') }}">Online Auction</a></h1>
+        <input type="text" placeholder="Search.." id="search-bar">
         @if (Auth::check())
         @php $id = Auth::user()->id @endphp
         <a class="button" href="{{ url('/logout') }}"> Logout </a> <a class="button" href="{{url('/user/'.$id)}}">{{ Auth::user()->name }}<a>

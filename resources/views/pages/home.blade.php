@@ -4,7 +4,17 @@
 
 @section('content')
 <section id="auction-container">
-    <p> Auctions: </p>
+    <div class="categories">
+        <div class="category"> Home </div>
+        @for($j = 1; $j <= 5; $j++)
+            @php
+            /*get auction category from database using ID*/
+            $category = App\Http\Controllers\CategoryController::getCategoryById($j);
+            @endphp
+            <div class="category"> nome: {{$category['category_name']}} </div>
+        @endfor
+    </div>
+    <hr>
     <div class="img-row">
     @for($i = 1; $i <= 3; $i++)
         @php

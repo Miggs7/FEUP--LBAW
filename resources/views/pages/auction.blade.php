@@ -31,7 +31,7 @@
     <p> Username of the auctioneer: {{$auctioneer['username']}}</p>
     {{-- Bid form should only be visible to authenticated users --}}
     @if(Auth::user() && ($now_time_stamp <= $date))
-    <form method="post" action={{route('bid')}}>
+    <form method="post">
         <label for="bid_value"> Bid Value:</label>
         @csrf
         <input type="number" name="bid_value">
@@ -43,7 +43,7 @@
     @if(Auth::user())
         @if(Auth::user()->id == $auctioneer_id)
         <p> this is the owner</p>
-        <form method="post" action={{route('update')}}>
+        <form method="post">
             @csrf
             <label for="name"> Name:</label>
             <input type="text" name="name">
