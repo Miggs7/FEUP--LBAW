@@ -45,6 +45,11 @@ Route::put('/auction/{id}/bid', 'AuctionController@bid');
 Route::put('/auction/{id}/edit', 'AuctionController@updateAuction');
 Route::delete('/auction/{id}/delete', 'AuctionController@delete');
 
+Route::get('/new',function(){
+    return view('pages.auctionNew');
+});
+Route::post('/new','AuctionController@create');
+
 //Manager
 Route::get('/manager/{id}',function(){
     return view('pages.manager');

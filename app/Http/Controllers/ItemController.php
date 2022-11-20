@@ -18,7 +18,7 @@ class ItemController extends Controller
    * @param  Request request containing the description
    * @return Response
    */
-  public function create(Request $request, $card_id)
+  /*public function create(Request $request, $card_id)
   {
     $item = new Item();
     $item->card_id = $card_id;
@@ -36,14 +36,14 @@ class ItemController extends Controller
      * @param  Request request containing the new state
      * @return Response
      */
-    public function update(Request $request, $id)
+    /*public function update(Request $request, $id)
     {
       $item = Item::find($id);
       $this->authorize('update', $item);
       $item->done = $request->input('done');
       $item->save();
       return $item;
-    }
+    }*/
 
     /**
      * Deletes an individual item.
@@ -51,12 +51,30 @@ class ItemController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function delete(Request $request, $id)
+    /*public function delete(Request $request, $id)
     {
       $item = Item::find($id);
       $this->authorize('delete', $item);
       $item->delete();
       return $item;
+    }*/
+
+    /**
+     * Gets item from id.
+     *
+     * @param  int  $id
+     * @return $item
+     */
+    public static function getItem($id){
+      return Item::find($id);
+    }
+
+    public static function getIdFromName($name){
+      foreach(Item::all() as $item){
+        if($item->name == $name){
+          return $item->id;
+        }
+      }
     }
 
 }
