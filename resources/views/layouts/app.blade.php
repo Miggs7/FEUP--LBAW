@@ -26,9 +26,12 @@
       <header>
         <h1><a href="{{ url('/') }}">Online Auction</a></h1>
         <input type="text" placeholder="Search.." id="search-bar">
-        @if (Auth::check())
-        @php $id = Auth::user()->id @endphp
-        <a class="button" href="{{ url('/logout') }}"> Logout </a> <a class="button" href="{{url('/user/'.$id)}}">{{ Auth::user()->name }}<a>
+        @if (Auth::guard('web')->user())
+        @php $id = Auth::guard('web')->user()->id @endphp
+        <a class="button" href="{{ url('/logout') }}"> Logout </a> <a class="button" href="{{url('/user/'.$id)}}">{{ Auth::guard('web')->user()->name }}<a>
+        @elseif (Auth::guard('manager')->user())
+        @php $id = Auth::guard('manager')->user()->id @endphp
+        <a class="button" href="{{ url('/logout') }}"> Logout </a> <a class="button" href="{{url('/manager/'.$id)}}">{{ Auth::guard('manager')->user()->name }}<a>
         @else
         <a class="button" href="{{ url('/login') }}"> Login </a> <span></span>
         @endif

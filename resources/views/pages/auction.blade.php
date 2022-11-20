@@ -7,7 +7,7 @@
     $img = App\Http\Controllers\AuctionImageController::getAuctionImage($id);
     /*get auctioneer info*/
     $auctioneer_id = App\Http\Controllers\AuctionListController::getAuctioneer($id);
-    $auctioneer = App\Http\Controllers\UserController::getUserById($id);
+    $auctioneer = App\Http\Controllers\UserController::getUserById($auctioneer_id);
     
     /*button will be hidden if time has passed*/
     $date = ($auction['ending_date']);
@@ -31,19 +31,20 @@
     <p> Username of the auctioneer: {{$auctioneer['username']}}</p>
     {{-- Bid form should only be visible to authenticated users --}}
     @if(Auth::user() && ($now_time_stamp <= $date))
-    <form method="post">
+        @if(Auth::user()->id != $auctioneer_id)
+    <form method="post" action={{url('auction/'.$id.'/bid/')}}>
         <label for="bid_value"> Bid Value:</label>
         @csrf
         <input type="number" name="bid_value">
         <input type="hidden" name="id" value={{$id}} >
         <input type="submit" value="submit">
     </form>
+        @endif
     @endif
     {{-- Update or delete if owner of auction --}}
     @if(Auth::user())
         @if(Auth::user()->id == $auctioneer_id)
-        <p> this is the owner</p>
-        <form method="post">
+        <form method="POST" action={{url('auction/'.$id.'/edit/')}}>
             @csrf
             <label for="name"> Name:</label>
             <input type="text" name="name">
@@ -72,6 +73,22 @@
         </form>
         @endif
     @endif
+
+    {{-- delete if manager, it will break the main page for now--}}
+    @if(Auth::guard('manager'))
+        @if(Auth::guard('manager')->user())
+        <form action="{{url('auction/'.$id.'/delete/')}}" method="POST">
+            @csrf
+            {{--@method('DELETE')--}}
+            <input type="hidden" name="id" value={{$id}} >
+            <button type="submit" value="delete">
+                Delete auction
+            </button>
+        </form>
+        @endif
+    @endif
+
+    
 </div>
 
 @endsection

@@ -35,13 +35,15 @@ Route::get('/user/{id}',function(){
     return view('pages.user');
 });
 Route::post('/user/{id}/edit','UserController@updateUser')->name('edit');
+Route::post('/user/{id}/ban','UserController@ban');
 
 //auction
 Route::get('/auction/{id}',function(){
     return view('pages.auction');
 });
-Route::post('/auction/{id}/bid', 'AuctionController@bid')->name('bid');
-Route::post('/auction/{id}/edit', 'AuctionController@updateAuction')->name('updateAuction');
+Route::post('/auction/{id}/bid', 'AuctionController@bid');
+Route::post('/auction/{id}/edit', 'AuctionController@updateAuction');
+Route::post('/auction/{id}/delete', 'AuctionController@delete');
 
 //Manager
 Route::get('/manager/{id}',function(){

@@ -53,4 +53,17 @@ class UserController extends Controller
     return redirect('/user/'.$user->id);
   }
 
+  public static function ban(Request $request){
+    $input = $request->input();
+    $user = User::find($input['id']);
+    $user->is_banned = true;
+
+    return redirect('/user/'.$user->id);
+  }
+
+  public static function checkIfBanned($id){
+    $user = User::find($id);
+    return $user->is_banned;
+  }
+
 }

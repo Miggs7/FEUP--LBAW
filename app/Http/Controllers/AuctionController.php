@@ -88,6 +88,7 @@ class AuctionController extends Controller
    * @return redirect
    */
   public static function delete(Request $request){
+
     $input = $request->input();
     $auction = Auction::find($input['id']);
     $auction->delete();    

@@ -1,16 +1,18 @@
 @extends('layouts.app')
 
-{{-- Only logged users should see profiles --}}
+{{-- Only logged users should see profiles 
 @if (!Auth::user())
     @php die(header('Location: /'));
     echo 'This is not your profile!'
     @endphp
 @endif
-
+--}}
 @php
     /*in case we're in other use profile we'll need to get his profile*/
     $id = request()->route('id');
     $user = App\Http\Controllers\UserController::getUserById($id);
+    $checkifbanned = App\Http\Controllers\UserController::checkIfBanned($id);
+    echo $checkifbanned;
 @endphp
 
 @section('content')
@@ -30,12 +32,24 @@
                         <p class="description-p text-muted pe-0 pe-lg-0">
                            Name: {{$user['name']}}
                         </p>
-                        <a href="#" class="btn rey-btn mt-3">See More</a>
+                        @if(Auth::guard('manager'))
+                            @if(Auth::guard('manager')->user())
+                            {{--ban is not changing bool --}}
+                            <form action="{{url('user/'.$id.'/ban')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="id" value={{$id}} >
+                                <input type="hidden" name="ban" value="1" >
+                                <button type="submit">
+                                    Ban User
+                                </button>
+                            </form>
+                            @endif
+                        @endif
                     </div>
                 </div>
             </div>
-            
-            @if (Auth::user()->id == $user['id'])
+            @if(Auth::user())
+                @if (Auth::user()->id == $user['id'])
             <div class="col-lg-6 align-items-center justify-content-left d-flex mb-5 mb-lg-0">
                 <div class="blockabout">
                     <div class="blockabout-inner text-center text-sm-start">
@@ -86,6 +100,7 @@
                   Edit
                 </button>
                 @endif
+            @endif
             </form>
                 </div>
             </div>
