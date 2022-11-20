@@ -23,7 +23,7 @@
   </head>
   <body>
     <main>
-      <header>
+      <header id="header">
         <h1><a href="{{ url('/') }}">Online Auction</a></h1>
         <input type="text" placeholder="Search.." id="search-bar">
         @if (Auth::guard('web')->user())

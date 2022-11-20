@@ -71,29 +71,44 @@
         @if(Auth::user())
             @if(Auth::user()->id == $auctioneer_id)
             <div class="auction-form">
+                <p>Edit Auction</p>
                 <form method="POST" action={{url('auction/'.$id.'/edit/')}}>
                     @csrf
                     @method('PUT')
-                    <label for="name"> Name:</label>
-                    <input type="text" name="name">
+                    <div>
+                        <label for="name"> Name:</label>
+                        <input type="text" name="name">
+                    </div>
                     
-                    <label for="description"> Description:</label>
-                    <input type="text" name="description">
+                    <div>
+                        <label for="description"> Description:</label>
+                        <input type="text" name="description">
+                    </div>
 
-                    <label for="starting_bid"> Starting Bid:</label>
-                    <input type="number" name="starting_bid">
+                    <div>
+                        <label for="starting_bid"> Starting Bid:</label>
+                        <input type="number" name="starting_bid">
+                    </div>
 
-                    <label for="ending_date"> Ending date:</label>
-                    <input type="date" name="ending_date">
+                    <div>
+                        <label for="ending_date"> Ending date:</label>
+                        <input type="date" name="ending_date">
+                    </div>
 
-                    <label for="id_item"> Id item:</label>
-                    <input type="number" name="id_item">
+                    <div>
+                        <label for="id_item"> Item Id:</label>
+                        <input type="number" name="id_item">
+                    </div>
 
-                    <label for="ongoing"> Ongoing</label>
-                    <input type="checkbox" name="ongoing" value="1" checked>
+                    <div>
+                        <label for="ongoing"> Ongoing</label>
+                        <input type="checkbox" name="ongoing" value="1" checked>
+                    </div>
 
-                    <label for="ongoing"> Stopping</label>
-                    <input type="checkbox" name="ongoing" value="0">
+                    <div>
+                        <label for="ongoing"> Stopping</label>
+                        <input type="checkbox" name="ongoing" value="0">
+                    </div>
 
                     <input type="hidden" name="id" value={{$id}} >
                     <input type="submit" value="submit">
