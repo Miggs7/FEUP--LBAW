@@ -12,6 +12,7 @@
     $id = request()->route('id');
     $user = App\Http\Controllers\UserController::getUserById($id);
     $is_banned = App\Http\Controllers\UserController::checkIfBanned($id);
+    $user_auctions = App\Http\Controllers\AuctionListController::auctioneerAuctions($id);
     
 @endphp
 
@@ -121,30 +122,22 @@
             </div>
             
         </div>
+       
         <div class="col-lg-6 align-items-center justify-content-left d-flex mb-5 mb-lg-0">
+            @foreach($user_auctions as $auction)
+                @php $auction_user = App\Http\Controllers\AuctionController::getAuction($auction['id_auction'])->name;
+                     $auction_image = App\Http\Controllers\AuctionImageController::getAuctionImage($auction['id_auction'])->link;
+                @endphp 
                 <div class="blockabout">
                     <div class="blockabout-inner text-center text-sm-start" height= "fit-content" block-size= "fit-content" display = "flex">
 
                     <figure class="img-column">
-                
-                        <img src="https://loremflickr.com/160/120" />
-      
-                        <figcaption>This is an auction</figcaption>
-                    </figure>
-                    <figure class="img-column">
-                
-                        <img src="https://loremflickr.com/160/120" />
-      
-                        <figcaption>This is an auction</figcaption>
-                    </figure>
-                    <figure class="img-column">
-                
-                        <img src="https://loremflickr.com/160/120" />
-      
-                        <figcaption>This is an auction</figcaption>
+                            <img src="{{$auction_image}}"/>
+                        <figcaption> {{$auction_user}}</figcaption>
                     </figure>
                 </div>                    
             </div>
+            @endforeach
         </div>
     </div>
 </div>
