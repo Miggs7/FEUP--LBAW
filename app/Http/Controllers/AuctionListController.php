@@ -13,10 +13,19 @@ class AuctionListController extends Controller{
    * @return Response
    */
   public static function getAuctioneer($id_auction){ 
-        foreach (AuctionList::all() as $auction_list){
-            if($auction_list->id_auction == $id_auction){
-              return $auction_list->id_auctioneer;
+        foreach (AuctionList::all() as $auction){
+            if($auction->id_auction == $id_auction){
+              return $auction->id_auctioneer;
             }
         }        
-    }    
+    }
+  public static function auctioneerAuctions($id_auctioneer){
+      $auctions = array();
+      foreach(AuctionList::all() as $auction){
+        if($auction->id_auctioneer == $id_auctioneer){
+          $auctions[] = $auction;
+        }
+      }
+      return $auctions;
+  }    
 }

@@ -12,6 +12,7 @@
     $id = request()->route('id');
     $user = App\Http\Controllers\UserController::getUserById($id);
     $is_banned = App\Http\Controllers\UserController::checkIfBanned($id);
+    
 @endphp
 
 @section('content')
@@ -34,7 +35,7 @@
                         @if($is_banned)
                         <p class="description-p text-muted pe-0 pe-lg-0">
                             This is user is banned
-                        </p>
+                        @endforeach
                         @endif
                         @if(Auth::guard('manager'))
                             @if(Auth::guard('manager')->user())
