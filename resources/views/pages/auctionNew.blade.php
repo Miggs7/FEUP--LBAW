@@ -26,6 +26,11 @@
     <label for="item">Item </label>
     <input id="item" type="text" name="item">
 
+    <label for="image">Image</label>
+    <input id="image" type="text" name="image">
+    @if(Auth::user())
+    <input id="id_auctioneer" type="hidden" name="id_auctioneer" value={{Auth::user()->id}}>
+    @endif
     <button type="submit">
       Create
     </button>

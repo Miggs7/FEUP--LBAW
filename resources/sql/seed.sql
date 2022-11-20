@@ -107,6 +107,7 @@ CREATE TABLE review(
 );
 
 CREATE TABLE auction_list(
+    id SERIAL PRIMARY KEY,
     "id_auctioneer" INT NOT NULL REFERENCES auctioneer("id_auctioneer") ON DELETE CASCADE,
     "id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE
 );
@@ -249,9 +250,9 @@ INSERT INTO manage VALUES(2, 1);
 INSERT INTO moderate VALUES(1, 2);
 INSERT INTO moderate VALUES(2, 1);
 
-INSERT INTO auction_list VALUES(6, 1);
-INSERT INTO auction_list VALUES(7, 2);
-INSERT INTO auction_list VALUES(1, 3);
+INSERT INTO auction_list VALUES(DEFAULT,6, 1);
+INSERT INTO auction_list VALUES(DEFAULT,7, 2);
+INSERT INTO auction_list VALUES(DEFAULT,1, 3);
 
 INSERT INTO watch_list VALUES(1, 1);
 

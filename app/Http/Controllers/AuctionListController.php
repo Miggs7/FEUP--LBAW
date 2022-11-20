@@ -27,5 +27,12 @@ class AuctionListController extends Controller{
         }
       }
       return $auctions;
-  }    
+  }
+  
+  public static function create($id_auctioneer,$id_auction){
+    $auction_list = new AuctionList;
+    $auction_list->id_auctioneer = $id_auctioneer;
+    $auction_list->id_auction = $id_auction;
+    $auction_list->save();
+  }
 }

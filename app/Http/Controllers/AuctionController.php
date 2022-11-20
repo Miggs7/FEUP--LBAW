@@ -112,8 +112,13 @@ class AuctionController extends Controller
     $auction-> current_bid = $input['starting_bid'];
     $auction-> starting_bid = $input['starting_bid'];
     $auction->id_item = app('App\Http\Controllers\ItemController')->getIdFromName($input['item']);
-    //$auction->id_item = ItemController::getNameFromId($input['id_item']);
     $auction->save();
-    return redirect('/');
+    /*image to AuctionImage table */
+    app('App\Http\Controllers\AuctionImageController')->create($input['image'],$auction['id']);
+    /*add auctioneer and auction to auction_list */
+    app('App\Http\Controllers\AuctionListController')->create($input['id_auctioneer'],$auction['id']);
+    /*add auction and category to auction_category (not done yet) */
+    
+    return redirect('/auction/'.$auction['id']);
   }
 }
