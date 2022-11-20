@@ -324,6 +324,16 @@ form p{
   text-align: center;
 }
 
+.profile-picture{
+  object-fit: cover;
+  border-radius: 50%;
+  align-items: center;
+}
 
+.edit-button{
+  text-align: center;
+  background-color: rgb(129, 0, 0);
+  color: white;
+}
 
 

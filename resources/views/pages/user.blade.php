@@ -23,6 +23,8 @@
             <div class="col-lg-6 align-items-center justify-content-left d-flex mb-5 mb-lg-0">
                 <div class="blockabout">
                     <div class="blockabout-inner text-center text-sm-start">
+                        <image class = "profile-picture" src="https://source.unsplash.com/random/?img=1" alt="user image" width="200" height="200">    
+
                         <div class="title-big pb-3 mb-3">
                             <h3>{{ $user['username']}}</h3>
                         </div>
@@ -35,7 +37,6 @@
                         @if($is_banned)
                         <p class="description-p text-muted pe-0 pe-lg-0">
                             This is user is banned
-                        @endforeach
                         @endif
                         @if(Auth::guard('manager'))
                             @if(Auth::guard('manager')->user())
@@ -116,6 +117,33 @@
             @endif
             </form>
                 </div>
+                
+            </div>
+            
+        </div>
+        <div class="col-lg-6 align-items-center justify-content-left d-flex mb-5 mb-lg-0">
+                <div class="blockabout">
+                    <div class="blockabout-inner text-center text-sm-start" height= "fit-content" block-size= "fit-content" display = "flex">
+
+                    <figure class="img-column">
+                
+                        <img src="https://loremflickr.com/160/120" />
+      
+                        <figcaption>This is an auction</figcaption>
+                    </figure>
+                    <figure class="img-column">
+                
+                        <img src="https://loremflickr.com/160/120" />
+      
+                        <figcaption>This is an auction</figcaption>
+                    </figure>
+                    <figure class="img-column">
+                
+                        <img src="https://loremflickr.com/160/120" />
+      
+                        <figcaption>This is an auction</figcaption>
+                    </figure>
+                </div>                    
             </div>
         </div>
     </div>
