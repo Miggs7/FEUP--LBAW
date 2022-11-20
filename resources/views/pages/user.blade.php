@@ -11,8 +11,7 @@
     /*in case we're in other use profile we'll need to get his profile*/
     $id = request()->route('id');
     $user = App\Http\Controllers\UserController::getUserById($id);
-    $checkifbanned = App\Http\Controllers\UserController::checkIfBanned($id);
-    echo $checkifbanned;
+    $is_banned = App\Http\Controllers\UserController::checkIfBanned($id);
 @endphp
 
 @section('content')
@@ -34,14 +33,20 @@
                         </p>
                         @if(Auth::guard('manager'))
                             @if(Auth::guard('manager')->user())
-                            {{--ban is not changing bool --}}
                             <form action="{{url('user/'.$id.'/ban')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value={{$id}} >
+                                @if($is_banned)
+                                <input type="hidden" name="ban" value="0" >
+                                <button type="submit">
+                                    Unban User
+                                </button>
+                                @else
                                 <input type="hidden" name="ban" value="1" >
                                 <button type="submit">
                                     Ban User
                                 </button>
+                                @endif
                             </form>
                             @endif
                         @endif
