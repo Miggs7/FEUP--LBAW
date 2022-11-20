@@ -33,12 +33,19 @@
     @if(Auth::user() && ($now_time_stamp <= $date))
         @if(Auth::user()->id != $auctioneer_id && !(Auth::user()->is_banned))
     <form method="post" action={{url('auction/'.$id.'/bid/')}}>
+        <script>
+            function play() {
+              var audio = document.getElementById("audio");
+              audio.play();
+            }
+        </script>
         <label for="bid_value"> Bid Value:</label>
         @csrf
         @method('PUT')
         <input type="number" name="bid_value">
         <input type="hidden" name="id" value={{$id}} >
-        <input type="submit" value="submit">
+        <input type="submit" value="submit" onclick="play()">
+        <audio id="audio" src="https://dl.dropboxusercontent.com/sh/jz3oyiijegxrf0z/ZgxS3tP6QY/sfx-gavelpoundx3.mp3"></audio>
     </form>
         @endif
     @endif

@@ -35,7 +35,6 @@
                         @if($is_banned)
                         <p class="description-p text-muted pe-0 pe-lg-0">
                             This is user is banned
-                        @endforeach
                         @endif
                         @if(Auth::guard('manager'))
                             @if(Auth::guard('manager')->user())
