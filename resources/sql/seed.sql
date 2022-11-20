@@ -113,16 +113,19 @@ CREATE TABLE auction_list(
 );
 
 CREATE TABLE watch_list(
+    id SERIAL PRIMARY KEY,
     "id_bidder" INT NOT NULL REFERENCES bidder("id_bidder") ON DELETE CASCADE,
     "id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE
 );
 
 CREATE TABLE manage(
+    id SERIAL PRIMARY KEY,
     "id_manager" INT NOT NULL REFERENCES manager(id) ON DELETE CASCADE,
     "id_bidder" INT NOT NULL REFERENCES bidder("id_bidder") ON DELETE CASCADE
 );
 
 CREATE TABLE moderate(
+    id SERIAL PRIMARY KEY,
     "id_manager" INT NOT NULL REFERENCES manager(id) ON DELETE CASCADE,
     "id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE
 );
@@ -143,6 +146,7 @@ CREATE TABLE category(
 );
 
 CREATE TABLE auction_category(
+    id SERIAL PRIMARY KEY,
     "id_category" INT NOT NULL REFERENCES category(id) ON DELETE CASCADE,
     "id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE
 );
@@ -154,7 +158,8 @@ CREATE TABLE auction_image(
 );
 
 CREATE TABLE bid(
-    "id_bidder" INT PRIMARY KEY REFERENCES bidder("id_bidder") ON DELETE CASCADE,
+    id SERIAL PRIMARY KEY,
+    "id_bidder" INT NOT NULL REFERENCES bidder("id_bidder") ON DELETE CASCADE,
     "id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE,
     bid_value FLOAT NOT NULL
 );
@@ -222,8 +227,8 @@ INSERT INTO auctioneer VALUES (6, 1);
 INSERT INTO auctioneer VALUES (1);
 INSERT INTO auctioneer VALUES (7);
 
-INSERT INTO review VALUES(0, 'Annonymous clown', 'Product does not match the description! It is awful', 1, 6);
-INSERT INTO review VALUES(1, 'Grandma', 'Amazing, this car will make my friends jealous', 1, 6);
+INSERT INTO review VALUES(DEFAULT, 'Annonymous clown', 'Product does not match the description! It is awful', 1, 6);
+INSERT INTO review VALUES(DEFAULT, 'Grandma', 'Amazing, this car will make my friends jealous', 1, 6);
 
 INSERT INTO notification VALUES(DEFAULT, 'Saturday, October 1, 2022 9:42 PM', 'You won the auction', 'Auction Status Notification',1, 1, 1);
 
@@ -240,21 +245,21 @@ INSERT INTO category VALUES(DEFAULT, 'Furnitures');
 INSERT INTO category VALUES(DEFAULT, 'Accessories');
 INSERT INTO category VALUES(DEFAULT, 'Memorabilia');
 
-INSERT INTO auction_category VALUES(1, 1);
-INSERT INTO auction_category VALUES(2, 2);
-INSERT INTO auction_category VALUES(2, 3);
+INSERT INTO auction_category VALUES(DEFAULT,1, 1);
+INSERT INTO auction_category VALUES(DEFAULT,2, 2);
+INSERT INTO auction_category VALUES(DEFAULT,2, 3);
 
-INSERT INTO manage VALUES(1, 3);
-INSERT INTO manage VALUES(2, 1);
+INSERT INTO manage VALUES(DEFAULT,1, 3);
+INSERT INTO manage VALUES(DEFAULT,2, 1);
 
-INSERT INTO moderate VALUES(1, 2);
-INSERT INTO moderate VALUES(2, 1);
+INSERT INTO moderate VALUES(DEFAULT,1, 2);
+INSERT INTO moderate VALUES(DEFAULT,2, 1);
 
 INSERT INTO auction_list VALUES(DEFAULT,6, 1);
 INSERT INTO auction_list VALUES(DEFAULT,7, 2);
 INSERT INTO auction_list VALUES(DEFAULT,1, 3);
 
-INSERT INTO watch_list VALUES(1, 1);
+INSERT INTO watch_list VALUES(DEFAULT,1, 1);
 
 -----------------------------------------
 -- INDEX

@@ -142,7 +142,7 @@ paths:
     get:
       operationId: R106
       summary: "R106: View user profile"
-      description: "Show the individual user profile. Access: USR"
+      description: "Show the individual user profile, will show a form is user is in its own profile. Access: USR"
       tags:
         - "M01: Authentication and Individual Profile"
 
@@ -619,7 +619,7 @@ paths:
   /user/{id}/ban:
     put:
       operationId: R506
-      summary: "R506: Ban user"
+      summary: "R506: Ban user Action"
       description: "Ban user. Access: MAN"
       tags:
         - "M05: User and Auction Administration and Static pages"
@@ -659,7 +659,7 @@ paths:
   /reviews/{id}/delete:
     delete:
       operationId: R507
-      summary: "R507: Delete review"
+      summary: "R507: Delete review Action"
       description: "Delete review. Access: MAN,USR"
       tags:
         - "M03: Reviews and Watchlist"
