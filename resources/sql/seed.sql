@@ -294,7 +294,7 @@ DROP FUNCTION IF EXISTS auction_time_expired CASCADE;
 CREATE FUNCTION auction_time_expired () RETURNS trigger AS
 $BODY$
 BEGIN
-    IF(OLD.ending_date <= now()) THEN
+    IF(OLD.ending_date >= now()) THEN
         NEW.ongoing = 0;
     END IF;
     RETURN NEW;
