@@ -5,13 +5,13 @@
 @section('content')
 <section id="auction-container">
     <div class="categories">
-        <div class="category"> <a href="/"> Home </a> </div>
+        <a href="/" class="category"> Home </a>
         @for($j = 1; $j <= 5; $j++)
             @php
             /*get auction category from database using ID*/
             $category = App\Http\Controllers\CategoryController::getCategoryById($j);
             @endphp
-            <div class="category"> {{$category['type']}} </div>
+            <a href="/" class="category"> {{$category['type']}} </a>
         @endfor
     </div>
     <hr>
@@ -26,7 +26,7 @@
             <a href="{{url('/auction/'.$i)}}">
                 <img src= "{{$img['link']}}" alt="Auction image" width="200" height="200">
             </a>
-                <figcaption>This is {{$auction['name']}}</figcaption>
+                <figcaption>{{$auction['name']}}</figcaption>
         </figure>
     @endfor   
     </div>
