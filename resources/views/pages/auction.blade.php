@@ -31,10 +31,11 @@
     <p> Username of the auctioneer: {{$auctioneer['username']}}</p>
     {{-- Bid form should only be visible to authenticated users --}}
     @if(Auth::user() && ($now_time_stamp <= $date))
-        @if(Auth::user()->id != $auctioneer_id)
+        @if(Auth::user()->id != $auctioneer_id && !(Auth::user()->is_banned))
     <form method="post" action={{url('auction/'.$id.'/bid/')}}>
         <label for="bid_value"> Bid Value:</label>
         @csrf
+        @method('PUT')
         <input type="number" name="bid_value">
         <input type="hidden" name="id" value={{$id}} >
         <input type="submit" value="submit">
@@ -43,9 +44,10 @@
     @endif
     {{-- Update or delete if owner of auction --}}
     @if(Auth::user())
-        @if(Auth::user()->id == $auctioneer_id)
+        @if(Auth::user()->id == $auctioneer_id && !(Auth::user()->is_banned))
         <form method="POST" action={{url('auction/'.$id.'/edit/')}}>
             @csrf
+            @method('PUT')
             <label for="name"> Name:</label>
             <input type="text" name="name">
             
@@ -79,7 +81,7 @@
         @if(Auth::guard('manager')->user())
         <form action="{{url('auction/'.$id.'/delete/')}}" method="POST">
             @csrf
-            {{--@method('DELETE')--}}
+            @method('DELETE')
             <input type="hidden" name="id" value={{$id}} >
             <button type="submit" value="delete">
                 Delete auction

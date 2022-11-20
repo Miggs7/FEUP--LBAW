@@ -158,7 +158,7 @@ paths:
           description: "Ok. Show User Profile UI02"
     
   /user/{id}/edit:
-    post:
+    put:
       operationId: R107
       summary: "R107: Edit user profile Action"
       description: "Edit the individual user profile. Access: USR"
@@ -426,7 +426,7 @@ paths:
   
 
   /auction/{id}/bid:
-    post:
+    put:
       operationId: R402
       summary: "R402: Make a Bid"
       description: "Update current auction bid. Access: BID"
@@ -497,13 +497,12 @@ paths:
             description: 'Create Auction'
 
   /auction/{id}/edit:
-    post:
+    put:
       operationId: R405
       summary: "R405: Edit Auction Page"
       description: "Edit Auction page. Access: AUC,MAN"
       tags:
         - "M04: Auctions"
-        - "M05: User and Auction Administration and Static pages"
       
       parameters:
         - in: path
@@ -546,9 +545,7 @@ paths:
                 302Failure:
                   description: 'Failed to edit auction. Redirect to auction page'
                   value: '/auction/{id}'
-
-  
-
+    
   /manager/{id}:
     get:
       operationId: R501
@@ -620,7 +617,7 @@ paths:
           description: "Ok. Show Contacts UI"  
   
   /user/{id}/ban:
-    post:
+    put:
       operationId: R506
       summary: "R506: Ban user"
       description: "Ban user. Access: MAN"
@@ -689,3 +686,34 @@ paths:
                 302Failure:
                   description: 'Review Deleted. Redirect to review page'
                   value: '/reviews/{id_review}'
+    
+  /auction/{id}/delete:
+    delete:
+      operationId: R508
+      summary: "R508: Ban Auction Page"
+      description: "Ban Auction page. Access: MAN"
+      tags:
+        - "M05: User and Auction Administration and Static pages"
+      
+      parameters:
+        - in: path
+          name: id_auction
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '302':
+          description: 'Redirect after auction edit.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Auction Deleted! Redirect to Home page'
+                  value: '/'
+                302Failure:
+                  description: 'Failed to Delete auction. Redirect to auction page'
+                  value: '/auction/{id}'
+
