@@ -481,8 +481,7 @@ form p{
   text-align: center;
 }
 
-
-
+/*Contact*/
 
 .contact-info{
   background-image: linear-gradient(black, grey);
@@ -507,4 +506,17 @@ form p{
 
 .contact-info p{
   font-size: 20px;
+}
+
+/*Watch List*/
+
+.watch-list h2{
+  font-size: 65px;
+  text-align: center;
+  margin-top: -4%;
+}
+
+.watch-list p{
+  font-size: 25px;
+  margin-left: 2%;
 }
