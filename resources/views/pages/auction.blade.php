@@ -42,7 +42,7 @@
         </div>
         <div>
             <div>Auctioneer:</div>
-            <div>{{$auctioneer['username']}}</div>
+            <a id="auctioneer-profile-href" href="{{url('/user/'.$id)}}">{{$auctioneer['username']}}</a>
         </div>
         
         {{-- Bid form should only be visible to authenticated users --}}

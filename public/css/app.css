@@ -203,12 +203,40 @@ hr {
   display: flex;
   flex-direction: column;
   font-size: 25px;
-  padding: 100px;
   justify-content: space-around;
+}
+
+#auction-content .auction-info a {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 50px;
 }
 
 #auction-content .auction-info label {
   font-size: 30px;
+}
+
+#auction-content .auction-info > a > div {
+  display: flex;
+  gap: 20px;
+}
+
+#auction-content .auction-info > div {
+  display: flex;
+  gap: 20px;
+}
+
+#auctioneer-profile-href:hover {
+  color: #606060;
+  transform: scale(1.05);
+}
+
+#auction-content .auction-info > div > :first-child,
+#auction-content .auction-info > a > div > :first-child {
+  display: flex;
+  gap: 20px;
+  font-weight: bold;
 }
 
 .auction-form {
@@ -238,17 +266,6 @@ hr {
 
 .auction-form input[type="submit"] {
   margin-top: 50px;
-}
-
-#auction-content .auction-info > div {
-  display: flex;
-  gap: 20px;
-}
-
-#auction-content .auction-info > div > :first-child {
-  display: flex;
-  gap: 20px;
-  font-weight: bold;
 }
 
 #content input[type="submit"] {
