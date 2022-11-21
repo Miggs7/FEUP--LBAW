@@ -77,7 +77,7 @@
                     @method('DELETE')
                     <input type="hidden" name="id_auction" value={{$id}} >
                     <input type="hidden" name="id_bidder" value={{Auth::user()->id}} >
-                    <button submit="submit" >Watch</button>
+                    <button submit="submit" >Unwatch</button>
                 </form>
                 @endif
             @endif

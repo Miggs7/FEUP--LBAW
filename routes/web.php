@@ -66,5 +66,6 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::get('/watchList/{id}',function(){
     return view('pages.watchList');
 });
+
 Route::post('watchList/{id}/add','WatchListController@addToWatchList');
 Route::delete('watchList/{id}/delete','WatchListController@removeFromWatchList');

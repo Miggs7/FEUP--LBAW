@@ -35,10 +35,10 @@
 </div>
 
 <div class="img-row">
-        @foreach($watching as $auction)
+        @foreach($watching as $watch)
             @php
-            $auction = App\Http\Controllers\AuctionController::getAuction($auction->id);
-            $img = App\Http\Controllers\AuctionImageController::getAuctionImage($auction->id);
+            $auction = App\Http\Controllers\AuctionController::getAuction($watch->id_auction);
+            $img = App\Http\Controllers\AuctionImageController::getAuctionImage($watch->id_auction);
             @endphp
 
             <figure class="img-column">
