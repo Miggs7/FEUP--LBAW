@@ -281,7 +281,7 @@ paths:
           description: "Ok. Show User watchlist page UI"
 
   /watchlist/{id}/add:
-    put:
+    post:
       operationId: R303
       summary: "R303: Add auction to watchlist Action"
       description: "Add auction to watchlist. Access: USR"
@@ -353,7 +353,7 @@ paths:
                   value: '/watchlist/{id_bidder}'
 
   /review/new:
-    put:
+    post:
       operationId: R305
       summary: "R305: Add Review Action"
       description: "Add auction to watchlist. Access: USR"

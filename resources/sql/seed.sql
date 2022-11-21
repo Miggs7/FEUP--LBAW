@@ -221,11 +221,45 @@ INSERT INTO auction VALUES(DEFAULT,'Makena', 'This is an auction','Friday, Octob
 INSERT INTO transaction VALUES(DEFAULT, 25500, 'Buy');
 
 INSERT INTO bidder VALUES (1, 1);
-INSERT INTO bidder VALUES (3, 1);
+INSERT INTO bidder VALUES (2);
+INSERT INTO bidder VALUES (3);
+INSERT INTO bidder VALUES (4);
+INSERT INTO bidder VALUES (5);
+INSERT INTO bidder VALUES (6);
+INSERT INTO bidder VALUES (7);
+INSERT INTO bidder VALUES (8);
+INSERT INTO bidder VALUES (9, 1);
+INSERT INTO bidder VALUES (10);
+INSERT INTO bidder VALUES (12);
+INSERT INTO bidder VALUES (13);
+INSERT INTO bidder VALUES (14);
+INSERT INTO bidder VALUES (15);
+INSERT INTO bidder VALUES (16);
+INSERT INTO bidder VALUES (17);
+INSERT INTO bidder VALUES (18);
+INSERT INTO bidder VALUES (19);
+INSERT INTO bidder VALUES (20);
 
-INSERT INTO auctioneer VALUES (6, 1);
-INSERT INTO auctioneer VALUES (1);
+INSERT INTO auctioneer VALUES (1, 1);
+INSERT INTO auctioneer VALUES (2);
+INSERT INTO auctioneer VALUES (3);
+INSERT INTO auctioneer VALUES (4);
+INSERT INTO auctioneer VALUES (5);
+INSERT INTO auctioneer VALUES (6);
 INSERT INTO auctioneer VALUES (7);
+INSERT INTO auctioneer VALUES (8);
+INSERT INTO auctioneer VALUES (9);
+INSERT INTO auctioneer VALUES (10);
+INSERT INTO auctioneer VALUES (11);
+INSERT INTO auctioneer VALUES (12);
+INSERT INTO auctioneer VALUES (13);
+INSERT INTO auctioneer VALUES (14);
+INSERT INTO auctioneer VALUES (15);
+INSERT INTO auctioneer VALUES (16);
+INSERT INTO auctioneer VALUES (17);
+INSERT INTO auctioneer VALUES (18);
+INSERT INTO auctioneer VALUES (19);
+INSERT INTO auctioneer VALUES (20);
 
 INSERT INTO review VALUES(DEFAULT, 'Annonymous clown', 'Product does not match the description! It is awful', 1, 6);
 INSERT INTO review VALUES(DEFAULT, 'Grandma', 'Amazing, this car will make my friends jealous', 1, 6);

@@ -32,10 +32,22 @@
                         <p class="description-p text-muted pe-0 pe-lg-0">
                            Name: {{$user['name']}}
                         </p>
+                        <form action="{{url('/watchList/'.$id)}}">
+                            <input type="submit" value="Watch List" />
+                        </form>
                         @if($is_banned)
                         <p class="description-p text-muted pe-0 pe-lg-0">
                             This is user is banned
                         @endif
+                        @if(Auth::user())
+                            @if(!$is_banned && Auth::user()->id == $user['id'])
+                            <form action="{{url('/new')}}">
+                                <input type="submit" value="Create New Auction" />
+                            </form>
+                            @endif
+                        @endif
+                        
+                       
                         @if(Auth::guard('manager'))
                             @if(Auth::guard('manager')->user())
                             <form action="{{url('user/'.$id.'/ban')}}" method="POST">

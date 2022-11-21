@@ -8,6 +8,7 @@
     /*get auctioneer info*/
     $auctioneer_id = App\Http\Controllers\AuctionListController::getAuctioneer($id);
     $auctioneer = App\Http\Controllers\UserController::getUserById($auctioneer_id);
+    $is_watched = App\Http\Controllers\WatchListController::isOnWatchList($id,Auth::user()->id);
     
     /*button will be hidden if time has passed*/
     $date = ($auction['ending_date']);
@@ -63,6 +64,22 @@
             <input type="submit" value="submit" onclick="play()">
             <audio id="audio" src="https://dl.dropboxusercontent.com/sh/jz3oyiijegxrf0z/ZgxS3tP6QY/sfx-gavelpoundx3.mp3"></audio>    
         </form>
+                @if(!$is_watched)
+                    <form method="post" action={{url('watchList/'.$id.'/add/')}}>
+                        @csrf
+                        <input type="hidden" name="id_auction" value={{$id}} >
+                        <input type="hidden" name="id_bidder" value={{Auth::user()->id}} >
+                        <button submit="submit" >Watch</button>
+                    </form>
+                @else
+                <form method="post" action={{url('watchList/'.$id.'/delete/')}}>
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="id_auction" value={{$id}} >
+                    <input type="hidden" name="id_bidder" value={{Auth::user()->id}} >
+                    <button submit="submit" >Watch</button>
+                </form>
+                @endif
             @endif
         @endif
     </div>
