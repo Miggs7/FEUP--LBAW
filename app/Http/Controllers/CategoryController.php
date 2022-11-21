@@ -19,4 +19,14 @@ class CategoryController extends Controller
     return $category;
   }
 
+  public static function getCategoryByName($type){
+    $category = Category::find($type);
+    return $category;
+  }
+
+  public static function getCategories(){
+    $categories = Category::all();
+    return $categories;
+  }
+
 }

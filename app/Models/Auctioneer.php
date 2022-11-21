@@ -4,16 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AuctionList extends Model
+class Auctioneer extends Model
 {
 
-    protected $table = 'auction_list';
+    protected $table = 'auctioneer';
 
     // Don't add create and update timestamps in database.
     public $timestamps  = false;
-
-    public function auctions(){
-        return $this->hasMany('id_auctioneer');
-    }
-
-}   
+}

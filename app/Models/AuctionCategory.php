@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Auction extends Model
+class AuctionCategory extends Model
 {
 
-    protected $table = 'auction';
+    protected $table = 'auction_category';
 
     // Don't add create and update timestamps in database.
     public $timestamps  = false;
@@ -17,7 +17,7 @@ class Auction extends Model
      *
      * @var array
      */
-    protected $fillable = [
+    /*protected $fillable = [
         'name','description','starting_bid','current_bid'
-    ];
+    ];*/
 }
