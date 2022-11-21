@@ -258,8 +258,8 @@ paths:
 
   /watchlist/{id}:
     get:
-      operationId: R302
-      summary: "R302: View User watchlist Page"
+      operationId: R301
+      summary: "R301: View User watchlist Page"
       description: "Show the individual user watchlist page. Access: PUB"
       tags:
         - "M03: Reviews and Watchlist"
@@ -282,8 +282,8 @@ paths:
 
   /watchlist/{id}/add:
     post:
-      operationId: R303
-      summary: "R303: Add auction to watchlist Action"
+      operationId: R302
+      summary: "R302: Add auction to watchlist Action"
       description: "Add auction to watchlist. Access: USR"
       tags:
         - "M03: Reviews and Watchlist"
@@ -319,8 +319,8 @@ paths:
 
   /watchlist/{id}/delete:
     delete:
-      operationId: R304
-      summary: "R304: Delete auction from watchlist"
+      operationId: R303
+      summary: "R303: Delete auction from watchlist"
       description: "Delete auction from watchlist. Access: AUC"
       tags:
         - "M03: Reviews and Watchlist"
@@ -354,8 +354,8 @@ paths:
 
   /review/new:
     post:
-      operationId: R305
-      summary: "R305: Add Review Action"
+      operationId: R304
+      summary: "R304: Add Review Action"
       description: "Add auction to watchlist. Access: USR"
       tags:
         - "M03: Reviews and Watchlist"
