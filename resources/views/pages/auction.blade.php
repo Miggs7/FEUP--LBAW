@@ -8,7 +8,10 @@
     /*get auctioneer info*/
     $auctioneer_id = App\Http\Controllers\AuctionListController::getAuctioneer($id);
     $auctioneer = App\Http\Controllers\UserController::getUserById($auctioneer_id);
-    $is_watched = App\Http\Controllers\WatchListController::isOnWatchList($id,Auth::user()->id);
+    if(Auth::check()){
+        $is_watched = App\Http\Controllers\WatchListController::isOnWatchList($id,Auth::user()->id);
+    }
+    
     
     /*button will be hidden if time has passed*/
     $date = ($auction['ending_date']);
