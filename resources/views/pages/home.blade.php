@@ -27,21 +27,21 @@
         <div class="categories-titles" id="{{$category['type']}}"> {{$category['type']}} </div>
         <hr>
         <div class="img-row">
-        @for($i = 1; $i <= 3; $i++)
+        @foreach(App\Models\Auction::all() as $auction)
 
             @php
-            $category = App\Http\Controllers\CategoryController::getCategoryById($i);
-            $auction = App\Http\Controllers\AuctionController::getAuction($i);
-            $img = App\Http\Controllers\AuctionImageController::getAuctionImage($i);
+            $category = App\Http\Controllers\CategoryController::getCategoryById($auction->id);
+            $auction = App\Http\Controllers\AuctionController::getAuction($auction->id);
+            $img = App\Http\Controllers\AuctionImageController::getAuctionImage($auction->id);
             @endphp
 
             <figure class="img-column">
-                <a href="{{url('/auction/'.$i)}}">
+                <a href="{{url('/auction/'.$auction->id)}}">
                     <img src= "{{$img['link']}}" alt="Auction image" width="200" height="200">
                 </a>
                     <figcaption>{{$auction['name']}}</figcaption>
             </figure>
-        @endfor   
+        @endforeach 
         </div>
     @endfor
 
