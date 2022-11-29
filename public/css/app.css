@@ -546,3 +546,9 @@ form p{
   font-size: 30px;
   text-align: center;
 }
+
+/* */
+
+.img-column figcaption {
+  display: flex;
+}

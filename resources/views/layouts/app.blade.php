@@ -36,6 +36,21 @@
         <a class="button" href="{{ url('/login') }}"> Login </a> <span></span>
         @endif
       </header>
+
+      <section id="auction-container">
+        <div class="second-header">
+            <div class="categories">
+                @for($j = 1; $j <= 7; $j++)
+                    @php
+                    /*get auction category from database using ID*/
+                    $category = App\Http\Controllers\CategoryController::getCategoryById($j);
+                    @endphp
+                    <a href="{{ url('/auctionCategory/'.$j) }}" class="category"> {{$category['type']}} </a>
+                @endfor
+            </div>
+            <hr>
+        </div>
+      </section> 
       <section id="content">
         @yield('content')
 

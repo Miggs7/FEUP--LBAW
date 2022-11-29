@@ -69,3 +69,8 @@ Route::get('/watchList/{id}',function(){
 
 Route::post('watchList/{id}/add','WatchListController@addToWatchList');
 Route::delete('watchList/{id}/delete','WatchListController@removeFromWatchList');
+
+//Category pages
+Route::get('/auctionCategory/{id}',function(){
+    return view('pages.auctionCategory');
+});

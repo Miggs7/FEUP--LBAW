@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\AuctionCategory;
+use App\Models\Auction;
 use Illuminate\Http\Request;
+use app\Http\Controllers\AuctionController;
 
 class AuctionCategoryController extends Controller
 {
@@ -24,6 +26,17 @@ class AuctionCategoryController extends Controller
     $auction_category->id_auction = $id_auction;
     $auction_category->id_category = $id_category;
     $auction_category->save();
+  }
+
+  public static function getAuctionByCategory($id_category)
+  {
+    $auctionArray = array();
+    foreach(AuctionCategory::all() as $auctionCategory) {
+      if($auctionCategory->id_category == $id_category) {
+        $auctionArray[] = Auction::find($auctionCategory->id_auction);
+      }
+    }
+    return $auctionArray;
   }
 
 }
