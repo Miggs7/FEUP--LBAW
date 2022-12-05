@@ -88,7 +88,7 @@ CREATE TABLE transaction(
     type transaction_type NOT NULL
 );
 
-CREATE TABLE bidder(
+/*CREATE TABLE bidder(
     "id_bidder" INTEGER PRIMARY KEY REFERENCES _user(id) ON DELETE CASCADE,
     "transaction_id" INTEGER REFERENCES transaction(id) ON DELETE CASCADE
 );
@@ -96,32 +96,32 @@ CREATE TABLE bidder(
 CREATE TABLE auctioneer(
     "id_auctioneer" INTEGER PRIMARY KEY REFERENCES _user(id) ON DELETE CASCADE,
     "transaction_id" INTEGER REFERENCES transaction(id) ON DELETE CASCADE
-);
+);*/
 
 CREATE TABLE review(
     id SERIAL PRIMARY KEY,
 	author TEXT NOT NULL,
     comment TEXT NOT NULL,
-    "id_bidder" INTEGER NOT NULL REFERENCES bidder("id_bidder") ON DELETE CASCADE,
-    "id_auctioneer" INTEGER NOT NULL REFERENCES auctioneer("id_auctioneer") ON DELETE CASCADE
+    "id_bidder" INTEGER NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
+    "id_auctioneer" INTEGER NOT NULL REFERENCES _user(id) ON DELETE CASCADE
 );
 
 CREATE TABLE auction_list(
     id SERIAL PRIMARY KEY,
-    "id_auctioneer" INT NOT NULL REFERENCES auctioneer("id_auctioneer") ON DELETE CASCADE,
+    "id_auctioneer" INT NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
     "id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE
 );
 
 CREATE TABLE watch_list(
     id SERIAL PRIMARY KEY,
-    "id_bidder" INT NOT NULL REFERENCES bidder("id_bidder") ON DELETE CASCADE,
+    "id_bidder" INT NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
     "id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE
 );
 
 CREATE TABLE manage(
     id SERIAL PRIMARY KEY,
     "id_manager" INT NOT NULL REFERENCES manager(id) ON DELETE CASCADE,
-    "id_bidder" INT NOT NULL REFERENCES bidder("id_bidder") ON DELETE CASCADE
+    "id_bidder" INT NOT NULL REFERENCES _user(id) ON DELETE CASCADE
 );
 
 CREATE TABLE moderate(
@@ -159,7 +159,7 @@ CREATE TABLE auction_image(
 
 CREATE TABLE bid(
     id SERIAL PRIMARY KEY,
-    "id_bidder" INT NOT NULL REFERENCES bidder("id_bidder") ON DELETE CASCADE,
+    "id_bidder" INT NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
     "id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE,
     bid_value FLOAT NOT NULL
 );
@@ -220,7 +220,7 @@ INSERT INTO auction VALUES(DEFAULT,'Makena', 'This is an auction','Friday, Octob
 
 INSERT INTO transaction VALUES(DEFAULT, 25500, 'Buy');
 
-INSERT INTO bidder VALUES (1, 1);
+/*INSERT INTO bidder VALUES (1, 1);
 INSERT INTO bidder VALUES (2);
 INSERT INTO bidder VALUES (3);
 INSERT INTO bidder VALUES (4);
@@ -260,6 +260,7 @@ INSERT INTO auctioneer VALUES (17);
 INSERT INTO auctioneer VALUES (18);
 INSERT INTO auctioneer VALUES (19);
 INSERT INTO auctioneer VALUES (20);
+*/
 
 INSERT INTO review VALUES(DEFAULT, 'Annonymous clown', 'Product does not match the description! It is awful', 1, 6);
 INSERT INTO review VALUES(DEFAULT, 'Grandma', 'Amazing, this car will make my friends jealous', 1, 6);

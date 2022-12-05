@@ -5,6 +5,12 @@
 @endphp
 
 @section('content')
+    @if(!Auth::Check())
+    <script>
+        alert('You need to be logged in to create auctions!');
+        window.history.back();
+    </script>
+    @endif
 <div class="col-lg-6 align-items-center justify-content-left d-flex mb-5 mb-lg-0">
     <div class="blockabout">
         <div class="blockabout-inner text-center text-sm-start">

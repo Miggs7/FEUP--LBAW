@@ -11,6 +11,7 @@
     if(Auth::check()){
         $is_watched = App\Http\Controllers\WatchListController::isOnWatchList($id,Auth::user()->id);
     }
+    else $is_watched = false;
     
     
     /*button will be hidden if time has passed*/
@@ -46,33 +47,54 @@
         </div>
         <div>
             <div>Auctioneer:</div>
-            <a id="auctioneer-profile-href" href="{{url('/user/'.$id)}}">{{$auctioneer['username']}}</a>
+            <a id="auctioneer-profile-href" href="{{url('/user/'.$auctioneer_id)}}">{{$auctioneer['username']}}</a>
         </div>
         
         {{-- Bid form should only be visible to authenticated users --}}
-        @if(Auth::user() && ($now_time_stamp <= $date))
-            @if(Auth::user()->id != $auctioneer_id)
+        @if(($now_time_stamp <= $date))
         <form method="post" action={{url('auction/'.$id.'/bid/')}}>
             <label for="bid_value"> Bid Value:</label>
             @csrf
             @method('PUT')
             <script>
-                function play() {
+                /*function play() {
                   var audio = document.getElementById("audio");
                   audio.play();
-                }
+                }*/
             </script>
             <input type="number" name="bid_value">
-            <input type="hidden" name="id" value={{$id}} >
+            @if(Auth::user())
+            @if(Auth::user()->id != $auctioneer_id)
+            <input type="hidden" name="id" value={{$id}}>
             <input type="submit" value="submit" onclick="play()">
-            <audio id="audio" src="https://dl.dropboxusercontent.com/sh/jz3oyiijegxrf0z/ZgxS3tP6QY/sfx-gavelpoundx3.mp3"></audio>    
-        </form>
+            <audio id="audio" src="https://dl.dropboxusercontent.com/sh/jz3oyiijegxrf0z/ZgxS3tP6QY/sfx-gavelpoundx3.mp3"></audio>
+            @endif
+            @else
+            <script>
+                function loginError(){
+                    alert("Login Please!");
+                }
+                </script>
+                <button type="button" onclick="loginError()" >Submit</button>
+                @endif
+            </form>
                 @if(!$is_watched)
                     <form method="post" action={{url('watchList/'.$id.'/add/')}}>
                         @csrf
-                        <input type="hidden" name="id_auction" value={{$id}} >
-                        <input type="hidden" name="id_bidder" value={{Auth::user()->id}} >
-                        <button submit="submit" >Watch</button>
+                        <input type="hidden" name="id_auction" value={{$id}}>
+                        @if(Auth::user())
+                            @if(Auth::user()->id != $auctioneer_id)
+                            <input type="hidden" name="id_bidder" value={{Auth::user()->id}} >
+                            <button submit="submit" >Watch</button>
+                            @endif
+                        @else
+                        <script>
+                        function loginError(){
+                            alert("Login Please!");
+                        }
+                        </script>
+                        <button type="button" onclick="loginError()" >Watch</button>
+                        @endif
                     </form>
                 @else
                 <form method="post" action={{url('watchList/'.$id.'/delete/')}}>
@@ -83,7 +105,6 @@
                     <button submit="submit" >Unwatch</button>
                 </form>
                 @endif
-            @endif
         @endif
     </div>
 </div>
