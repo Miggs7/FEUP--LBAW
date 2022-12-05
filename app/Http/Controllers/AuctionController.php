@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Auction;
+use App\Models\Bid;
 use Illuminate\Http\Request;
 use app\Http\Controllers\ItemController;
 
@@ -34,6 +35,12 @@ class AuctionController extends Controller
     /*Trigger will verify if value is valid*/
     $auction->current_bid  = $input['bid_value'];
     $auction->save();
+
+    $bid = new Bid;
+    $bid->id_bidder = $input['id_bidder'];
+    $bid->id_auction = $input['id'];
+    $bid->bid_value = $input['bid_value'];
+    $bid->save();
 
     return redirect('/auction/'.$auction->id);
   }
@@ -111,12 +118,8 @@ class AuctionController extends Controller
     /*at the start of bid the current and starting bid will be the same*/
     $auction-> current_bid = $input['starting_bid'];
     $auction-> starting_bid = $input['starting_bid'];
-    $auction->id_item = app('App\Http\Controllers\ItemController')->getIdFromName($input['item']);
+    $auction->id_item = app('App\Http\Controllers\ItemController')->getOrCreate($input['item']);
     $auction->save();
-    /*add user to auctioneer, new users not from original seed.sql*/
-    /*if(!app('App\Http\Controllers\AuctioneerController')->getAuctioneer($input['id_auctioneer'])){
-      app('App\Http\Controllers\AuctioneerController')->create($input['id_auctioneer']);
-    }*/
     /*image to AuctionImage table */
     app('App\Http\Controllers\AuctionImageController')->create($input['image'],$auction['id']);
     /*add auctioneer and auction to auction_list */

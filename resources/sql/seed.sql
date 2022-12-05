@@ -14,8 +14,6 @@ DROP TABLE IF EXISTS _user CASCADE;
 DROP TABLE IF EXISTS item CASCADE;
 DROP TABLE IF EXISTS auction CASCADE;
 DROP TABLE IF EXISTS transaction CASCADE;
-DROP TABLE IF EXISTS bidder CASCADE;
-DROP TABLE IF EXISTS auctioneer CASCADE;
 DROP TABLE IF EXISTS review CASCADE;
 DROP TABLE IF EXISTS auction_list CASCADE;
 DROP TABLE IF EXISTS watch_list CASCADE;
@@ -63,7 +61,7 @@ CREATE TABLE _user(
 CREATE TABLE item(
     id SERIAL PRIMARY KEY ,
     name TEXT NOT NULL,
-    description TEXT NOT NULL,
+    description TEXT,
     "id_bidder" INTEGER REFERENCES _user(id) ON DELETE CASCADE
 );
 
@@ -85,18 +83,10 @@ CREATE TABLE auction(
 CREATE TABLE transaction(
     id SERIAL PRIMARY KEY,
     value INTEGER NOT NULL CHECK (value > 0),
-    type transaction_type NOT NULL
+    type transaction_type NOT NULL,
+    "id_bidder" INTEGER NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
+    "id_auctioneer" INTEGER NOT NULL REFERENCES _user(id) ON DELETE CASCADE
 );
-
-/*CREATE TABLE bidder(
-    "id_bidder" INTEGER PRIMARY KEY REFERENCES _user(id) ON DELETE CASCADE,
-    "transaction_id" INTEGER REFERENCES transaction(id) ON DELETE CASCADE
-);
-
-CREATE TABLE auctioneer(
-    "id_auctioneer" INTEGER PRIMARY KEY REFERENCES _user(id) ON DELETE CASCADE,
-    "transaction_id" INTEGER REFERENCES transaction(id) ON DELETE CASCADE
-);*/
 
 CREATE TABLE review(
     id SERIAL PRIMARY KEY,
@@ -211,56 +201,11 @@ INSERT INTO item VALUES(DEFAULT,'Forever 21', 'This is clothing', 8);
 INSERT INTO item VALUES(DEFAULT,'Angels Jeanswear','This is clothing', 7);
 INSERT INTO item VALUES(DEFAULT,'SABA','This is clothing', 1);
 
--- create auction
-
-
 INSERT INTO auction VALUES(DEFAULT,'Orange Bird','This is an auction', 'Saturday, October 1, 2022 5:58 PM', 'Monday, December 3, 2022 5:58 PM',13333, 12136,DEFAULT, 7);
 INSERT INTO auction VALUES(DEFAULT,'Malibu', 'This is an auction','Saturday, October 1, 2022 9:42 PM', 'Monday, December 17, 2022 8:42 PM', 42289, 42289,DEFAULT, 4);
 INSERT INTO auction VALUES(DEFAULT,'Makena', 'This is an auction','Friday, October 7, 2022 5:01 PM', 'Monday, December 17, 2022 8:42 PM',53087, 51079,DEFAULT,1);
 
-INSERT INTO transaction VALUES(DEFAULT, 25500, 'Buy');
-
-/*INSERT INTO bidder VALUES (1, 1);
-INSERT INTO bidder VALUES (2);
-INSERT INTO bidder VALUES (3);
-INSERT INTO bidder VALUES (4);
-INSERT INTO bidder VALUES (5);
-INSERT INTO bidder VALUES (6);
-INSERT INTO bidder VALUES (7);
-INSERT INTO bidder VALUES (8);
-INSERT INTO bidder VALUES (9, 1);
-INSERT INTO bidder VALUES (10);
-INSERT INTO bidder VALUES (12);
-INSERT INTO bidder VALUES (13);
-INSERT INTO bidder VALUES (14);
-INSERT INTO bidder VALUES (15);
-INSERT INTO bidder VALUES (16);
-INSERT INTO bidder VALUES (17);
-INSERT INTO bidder VALUES (18);
-INSERT INTO bidder VALUES (19);
-INSERT INTO bidder VALUES (20);
-
-INSERT INTO auctioneer VALUES (1, 1);
-INSERT INTO auctioneer VALUES (2);
-INSERT INTO auctioneer VALUES (3);
-INSERT INTO auctioneer VALUES (4);
-INSERT INTO auctioneer VALUES (5);
-INSERT INTO auctioneer VALUES (6);
-INSERT INTO auctioneer VALUES (7);
-INSERT INTO auctioneer VALUES (8);
-INSERT INTO auctioneer VALUES (9);
-INSERT INTO auctioneer VALUES (10);
-INSERT INTO auctioneer VALUES (11);
-INSERT INTO auctioneer VALUES (12);
-INSERT INTO auctioneer VALUES (13);
-INSERT INTO auctioneer VALUES (14);
-INSERT INTO auctioneer VALUES (15);
-INSERT INTO auctioneer VALUES (16);
-INSERT INTO auctioneer VALUES (17);
-INSERT INTO auctioneer VALUES (18);
-INSERT INTO auctioneer VALUES (19);
-INSERT INTO auctioneer VALUES (20);
-*/
+INSERT INTO transaction VALUES(DEFAULT, 25500, 'Buy',1,1);
 
 INSERT INTO review VALUES(DEFAULT, 'Annonymous clown', 'Product does not match the description! It is awful', 1, 6);
 INSERT INTO review VALUES(DEFAULT, 'Grandma', 'Amazing, this car will make my friends jealous', 1, 6);
@@ -377,7 +322,7 @@ DROP FUNCTION IF EXISTS add_auction_to_watch_list CASCADE;
 CREATE FUNCTION add_auction_to_watch_list() RETURNS trigger AS
 $BODY$
 BEGIN
-    INSERT INTO watch_list VALUES (NEW.id_bidder, NEW.id_auction);
+    INSERT INTO watch_list VALUES (DEFAULT,NEW.id_bidder, NEW.id_auction);
     RETURN NEW;
 END;
 $BODY$
@@ -389,9 +334,9 @@ AFTER INSERT ON bid
 FOR EACH ROW
 EXECUTE PROCEDURE add_auction_to_watch_list();
 
---TRIGGER 05 remove auction from watch_list after cancelling 
 
-DROP FUNCTION IF EXISTS remove_auction_from_watch_list CASCADE;
+--TRIGGER 05 remove auction from watch_list after cancelling 
+/*DROP FUNCTION IF EXISTS remove_auction_from_watch_list CASCADE;
 CREATE FUNCTION remove_auction_from_watch_list() RETURNS trigger AS
 $BODY$
 BEGIN
@@ -406,7 +351,6 @@ CREATE TRIGGER remove_auction_from_watch_list
 AFTER DELETE ON bid
 FOR EACH ROW
 EXECUTE PROCEDURE remove_auction_from_watch_list();
-
-
+*/
 
 

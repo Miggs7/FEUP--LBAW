@@ -13,7 +13,6 @@
     }
     else $is_watched = false;
     
-    
     /*button will be hidden if time has passed*/
     $date = ($auction['ending_date']);
     $now = time();
@@ -57,16 +56,17 @@
             @csrf
             @method('PUT')
             <script>
-                /*function play() {
-                  var audio = document.getElementById("audio");
-                  audio.play();
-                }*/
+                function bidAlert() {
+                  alert("You just placed a bid! The Auction is on your watchlist!");
+                }
             </script>
             <input type="number" name="bid_value">
             @if(Auth::user())
+            {{-- this is where the bidding action occurs--}}
             @if(Auth::user()->id != $auctioneer_id)
             <input type="hidden" name="id" value={{$id}}>
-            <input type="submit" value="submit" onclick="play()">
+            <input type="hidden" name="id_bidder" value={{Auth::user()->id}} >
+            <input type="submit" value="submit" onclick="bidAlert()">
             <audio id="audio" src="https://dl.dropboxusercontent.com/sh/jz3oyiijegxrf0z/ZgxS3tP6QY/sfx-gavelpoundx3.mp3"></audio>
             @endif
             @else
@@ -81,9 +81,10 @@
                 @if(!$is_watched)
                     <form method="post" action={{url('watchList/'.$id.'/add/')}}>
                         @csrf
-                        <input type="hidden" name="id_auction" value={{$id}}>
+                        
                         @if(Auth::user())
                             @if(Auth::user()->id != $auctioneer_id)
+                            <input type="hidden" name="id_auction" value={{$id}}>
                             <input type="hidden" name="id_bidder" value={{Auth::user()->id}} >
                             <button submit="submit" >Watch</button>
                             @endif
@@ -127,18 +128,8 @@
                     </div>
 
                     <div>
-                        <label for="starting_bid"> Starting Bid:</label>
-                        <input type="number" name="starting_bid">
-                    </div>
-
-                    <div>
                         <label for="ending_date"> Ending date:</label>
                         <input type="date" name="ending_date">
-                    </div>
-
-                    <div>
-                        <label for="id_item"> Item Id:</label>
-                        <input type="number" name="id_item">
                     </div>
 
                     <div>
@@ -159,7 +150,7 @@
             @endif
         @endif
 
-        {{-- delete if manager, it will break the main page for now--}}
+        {{-- delete if manager --}}
         @if(Auth::guard('manager'))
             @if(Auth::guard('manager')->user())
             <form action="{{url('auction/'.$id.'/delete/')}}" method="POST">

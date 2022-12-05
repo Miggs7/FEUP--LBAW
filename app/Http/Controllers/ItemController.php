@@ -69,12 +69,33 @@ class ItemController extends Controller
       return Item::find($id);
     }
 
-    public static function getIdFromName($name){
+     /**
+     * Gets item from name or creates
+     *
+     * @param  string  $id
+     * @return $item
+     */
+    public static function getOrCreate($name){
       foreach(Item::all() as $item){
         if($item->name == $name){
           return $item->id;
         }
       }
+      $new_item = new Item;
+      $new_item->name = $name;
+      $new_item->save();
+      return $new_item->id;
+    }
+
+         /**
+     * creates item
+     *
+     * @param  string  $name
+     * @return $item
+     */
+    public static function createItem($name){
+      $item = new Item;
+      $item->name = $name;
     }
 
 }

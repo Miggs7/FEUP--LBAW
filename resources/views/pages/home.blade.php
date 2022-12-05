@@ -25,7 +25,7 @@
                 <img src= "{{$img['link']}}" alt="Auction image" width="200" height="200">
             </a>
                 <figcaption>
-                    <div>{{$auction['name']}}</div> 
+                    <div>{{$auction['name']}}</div>
                     <div>{{$auction['current_bid']}}$</div>
                 </figcaption>
         </figure>
