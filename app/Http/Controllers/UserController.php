@@ -19,36 +19,31 @@ class UserController extends Controller
     return $user;
   }
 
+  
+
     /**
    * Update user.
    *
    * @param  Request  $request
+   * @param int $id
    * @return redirect
    */
-  public static function updateUser(Request $request){
+  public static function update(Request $request){
 
-    $input = $request->input();
-    $user = User::find($input['id']);
+    $request->validate(array(
+      'name' => 'nullable|string|max:255',
+      'email' => 'nullable|string|email|max:255|unique:_user',
+      'username' => 'nullable|string|max:255|unique:_user',  
+      'password' => 'nullable|string|min:6|confirmed',   
+    ));
 
-    if($input['name']){
-      $user->name = $input['name'];
-      $user->save();
-    }
+    $user = self::getUserById($request->id);
+    if($request->name)$user->name = ($request->name);
+    if($request->email)$user->email = ($request->email);
+    if($request->username)$user->username = ($request->username);
+    if($request->password)$user->password = bcrypt($request->password);
     
-    if($input['password']){
-      $user->password = bcrypt($input['password']);
-      $user->save();
-    }
-
-    if($input['username']){
-      $user->username = $input['username'];
-      $user->save();
-    }
-
-    if($input['email']){
-      $user->email = $input['email'];
-      $user->save();
-    }
+    $user->save();
     
     return redirect('/user/'.$user->id);
   }

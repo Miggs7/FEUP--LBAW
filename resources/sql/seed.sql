@@ -334,23 +334,25 @@ AFTER INSERT ON bid
 FOR EACH ROW
 EXECUTE PROCEDURE add_auction_to_watch_list();
 
+--TRIGGER 05 verify age (Only users with 17+) can register
 
---TRIGGER 05 remove auction from watch_list after cancelling 
-/*DROP FUNCTION IF EXISTS remove_auction_from_watch_list CASCADE;
-CREATE FUNCTION remove_auction_from_watch_list() RETURNS trigger AS
+/*DROP FUNCTION IF EXISTS verify_age CASCADE;
+CREATE FUNCTION verify_age() RETURNS trigger AS
 $BODY$
 BEGIN
-    DELETE FROM watch_list WHERE id_auction = OLD.id_auction;
-    RETURN OLD;
+    if(NEW.age >= 17) THEN
+    RETURN NEW;
+    END IF;
+    RETURN NULL;
 END;
 $BODY$
 LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS remove_auction_from_watch_list on bid CASCADE;
-CREATE TRIGGER remove_auction_from_watch_list
-AFTER DELETE ON bid
+DROP TRIGGER IF EXISTS verify_age on _user CASCADE;
+CREATE TRIGGER verify_age
+BEFORE INSERT ON _user
 FOR EACH ROW
-EXECUTE PROCEDURE remove_auction_from_watch_list();
+EXECUTE PROCEDURE verify_age();
 */
 
 

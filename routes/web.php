@@ -11,47 +11,53 @@
 |
 */
 //Home
+
+use App\Http\Controllers\AuctionController;
+
 Route::get('/', function () {
     return view('pages.home');
 });
 
 //FAQ
-Route::get('/faq', function() {
+Route::get('/faq', function () {
     return view('pages.faq');
 });
 
 //Contact
-Route::get('/contact', function() {
+Route::get('/contact', function () {
     return view('pages.contact');
 });
 
 //about
-Route::get('/about', function() {
+Route::get('/about', function () {
     return view('pages.about');
 });
 
 //user
-Route::get('/user/{id}',function(){
+Route::get('/user/{id}', function () {
     return view('pages.user');
 });
-Route::put('/user/{id}/edit','UserController@updateUser')->name('edit');
-Route::put('/user/{id}/ban','UserController@ban');
+Route::put('/user/{id}/edit', 'UserController@update')->name('edit');
+Route::put('/user/{id}/ban', 'UserController@ban');
 
-//auction
-Route::get('/auction/{id}',function(){
-    return view('pages.auction');
-});
-Route::put('/auction/{id}/bid', 'AuctionController@bid');
-Route::put('/auction/{id}/edit', 'AuctionController@updateAuction');
-Route::delete('/auction/{id}/delete', 'AuctionController@delete');
 
-Route::get('/new',function(){
-    return view('pages.auctionNew');
+//Auction
+Route::controller(AuctionController::class)->group(function () {
+    Route::get('auction/new', function () {
+        return view('pages.auctionNew');
+    });
+    Route::post('auction/new', 'create');
+    Route::get('/auction/{id}', function () {
+        return view('pages.auction');
+    });
+    Route::put('/auction/{id}/bid', 'bid');
+    Route::put('/auction/{id}/edit', 'updateAuction');
+    Route::delete('/auction/{id}/delete', 'delete');
 });
-Route::post('/new','AuctionController@create');
+
 
 //Manager
-Route::get('/manager/{id}',function(){
+Route::get('/manager/{id}', function () {
     return view('pages.manager');
 });
 
@@ -63,14 +69,14 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 Route::post('register', 'Auth\RegisterController@register');
 
 //Watch List
-Route::get('/watchList/{id}',function(){
+Route::get('/watchList/{id}', function () {
     return view('pages.watchList');
 });
 
-Route::post('watchList/{id}/add','WatchListController@addToWatchList');
-Route::delete('watchList/{id}/delete','WatchListController@removeFromWatchList');
+Route::post('watchList/{id}/add', 'WatchListController@addToWatchList');
+Route::delete('watchList/{id}/delete', 'WatchListController@removeFromWatchList');
 
 //Category pages
-Route::get('/auctionCategory/{id}',function(){
+Route::get('/auctionCategory/{id}', function () {
     return view('pages.auctionCategory');
 });

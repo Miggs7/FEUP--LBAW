@@ -20,6 +20,14 @@
       </span>
     @endif
 
+    <label for="age">Age: </label>
+    <input id="age" type="number" name="age" value="{{ old('age') }}" required>
+    @if ($errors->has('age'))
+      <span class="error">
+          {{ $errors->first('age') }}
+      </span>
+    @endif
+
     <label for="username">Username</label>
     <input id="username" type="text" name="username" value="{{ old('username') }}" required autofocus>
     @if ($errors->has('username'))
