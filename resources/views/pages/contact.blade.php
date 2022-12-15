@@ -10,8 +10,8 @@
 <div class="row row-cols-1 row-cols-md-3">
     <div class="col-6 mb-4">
       <div class="card h-100">
-        <div class="card-body">
-          <h5 class="card-title">Address</h5>
+        <div class="card-body text-center">
+          <h5 class="card-title text-center">Address</h5>
           <p class="card-text">1234 Street Name</p>
           <p class="card-text">City, ST 12345</p>
         </div>
@@ -19,7 +19,7 @@
     </div>
     <div class="col-6 mb-4">
       <div class="card h-100">
-        <div class="card-body">
+        <div class="card-body text-center">
           <h5 class="card-title">Phone</h5>
           <p class="card-text">(123) 456-7890</p>
           <p></p>
@@ -28,7 +28,7 @@
     </div>
     <div class="col-md mb-4">
       <div class="card h-100">
-        <div class="card-body">
+        <div class="card-body text-center">
           <h5 class="card-title">Email</h5>
           <p class="card-text">onlineauctions@auction.com</p>
           <p></p>

@@ -90,6 +90,12 @@ button.btn-primary:hover{
   color: white;
 }
 
+/*profile*/
+
+button svg {
+  fill:rgb(222, 217, 217); 
+}
+
 
 
 ::placeholder {
