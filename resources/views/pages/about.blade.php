@@ -1,22 +1,47 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="about-content">
-    <div class="about-info">
-        <div>
-            <div>
-                <h2>Made by:</h2>
-                <p>Miguel Tavares, up202002811</p>
-                <p>Gonçalo Ferreira, up202004761</p>
-                <p>Domingos Santos, up201906680</p>
-                <p>João Félix, up202008867</p>
-            </div>
+<section id="auction-container">
+<div class="h-100 d-flex align-items-center justify-content-center">
+<div class="justify-content-center" id="about-container">
+    <p class="">Made By:</p>
+    <div class="row">
+        <div class="col-sm px-lg-5">
+            <figure class="img-column">
+                    <img src= "https://avatarfiles.alphacoders.com/103/thumb-103373.png" alt="Auction image" width="200" height="200">
+                    <figcaption class="justify-content-center">
+                        <div>Miguel Tavares</div>
+                    </figcaption>
+            </figure>
         </div>
-        <div>
-            <div>
-                <h3>Online Auction website made for LBAW</h2>
-            </div>
-        </div> 
+        <div class="col-sm px-lg-5">
+            <figure class="img-column">
+                    <img src= "https://cdn.vrcmods.com/uploads/items/item/1745/imgs/2465cb4aa72d42dd96b8a4917bec93ea.jpg" alt="Auction image" width="200" height="200">
+                    <figcaption class="justify-content-center">
+                        <div>NPC</div>
+                    </figcaption>
+            </figure>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm px-lg-5">
+            <figure class="img-column">
+                    <img src= "https://cdn.vrcmods.com/uploads/items/item/1745/imgs/2465cb4aa72d42dd96b8a4917bec93ea.jpg" alt="Auction image" width="200" height="200">
+                    <figcaption class="justify-content-center">
+                        <div>NPC</div>
+                    </figcaption>
+            </figure>
+        </div>
+        <div class="col-sm px-lg-5">
+            <figure class="img-column">
+                    <img src= "https://cdn.vrcmods.com/uploads/items/item/1745/imgs/2465cb4aa72d42dd96b8a4917bec93ea.jpg" alt="Auction image" width="200" height="200">
+                    <figcaption class="justify-content-center">
+                        <div>NPC</div>
+                    </figcaption>
+            </figure>
+        </div>
+        </div>
     </div>
 </div>
+</section>
 @endsection

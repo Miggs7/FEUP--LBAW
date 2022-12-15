@@ -11,62 +11,87 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/milligram.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    <!--CSS to Overide-->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/auction.css') }}" rel="stylesheet">
+    
     <script type="text/javascript">
         // Fix for Firefox autofocus CSS bug
         // See: http://stackoverflow.com/questions/18943276/html-5-autofocus-messes-up-css-loading/18945951#18945951
     </script>
-    <script type="text/javascript" src={{ asset('js/app.js') }} defer>
-</script>
+    <script type="text/javascript" src={{ asset('js/bootstrap.bundle.js') }} defer> </script>
+    <script type="text/javascript" src={{ asset('js/app.js') }} defer> </script>
   </head>
-  <body>
-    <main>
-      <header id="header">
-        <h1><a href="{{ url('/') }}">Online Auction</a></h1>
-        <input type="text" placeholder="Search.." id="search-bar">
-        @if (Auth::guard('web')->user())
-        @php $id = Auth::guard('web')->user()->id @endphp
-        <a class="button" href="{{ url('/logout') }}"> Logout </a> <a class="button" href="{{url('/user/'.$id)}}">{{ Auth::guard('web')->user()->name }}<a>
-        @elseif (Auth::guard('manager')->user())
-        @php $id = Auth::guard('manager')->user()->id @endphp
-        <a class="button" href="{{ url('/logout') }}"> Logout </a> <a class="button" href="{{url('/manager/'.$id)}}">{{ Auth::guard('manager')->user()->name }}<a>
-        @else
-        <a class="button" href="{{ url('/login') }}"> Login </a> <span></span>
-        @endif
-      </header>
+  <body>  
 
-      <section id="auction-container">
-        <div class="second-header">
-            <div class="categories">
-                @for($j = 1; $j <= 7; $j++)
-                    @php
-                    /*get auction category from database using ID*/
-                    $category = App\Http\Controllers\CategoryController::getCategoryById($j);
-                    @endphp
-                    <a href="{{ url('/auctionCategory/'.$j) }}" class="category"> {{$category['type']}} </a>
-                @endfor
+      <header class="p-3 text-white">
+        <div class="container">
+          <div class="d-flex flex-wrap">
+    
+            <ul class="nav col col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+              <li><a href={{url('/')}} id="logo" class="nav-link px-2">Online Auction</a></li>
+            </ul>
+    
+            <form class="col col-lg-auto me-lg-auto mb-3 mb-lg-0 me-lg-3">
+              <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+            </form>
+
+            <div class="text-end">
+              @if(Auth::guard('web')->user())
+              @php $id = Auth::guard('web')->user()->id @endphp
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{Auth::guard('web')->user()->name}}
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item text-black" href={{url('/user/'.$id)}}>Profile</a></li>
+                <li><a class="dropdown-item text-black" href={{url('/auction/new')}}>New Auction</a></li>
+                <li><a class="dropdown-item text-black" href={{url('/watchList/'.$id)}}>Watchlist</a></li>
+                <li><a class="dropdown-item text-black" href="{{url('/logout')}}">Logout</a></li>
+              </ul>
             </div>
-            <hr>
-        </div>
-      </section> 
-      <section id="content">
-        @yield('content')
+              @elseif (Auth::guard('manager')->user())
+              @php $id = Auth::guard('manager')->user()->id @endphp
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{Auth::guard('manager')->user()->name}}
+                </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item text-black" href={{url('/manager/'.$id)}}>Profile</a></li>
+                <li><a class="dropdown-item text-black" href="{{url('/logout')}}">Logout</a></li>
+              </ul>
+              </div>
 
-      </section>
-
-        <footer id="footer">
-        <div class="footer-container">
-          <a class="faq" href="{{url('/faq')}}">FAQ</span>
-          <a class="contact" href="{{url('/contact')}}">Contact US</span>
-          <a class="about" href="{{url('/about')}}" >About</span>
-          
+              @else 
+              <a href={{url('/login')}}>
+              <button type="button" class="btn me-2">Login</button>
+              </a>
+              @endif
+            </div>
+          </div>
         </div>
-        <a class="copyright">© 2022 Online Auction</span>
+      </header>
+      
+      <ul class="nav justify-content-center" id="categories">
+        @for($i=1; $i <= 7 ; $i++)
+          @php
+          $category = App\Http\Controllers\CategoryController::getCategoryById($i);
+          @endphp
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/auctionCategory/'.$i) }}" class="category"> {{$category['type']}} </a>
+          </li>
+          @endfor
+      </ul>
+      
+      @yield('content')
+
+      <footer class="py-3" >
+        <ul class="nav justify-content-center pb-3 mb-3">
+          <li class="nav-item"><a href="{{url('/faq')}}" class="nav-link px-2">FAQs</a></li>
+          <li class="nav-item"><a href="{{url('/contact')}}" class="nav-link px-2">Contacts</a></li>
+          <li class="nav-item"><a href="{{url('/about')}}" class="nav-link px-2">About Us</a></li>
+        </ul>
+        <p class="text-center text-white">© 2022 LBAW 132, Inc</p>
       </footer>
-
-      </section>
-    </main>
   </body>
 </html>
