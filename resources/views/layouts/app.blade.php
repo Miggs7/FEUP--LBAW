@@ -47,6 +47,8 @@
                 <li><a class="dropdown-item text-black" href={{url('/user/'.$id)}}>Profile</a></li>
                 <li><a class="dropdown-item text-black" href={{url('/auction/new')}}>New Auction</a></li>
                 <li><a class="dropdown-item text-black" href={{url('/watchList/'.$id)}}>Watchlist</a></li>
+                <li><a class="dropdown-item text-black" href="{{url('/auctionlist/'.$id)}}">Auctionlist</a></li>
+                <li><a class="dropdown-item text-black" href="#">Inbox</a></li>
                 <li><a class="dropdown-item text-black" href="{{url('/logout')}}">Logout</a></li>
               </ul>
             </div>

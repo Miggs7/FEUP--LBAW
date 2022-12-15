@@ -10,7 +10,7 @@
     $category = App\Http\Controllers\CategoryController::getCategoryById($j);
     @endphp
     <div class="h-100 d-flex align-items-center justify-content-center">
-    <div class="categories-titles my-3" id="{{$category['type']}}"> {{$category['type']}} </div>
+    <h2 class="categories-titles my-3" id="{{$category['type']}}"> {{$category['type']}} </h2>
     </div>
     <hr class="mb-5">
     <div class="container">

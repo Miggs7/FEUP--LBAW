@@ -3,8 +3,10 @@
 @section('content')
 <section id="auction-container">
 <div class="h-100 d-flex align-items-center justify-content-center">
+    <h1 class="md-3 justify-content-center px-10">Made By:</h1>
+</div>
+<div class="h-100 d-flex align-items-center justify-content-center">
 <div class="justify-content-center" id="about-container">
-    <p class="">Made By:</p>
     <div class="row">
         <div class="col-sm px-lg-5">
             <figure class="img-column">

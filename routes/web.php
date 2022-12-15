@@ -72,9 +72,13 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::get('/watchList/{id}', function () {
     return view('pages.watchList');
 });
-
 Route::post('watchList/{id}/add', 'WatchListController@addToWatchList');
 Route::delete('watchList/{id}/delete', 'WatchListController@removeFromWatchList');
+
+//Auction List
+Route::get('/auctionlist/{id}', function () {
+    return view('pages.auctionList');
+});
 
 //Category pages
 Route::get('/auctionCategory/{id}', function () {

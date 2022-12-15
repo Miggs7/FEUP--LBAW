@@ -2,12 +2,14 @@
 
 @section('content')
 <div class="d-flex justify-content-center align-items-center container my-5 ">
+  <div class="card h-100">
+    <div class="card-body">
 <form method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
     
     <div class="form-group mb-2">
-      <label for="exampleInputEmail1">Name</label>
-    <input id="name" type="text" name="name" id="exampleInputEmail1" class="form-control"  value="{{ old('name') }}" required autofocus>
+      <label for="name">Name</label>
+    <input id="name" type="text" name="name" class="form-control"  value="{{ old('name') }}" required autofocus>
     @if ($errors->has('name'))
       <span class="error">
           {{ $errors->first('name') }}
@@ -16,8 +18,8 @@
     </div>
 
     <div class="form-group mb-2">
-      <label for="exampleInputEmail1">E-Mail Address</label>
-    <input id="email" type="email" name="email" id="exampleInputEmail1" class="form-control"  value="{{ old('email') }}" required>
+      <label for="email">E-Mail Address</label>
+    <input id="email" type="email" name="email" class="form-control"  value="{{ old('email') }}" required>
     @if ($errors->has('email'))
       <span class="error">
           {{ $errors->first('email') }}
@@ -26,8 +28,8 @@
     </div>
 
     <div class="form-group mb-2">
-      <label for="exampleInputEmail1">Age: </label>
-    <input id="age" type="number" name="age" id="exampleInputEmail1" class="form-control"  value="{{ old('age') }}" required>
+      <label for="age" class="age">Age: </label>
+    <input id="age" type="number" name="age" class="form-control"  value="{{ old('age') }}" required>
     @if ($errors->has('age'))
       <span class="error">
           {{ $errors->first('age') }}
@@ -36,8 +38,8 @@
     </div>
 
     <div class="form-group mb-2">
-    <label for="exampleInputEmail1">Username</label>
-    <input id="username" type="text" name="username" class="form-control"  id="exampleInputEmail1" value="{{ old('username') }}" required autofocus>
+    <label for="username" class="username">Username</label>
+    <input id="username" type="text" name="username" class="form-control" value="{{ old('username') }}" required autofocus>
     @if ($errors->has('username'))
       <span class="error">
           {{ $errors->first('username') }}
@@ -46,8 +48,8 @@
     </div>
 
     <div class="form-group mb-2">
-      <label for="exampleInputEmail1">Password</label>
-    <input id="password" type="password" id="exampleInputEmail1" class="form-control"  name="password" required>
+      <label for="password" class="password">Password</label>
+    <input id="password" type="password" class="form-control"  name="password" required>
     @if ($errors->has('password'))
       <span class="error">
           {{ $errors->first('password') }}
@@ -56,8 +58,8 @@
     </div>
 
     <div class="form-group mb-3">
-      <label for="exampleInputEmail1">Confirm Password</label>
-    <input id="password-confirm" type="password" id="exampleInputEmail1" class="form-control"  name="password_confirmation" required>
+      <label for="password-confirm">Confirm Password</label>
+    <input type="password" id="password-confirm" class="form-control"  name="password_confirmation" required>
     </div>
 
     <button class="btn btn-primary" type="submit">
@@ -69,5 +71,7 @@
     <a>
   
 </form>
+    </div>
+  </div>
 </div>
 @endsection

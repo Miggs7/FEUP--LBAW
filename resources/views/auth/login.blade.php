@@ -2,12 +2,14 @@
 
 @section('content')
 <div class="d-flex justify-content-center align-items-center my-5">
+  <div class="card h-100">
+    <div class="card-body">
 <form method="POST" action="{{ route('login') }}">
     {{ csrf_field() }}
 
     <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" name="email">
       @if ($errors->has('email'))
       <span class="error text-danger">
         {{ $errors->first('email') }}
@@ -15,8 +17,8 @@
       @endif
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
       @if ($errors->has('password'))
       <span class="error text-danger">
           {{ $errors->first('password') }}
@@ -34,5 +36,7 @@
     <button type="button" class="btn btn-primary">Register</button>
     <a>
   </form>
+    </div>
+  </div>
 </div>
 @endsection
