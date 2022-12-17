@@ -35,6 +35,13 @@ header .container .text-end button:hover{
   border-color: rgb(115, 112, 112);
 }
 
+/*form bootstrap*/
+
+.form-check-input:checked{
+  background-color: rgb(129, 0, 0);
+  border-color: rgb(129, 0, 0);
+}
+
 /*footer*/
 
 footer {
@@ -69,6 +76,7 @@ header .container ul a{
 
 #categories li a:hover{
   color:rgb(32, 31, 31);
+  transform: scale(1.05);
 }
 
 /*login form*/
@@ -83,18 +91,18 @@ button.btn-primary:hover{
   border-color:rgb(88, 1, 1);
 }
 
-#search-bar {
-  width: 500px;
-  right: 40%;
-  position: absolute;
-  color: white;
-}
-
 /*profile*/
 
 button svg {
   fill:rgb(222, 217, 217); 
 }
+
+/*auction page*/
+
+.d-flex.auction{
+  gap:20px;
+}
+
 
 
 
@@ -224,29 +232,6 @@ hr {
   background-color: #dfdede;
 }
 
-/**
- * Overide milligram colors
- * Some styles might be missing
- **/
-/*button {
-  background-color: white;
-}
-a.button {
-  background-color: white;
-  
-}
-a.button.button-outline {
-  color: black;
-}
-a {
-  color: black;
-}
-input[type=text]:focus,
-input[type=email]:focus,
-input[type=password]:focus {
-  border-color: white;
-}*/
-
 figcaption {
   text-align: center;
   padding-top: 20px;
@@ -352,33 +337,6 @@ form p{
   text-align: center;
 }
 
-/*Contact*/
-
-.contact-info{
-  background-image: linear-gradient(black, grey);
-  height: 450px;
-  margin-top: 5%;
-  margin-left: 5%;
-  margin-right: 5%;
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-  justify-content: center;
-  font-size: 30px;
-  padding: 100px;
-  justify-content: space-around;
-  
-}
-
-.contact-info h2{
-  color: rgb(129, 0, 0);
-  font-size: 50px;
-}
-
-.contact-info p{
-  font-size: 20px;
-}
-
 /*Watch List*/
 
 .watch-list h2{
@@ -390,19 +348,6 @@ form p{
 .watch-list p{
   font-size: 25px;
   margin-left: 2%;
-}
-
-/* FAQ's */
-
-.faq-info h2{
-  font-size: 40px;
-  text-align: center;
-  margin-top: -4%;
-}
-
-.faq-info p{
-  font-size: 30px;
-  text-align: center;
 }
 
 /* */

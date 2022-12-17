@@ -29,6 +29,12 @@ class AuctionController extends Controller
    */
   public static function bid(Request $request)
   { 
+
+    $request->validate(array(
+      'id_bidder' => 'required|numeric',
+      'bid_value' => 'required|numeric|gt:current_bid',
+    ));
+
     $input = $request->input();
     $auction = Auction::find($input['id']);
     
@@ -53,38 +59,19 @@ class AuctionController extends Controller
    */
   public static function updateAuction(Request $request){
 
-    $input = $request->input();
-    $auction = Auction::find($input['id']);
+    $request->validate(array(
+      'name' => 'nullable|string|max:255',
+      'description' => 'nullable|string|max:255',
+    ));
 
-    if($input['name']){
-      $auction->name = $input['name'];
-      $auction->save();
-    }
+    $auction = Auction::find($request->id);
 
-    if($input['description']){
-      $auction->description = $input['description'];
-      $auction->save();
-    }
-
-    if($input['starting_bid']){
-      $auction->starting_bid = $input['starting_bid'];
-      $auction->save();
-    }
-
-    if($input['ending_date']){
-      $auction->ending_date = $input['ending_date'];
-      $auction->save();
-    }
-    
-    if($input['id_item']){
-      $auction->id_item = $input['id_item'];
-      $auction->save();
-    }
-
-    if($input['ongoing']){
-      $auction->ongoing = $input['ongoing'];
-      $auction->save();
-    }
+    if($request->name) $auction->name = $request->name;
+    if($request->description) $auction->description = $request->description;
+    if($request->ending_date) $auction->ending_date = $request->ending_date;
+    if($request->ongoing) $auction->ongoing = $request->ongoing;
+  
+    $auction->save();
 
     return redirect('/auction/'.$auction->id);
   }
@@ -110,22 +97,32 @@ class AuctionController extends Controller
   *  @return redirect
    */
   public static function create(Request $request){
-    $input = $request->input();
+
+    $request->validate(array(
+      'name' => 'required|string|max:255',
+      'description' => 'required|string|max:255',
+      'ending_date' => 'required|date',  
+      'starting_bid' => 'required|numeric', 
+      'item' => 'required|string|max:255', 
+    ));
+
+    //return $request;
+
     $auction = new Auction;
-    $auction-> name = $input['name'];
-    $auction-> description = $input['description'];
-    $auction-> ending_date = $input['ending_date'];
+    $auction-> name = $request['name'];
+    $auction-> description = $request['description'];
+    $auction-> ending_date = $request['ending_date'];
     /*at the start of bid the current and starting bid will be the same*/
-    $auction-> current_bid = $input['starting_bid'];
-    $auction-> starting_bid = $input['starting_bid'];
-    $auction->id_item = app('App\Http\Controllers\ItemController')->getOrCreate($input['item']);
+    $auction-> current_bid = $request['starting_bid'];
+    $auction-> starting_bid = $request['starting_bid'];
+    $auction->id_item = app('App\Http\Controllers\ItemController')->getOrCreate($request['item']);
     $auction->save();
     /*image to AuctionImage table */
-    app('App\Http\Controllers\AuctionImageController')->create($input['image'],$auction['id']);
+    app('App\Http\Controllers\AuctionImageController')->create($request['image'],$auction['id']);
     /*add auctioneer and auction to auction_list */
-    app('App\Http\Controllers\AuctionListController')->create($input['id_auctioneer'],$auction['id']);
+    app('App\Http\Controllers\AuctionListController')->create($request['id_auctioneer'],$auction['id']);
     /*add auction and category to auction_category */
-    app('App\Http\Controllers\AuctionCategoryController')->create($input['category'],$auction['id']);
+    app('App\Http\Controllers\AuctionCategoryController')->create($request['category'],$auction['id']);
     
     return redirect('/auction/'.$auction['id']);
   }
