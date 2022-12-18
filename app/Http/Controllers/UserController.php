@@ -35,9 +35,21 @@ class UserController extends Controller
       'email' => 'nullable|string|email|max:255|unique:_user',
       'username' => 'nullable|string|max:255|unique:_user',  
       'password' => 'nullable|string|min:6|confirmed',   
+      'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048'
     ));
 
+    
     $user = self::getUserById($request->id);
+
+    //Move image to public folder
+    if($request->image){
+      $imageName = 'user'.$request->id.'.'.$request->image->extension();
+      $request->image->move(public_path('images/profile/'), $imageName);
+      $img_path = '/images/profile/'.$imageName;
+      $user->profile_picture = $img_path;
+    }
+
+    
     if($request->name)$user->name = ($request->name);
     if($request->email)$user->email = ($request->email);
     if($request->username)$user->username = ($request->username);

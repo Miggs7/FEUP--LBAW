@@ -14,7 +14,7 @@
     <div class="d-flex justify-content-center align-items-center container my-5 ">
         <div class="card h-100">
           <div class="card-body">
-<form method="POST" action={{url('auction/new')}}>
+<form method="POST" action={{url('auction/new')}} enctype="multipart/form-data" >
     {{ csrf_field() }}
     <p class="description-p pe-0 pe-lg-0">
         Create New Auction
@@ -86,13 +86,17 @@
     </div>
 
     <div class="form-group mb-2">
-    <label for="image">Image URL</label>
-    <input id="image" type="text" name="image" class="form-control">
+    <label for="image">Image:</label>
+    <input id="image" type="file" name="image" class="form-control">
     </div>
-    
-    @if(Auth::user())
-    <input id="id_auctioneer" type="hidden" name="id_auctioneer" value={{Auth::user()->id}}>
+    @if ($errors->has('image'))
+    <span class="error">
+        Please upload JPG,PNG or JPEG!
+    </span>
     @endif
+    
+    <input id="id_auctioneer" type="hidden" name="id_auctioneer" value={{Auth::user()?->id}}>
+
     <button type="submit" class="btn btn-primary justify-content-center">
       Create
     </button>

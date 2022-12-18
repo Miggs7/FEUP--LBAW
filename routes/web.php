@@ -13,6 +13,7 @@
 //Home
 
 use App\Http\Controllers\AuctionController;
+use App\Http\Controllers\ManagerController;
 
 Route::get('/', function () {
     return view('pages.home');
@@ -55,10 +56,17 @@ Route::controller(AuctionController::class)->group(function () {
     Route::delete('/auction/{id}/delete', 'delete');
 });
 
+//Payment
+Route::post('auction/{id}/pay','PaymentController@payment');
+
 
 //Manager
+Route::controller(ManagerController::class)->group(function () {
+
+Route::put('/manager/{id}/edit', 'updateManager');
 Route::get('/manager/{id}', function () {
     return view('pages.manager');
+    });
 });
 
 // Authentication

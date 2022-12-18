@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS manager CASCADE;
 DROP TABLE IF EXISTS _user CASCADE;
 DROP TABLE IF EXISTS item CASCADE;
 DROP TABLE IF EXISTS auction CASCADE;
-DROP TABLE IF EXISTS transaction CASCADE;
+DROP TABLE IF EXISTS payment CASCADE;
 DROP TABLE IF EXISTS review CASCADE;
 DROP TABLE IF EXISTS auction_list CASCADE;
 DROP TABLE IF EXISTS watch_list CASCADE;
@@ -29,11 +29,11 @@ DROP TABLE IF EXISTS bid CASCADE;
 -- Types
 -----------------------------------------
 DROP TYPE IF EXISTS notification_type;
-DROP TYPE IF EXISTS transaction_type;
+--DROP TYPE IF EXISTS transaction_type;
 DROP TYPE IF EXISTS category_name;
 
 CREATE TYPE notification_type AS ENUM  ('Auction Status Notification', 'Review Notification');
-CREATE TYPE transaction_type AS ENUM ('Sell', 'Buy', 'Deposit', 'Cash Out');
+--CREATE TYPE transaction_type AS ENUM ('Sell', 'Buy', 'Deposit', 'Cash Out');
 CREATE TYPE category_name AS ENUM ('Jewelry', 'Cars', 'Clothing', 'Furnitures', 'Memorabilia', 'Accessories', 'Other');
 
 -----------------------------------------
@@ -54,6 +54,7 @@ CREATE TABLE _user(
     name TEXT NOT NULL,
     password TEXT NOT NULL,
     age INT,
+    profile_picture TEXT,
     is_banned BOOLEAN DEFAULT FALSE,
     CONSTRAINT age CHECK (age >= 17)
 );
@@ -80,12 +81,13 @@ CREATE TABLE auction(
     CONSTRAINT starting_date check (starting_date < ending_date)
 );
 
-CREATE TABLE transaction(
-    id SERIAL PRIMARY KEY,
-    value INTEGER NOT NULL CHECK (value > 0),
-    type transaction_type NOT NULL,
+CREATE TABLE payment(
+    id SERIAL,
+    value INTEGER NOT NULL,
     "id_bidder" INTEGER NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
-    "id_auctioneer" INTEGER NOT NULL REFERENCES _user(id) ON DELETE CASCADE
+    "id_auctioneer" INTEGER NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
+    "id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE,
+    CONSTRAINT pk_payment PRIMARY KEY (id,id_auction)
 );
 
 CREATE TABLE review(
@@ -105,7 +107,8 @@ CREATE TABLE auction_list(
 CREATE TABLE watch_list(
     id SERIAL PRIMARY KEY,
     "id_bidder" INT NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
-    "id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE
+    "id_auction" INT NOT NULL REFERENCES auction(id) ON DELETE CASCADE,
+    CONSTRAINT user_watch_list UNIQUE (id_bidder,id_auction)
 );
 
 CREATE TABLE manage(
@@ -161,16 +164,16 @@ CREATE TABLE bid(
 INSERT INTO _user VALUES(DEFAULT,'Harry_Warren3153@nanoff.biz','gmcleoid0','Harry Warren','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',40,DEFAULT);
 INSERT INTO _user VALUES(DEFAULT,'Bree_Hepburn4560@bauros.biz','asmewin1','Bree Hepburn','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',99,DEFAULT);
 INSERT INTO _user VALUES(DEFAULT,'Tony_Wellington1196@naiker.biz','apoulden2','Tony Wellington','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',90,DEFAULT);
-INSERT INTO _user VALUES(DEFAULT,'Harvey_Briggs7652@corti.com','etraynor3','Harvey Briggs','	$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',48,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Harvey_Briggs7652@corti.com','etraynor3','Harvey Briggs','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',48,DEFAULT);
 INSERT INTO _user VALUES(DEFAULT,'Allison_Appleton3129@twace.org','ghanvey4','Allison Appleton','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',86,DEFAULT);
-INSERT INTO _user VALUES(DEFAULT,'Benjamin_Vince3261@nickia.com','abickle5','Benjamin Vince','	$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',92,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Benjamin_Vince3261@nickia.com','abickle5','Benjamin Vince','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',92,DEFAULT);
 INSERT INTO _user VALUES(DEFAULT,'Henry_Barrett1954@deons.tech','gmaisey6','Henry Barrett','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',95,DEFAULT);
 INSERT INTO _user VALUES(DEFAULT,'Rocco_Dunbar6506@bretoux.com','sgavahan7', 'Rocco Dunbar','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',55,DEFAULT);
 INSERT INTO _user VALUES(DEFAULT,'Cristal_Pearce6806@supunk.biz','sbolesma8','Cristal Pearce','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',80,DEFAULT);
 INSERT INTO _user VALUES(DEFAULT,'Chris_Johnson6157@guentu.biz','ggallelli9','Chris Johnson','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',61,DEFAULT);
-INSERT INTO _user VALUES(DEFAULT,'Daron_Baxter1161@ovock.tech','mwaytea','Daron Baxter','	$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',36,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Daron_Baxter1161@ovock.tech','mwaytea','Daron Baxter','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',36,DEFAULT);
 INSERT INTO _user VALUES(DEFAULT,'William_Purvis4083@liret.org','mludyb','William Purvis','	$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',72,DEFAULT);
-INSERT INTO _user VALUES(DEFAULT,'Lucas_Newman8198@nimogy.biz','awardesworthc','Lucas Newman','	$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',28,DEFAULT);
+INSERT INTO _user VALUES(DEFAULT,'Lucas_Newman8198@nimogy.biz','awardesworthc','Lucas Newman','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',28,DEFAULT);
 INSERT INTO _user VALUES(DEFAULT,'Hailey_Stanley2818@corti.com','mhuied','Hailey Stanley','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',93,DEFAULT);
 INSERT INTO _user VALUES(DEFAULT,'Doug_Bailey1953@famism.biz','lfowlse','Doug Bailey','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',53,DEFAULT);
 INSERT INTO _user VALUES(DEFAULT,'Allison_Buckley3465@bulaffy.com','cscannellf','Allison Buckley','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',19,DEFAULT);
@@ -205,7 +208,7 @@ INSERT INTO auction VALUES(DEFAULT,'Orange Bird','This is an auction', 'Saturday
 INSERT INTO auction VALUES(DEFAULT,'Malibu', 'This is an auction','Saturday, October 1, 2022 9:42 PM', 'Monday, December 17, 2022 8:42 PM', 42289, 42289,DEFAULT, 4);
 INSERT INTO auction VALUES(DEFAULT,'Makena', 'This is an auction','Friday, October 7, 2022 5:01 PM', 'Monday, December 17, 2022 8:42 PM',53087, 51079,DEFAULT,1);
 
-INSERT INTO transaction VALUES(DEFAULT, 25500, 'Buy',1,1);
+--INSERT INTO transaction VALUES(DEFAULT, 25500, 'Buy',1,1);
 
 INSERT INTO review VALUES(DEFAULT, 'Annonymous clown', 'Product does not match the description! It is awful', 1, 6);
 INSERT INTO review VALUES(DEFAULT, 'Grandma', 'Amazing, this car will make my friends jealous', 1, 6);
@@ -280,7 +283,7 @@ DROP FUNCTION IF EXISTS auction_time_expired CASCADE;
 CREATE FUNCTION auction_time_expired () RETURNS trigger AS
 $BODY$
 BEGIN
-    IF(OLD.ending_date >= now()) THEN
+    IF(OLD.ending_date <= now()) THEN
         NEW.ongoing = 0;
     END IF;
     RETURN NEW;
@@ -322,8 +325,11 @@ DROP FUNCTION IF EXISTS add_auction_to_watch_list CASCADE;
 CREATE FUNCTION add_auction_to_watch_list() RETURNS trigger AS
 $BODY$
 BEGIN
+    IF NOT EXISTS (select id_bidder,id_auction from watch_list where id_bidder=new.id_bidder AND id_auction= new.id_auction) THEN
     INSERT INTO watch_list VALUES (DEFAULT,NEW.id_bidder, NEW.id_auction);
     RETURN NEW;
+    END IF;
+    RETURN NULL;
 END;
 $BODY$
 LANGUAGE plpgsql;
@@ -333,26 +339,5 @@ CREATE TRIGGER add_auction_to_watch_list
 AFTER INSERT ON bid
 FOR EACH ROW
 EXECUTE PROCEDURE add_auction_to_watch_list();
-
---TRIGGER 05 verify age (Only users with 17+) can register
-
-/*DROP FUNCTION IF EXISTS verify_age CASCADE;
-CREATE FUNCTION verify_age() RETURNS trigger AS
-$BODY$
-BEGIN
-    if(NEW.age >= 17) THEN
-    RETURN NEW;
-    END IF;
-    RETURN NULL;
-END;
-$BODY$
-LANGUAGE plpgsql;
-
-DROP TRIGGER IF EXISTS verify_age on _user CASCADE;
-CREATE TRIGGER verify_age
-BEFORE INSERT ON _user
-FOR EACH ROW
-EXECUTE PROCEDURE verify_age();
-*/
 
 

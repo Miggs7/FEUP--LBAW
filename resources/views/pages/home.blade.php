@@ -8,6 +8,7 @@
     $counter = 0;
     /*get auction category from database using ID*/
     $category = App\Http\Controllers\CategoryController::getCategoryById($j);
+    $auctionArray = App\Http\Controllers\AuctionCategoryController::getAuctionByCategory($category->id);
     @endphp
     <div class="h-100 d-flex align-items-center justify-content-center">
     <h2 class="categories-titles my-3" id="{{$category['type']}}"> {{$category['type']}} </h2>
@@ -15,10 +16,9 @@
     <hr class="mb-5">
     <div class="container">
         <div class="row">
-    @foreach(App\Models\Auction::all() as $auction)
+    @foreach($auctionArray as $auction)
 
         @php
-        $category = App\Http\Controllers\CategoryController::getCategoryById($auction->id);
         $auction = App\Http\Controllers\AuctionController::getAuction($auction->id);
         $img = App\Http\Controllers\AuctionImageController::getAuctionImage($auction->id);
         $counter++;

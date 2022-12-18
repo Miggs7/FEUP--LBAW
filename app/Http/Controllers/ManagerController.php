@@ -27,23 +27,29 @@ class ManagerController extends Controller
    */
   public static function updateManager(Request $request){
 
+    $request->validate(array(
+      'name' => 'nullable|string|max:255',
+      'email' => 'nullable|string|email|max:255|unique:manager',
+      'password' => 'nullable|string|min:6|confirmed',   
+      'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048'
+    ));
+
+
     $input = $request->input();
     $manager = Manager::find($input['id']);
 
     if($input['name']){
         $manager->name = $input['name'];
-        $manager->save();
     }
     
     if($input['password']){
         $manager->password = bcrypt($input['password']);
-        $manager->save();
     }
 
     if($input['email']){
         $manager->email = $input['email'];
-        $manager->save();
     }
+    $manager->save();
     
     return redirect('/manager/'.$manager->id);
   }

@@ -32,12 +32,17 @@ class WatchListController extends Controller
    * @return Response
    */
   public static function addToWatchList(Request $r){
+
+    $r->validate(array(
+      'id_bidder' => 'required|numeric',
+    ));
+
     $input = $r->all();
     $watch_list = new WatchList;
     $watch_list->id_auction = $input['id_auction'];
     $watch_list->id_bidder = $input['id_bidder'];
     $watch_list->save();
-    return redirect('/watchList/'.$input['id_bidder']);
+    return redirect('/auction/'.$input['id_auction']);
   }
 
      /**
@@ -54,9 +59,9 @@ class WatchListController extends Controller
     foreach(WatchList::all() as $auction){
         if($auction->id_auction == $id_auction && $auction->id_bidder == $id_bidder){
             $auction->delete();
-            return redirect('/watchList/'.$id_bidder);
         }
     }
+    return redirect('/auction/'.$input['id_auction']);
   }
 
     /**

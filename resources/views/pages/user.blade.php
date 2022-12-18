@@ -21,11 +21,15 @@
     <div class="col">
       <div class="card mb-4">
         <div class="card-body text-center">
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+          @if($user->profile_picture)
+          <img src="{{$user['profile_picture']}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; height: 150px">
+          @else
+          <img src="{{url('/images/profile/default.png')}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; height: 150px">
+          @endif
           <h5 class="my-3">{{$user['username']}}</h5>
           <p class="text-muted mb-1">{{$user['name']}}</p>
           <p class="text-muted mb-1">{{$user['email']}}</p>
-          @if(Auth::guard('web')->user()->id == $id && !$is_banned)
+          @if(Auth::guard('web')->user()?->id == $id && !$is_banned)
           <button type="button" class="btn btn-primary profile" data-bs-toggle="modal" data-bs-target="#form">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="grey" class="bi bi-pencil-fill" viewBox="0 0 16 16">
               <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
@@ -55,9 +59,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form form method="POST" action={{url('user/'.$id.'/edit')}}>
+      <form form method="POST" action={{url('user/'.$id.'/edit')}} enctype="multipart/form-data">
         {{ csrf_field() }}
         @method('PUT')
+        <input type="hidden" name="id" value="{{$id}}">
         <div class="modal-body">
           <div class="form-group mb-2">
             <label for="name">Name</label>
@@ -99,10 +104,21 @@
           @endif
           </div>
       
-          <div class="form-group mb-3">
+          <div class="form-group mb-2">
             <label for="password-confirm">Confirm Password</label>
           <input type="password" id="password-confirm" class="form-control"  name="password_confirmation">
           </div>
+
+          <div class="form-group mb-2">
+            <label for="image">Image:</label>
+            <input id="image" type="file" name="image" class="form-control">
+            </div>
+            @if ($errors->has('image'))
+            <span class="error">
+                Please upload JPG,PNG or JPEG!
+            </span>
+            @endif
+
         <div class="modal-footer border-top-0 d-flex justify-content-center">
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
@@ -111,6 +127,7 @@
   </div>
 </div>
 </div>
+
 </section>
         
 @endsection

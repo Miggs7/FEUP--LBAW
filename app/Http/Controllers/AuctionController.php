@@ -6,6 +6,7 @@ use App\Models\Auction;
 use App\Models\Bid;
 use Illuminate\Http\Request;
 use app\Http\Controllers\ItemController;
+use App\Models\AuctionImage;
 
 class AuctionController extends Controller
 {
@@ -32,20 +33,20 @@ class AuctionController extends Controller
 
     $request->validate(array(
       'id_bidder' => 'required|numeric',
-      'bid_value' => 'required|numeric|gt:current_bid',
+      'current_bid' => 'required_with:bid_value|integer|min:1',
+      'bid_value' => 'required_with:current_bid|integer|gt:current_bid',
     ));
-
-    $input = $request->input();
-    $auction = Auction::find($input['id']);
+    
+    $auction = Auction::find($request['id']);
     
     /*Trigger will verify if value is valid*/
-    $auction->current_bid  = $input['bid_value'];
+    $auction->current_bid  = $request['bid_value'];
     $auction->save();
 
     $bid = new Bid;
-    $bid->id_bidder = $input['id_bidder'];
-    $bid->id_auction = $input['id'];
-    $bid->bid_value = $input['bid_value'];
+    $bid->id_bidder = $request['id_bidder'];
+    $bid->id_auction = $request['id'];
+    $bid->bid_value = $request['bid_value'];
     $bid->save();
 
     return redirect('/auction/'.$auction->id);
@@ -86,7 +87,12 @@ class AuctionController extends Controller
 
     $input = $request->input();
     $auction = Auction::find($input['id']);
+    $auction_image = AuctionImage::find($auction->id);
+    /*remove image from folder*/
+    unlink(public_path().$auction_image['link']);
+    /*delete from database*/
     $auction->delete();    
+    $auction_image->delete();
     return redirect('/');
   }
 
@@ -103,7 +109,8 @@ class AuctionController extends Controller
       'description' => 'required|string|max:255',
       'ending_date' => 'required|date',  
       'starting_bid' => 'required|numeric', 
-      'item' => 'required|string|max:255', 
+      'item' => 'required|string|max:255',
+      'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048' 
     ));
 
     //return $request;
@@ -117,8 +124,14 @@ class AuctionController extends Controller
     $auction-> starting_bid = $request['starting_bid'];
     $auction->id_item = app('App\Http\Controllers\ItemController')->getOrCreate($request['item']);
     $auction->save();
+
+    /*image to public folder*/
+    $imageName = 'auction'.$auction['id'].'.'.$request->image->extension();
+    $request->image->move(public_path('images/auction/'), $imageName);
+    $img_path = '/images/auction/'.$imageName;
+
     /*image to AuctionImage table */
-    app('App\Http\Controllers\AuctionImageController')->create($request['image'],$auction['id']);
+    app('App\Http\Controllers\AuctionImageController')->create($img_path,$auction['id']);
     /*add auctioneer and auction to auction_list */
     app('App\Http\Controllers\AuctionListController')->create($request['id_auctioneer'],$auction['id']);
     /*add auction and category to auction_category */

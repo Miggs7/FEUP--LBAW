@@ -79,17 +79,19 @@ header .container ul a{
   transform: scale(1.05);
 }
 
-/*login form*/
+/*buttons*/
 
-button.btn-primary{
-  background-color:rgb(129, 0, 0);
-  border-color:rgb(129, 0, 0);
+.btn-primary, .btn-primary:visited {
+    background-color: rgb(129, 0, 0) !important;
+    border-color:rgb(129, 0, 0) !important;
 }
 
-button.btn-primary:hover{
-  background-color:rgb(88, 1, 1);
-  border-color:rgb(88, 1, 1);
+.btn-primary:hover, .btn-primary:active{
+  background-color:rgb(88, 1, 1) !important;
+  border-color:rgb(88, 1, 1) !important;
 }
+
+
 
 /*profile*/
 
