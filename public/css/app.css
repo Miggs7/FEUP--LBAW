@@ -91,6 +91,28 @@ header .container ul a{
   border-color:rgb(88, 1, 1) !important;
 }
 
+/*tables */
+
+/*thead{
+  background-color: rgb(129, 0, 0) !important;
+  border-color:rgb(129, 0, 0) !important;
+  color: rgb(209, 204, 204);
+}*/
+
+tbody td a{
+  color:rgb(129, 0, 0);
+  text-decoration: none;
+}
+
+tbody td a:hover{
+  color:rgb(88, 1, 1) !important;
+  transform: scale(1.05);
+}
+
+tbody td a:active{
+  color:rgb(88, 1, 1) !important;
+}
+
 
 
 /*profile*/

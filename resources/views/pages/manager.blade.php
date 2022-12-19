@@ -1,36 +1,3 @@
-{{--@extends('layouts.app')
-
-{{-- Only logged users should see profiles --}}
-{{--
-@php
-    /*in case we're in other use profile we'll need to get his profile*/
-    $id = request()->route('id');
-    $manager = App\Http\Controllers\ManagerController::getManagerById($id);
-@endphp
-
-@section('content')
-  <section id="about-section" class="pt-5 pb-5">
-    <div class="container wrapabout">
-        <div class="red"></div>
-        <div class="row">
-            <div class="col-lg-6 align-items-center justify-content-left d-flex mb-5 mb-lg-0">
-                <div class="blockabout">
-                    <div class="blockabout-inner text-center text-sm-start">
-                        <div class="title-big pb-3 mb-3">
-                            <h3>{{ $manager['name']}}</h3>
-                        </div>
-                        <p class="description-p text-muted pe-0 pe-lg-0">
-                           Email: {{ $manager['email']}}
-                        </p>
-                        <a href="#" class="btn rey-btn mt-3">See More</a>
-                    </div>
-                </div>
-            </div>
-</section>
-        
-@endsection
---}}
-
 @extends('layouts.app')
 
 @php
@@ -147,11 +114,58 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header border-bottom-0">
-          <h5 class="modal-title" id="exampleModalLabel">Users</h5>
+          <h5 class="modal-title " id="exampleModalLabel">Users</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>        
+        <div class="table-responsive">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Username</th>
+              <th scope="col">Name</th>
+              <th scope="col">Ban</th>
+              <th scope="col">AuctionList</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach(App\Models\User::all()->sortBy('id') as $user)
+            <tr>
+              <th scope="row">{{$user->id}}</th>
+              <td><a href={{url('/user/'.$user->id)}}>{{$user->username}}</a></td>
+              <td>{{$user->name}}</td>
+              <form form method="POST" action={{url('user/'.$id.'/ban')}} enctype="multipart/form-data">
+                {{ csrf_field() }}
+                @method('PUT')
+                <input type="hidden" name="id" value={{$user->id}}>
+              @if(!$user->is_banned)
+                <input type="hidden" name="ban" value="1">
+                <td>
+                <button type="submit" class="btn btn-primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-slash" viewBox="0 0 16 16">
+                    <path d="M13.879 10.414a2.501 2.501 0 0 0-3.465 3.465l3.465-3.465Zm.707.707-3.465 3.465a2.501 2.501 0 0 0 3.465-3.465Zm-4.56-1.096a3.5 3.5 0 1 1 4.949 4.95 3.5 3.5 0 0 1-4.95-4.95ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm.256 7a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"/>
+                  </svg>
+                </button>
+                </td>
+              @else
+              <input type="hidden" name="ban" value="0">
+              <td>
+                <button type="submit" class="btn btn-primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-slash" viewBox="0 0 16 16">
+                    <path d="M13.879 10.414a2.501 2.501 0 0 0-3.465 3.465l3.465-3.465Zm.707.707-3.465 3.465a2.501 2.501 0 0 0 3.465-3.465Zm-4.56-1.096a3.5 3.5 0 1 1 4.949 4.95 3.5 3.5 0 0 1-4.95-4.95ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
+                  </svg>
+                </button>
+                </td>
+              @endif
+              </form>
+              <td><a href={{url('/auctionlist/'.$user->id)}}>Auctions</a></td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
         </div>
-        @foreach(App\Models\User::all() as $user)
-        <a href={{url('/user/'.$user['id'])}}><p>{{$user['username']}}</p></a>
-      @endforeach
       </div>
     </div>
 </div>
