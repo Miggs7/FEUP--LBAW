@@ -93,12 +93,6 @@ header .container ul a{
 
 /*tables */
 
-/*thead{
-  background-color: rgb(129, 0, 0) !important;
-  border-color:rgb(129, 0, 0) !important;
-  color: rgb(209, 204, 204);
-}*/
-
 tbody td a{
   color:rgb(129, 0, 0);
   text-decoration: none;
@@ -114,7 +108,6 @@ tbody td a:active{
 }
 
 
-
 /*profile*/
 
 button svg {
@@ -127,7 +120,18 @@ button svg {
   gap:20px;
 }
 
+/*card help*/
 
+.help a{
+    color:#8f8e8e;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.help a:hover, .help a:active{
+  color:#797878;
+}
 
 
 ::placeholder {
