@@ -106,6 +106,7 @@
                             </button>
                     </form>
             @else
+                {{--implement a confirmation message here--}}
                 <form method="post" action={{url('watchList/'.$id.'/delete/')}}>
                     @csrf
                     @method('DELETE')
@@ -119,8 +120,6 @@
                     </button>
                 </form>
             @endif 
-
-            {{-- implement winning bid here--}}
             @php 
             @endphp
             @elseif((Auth::user('web')?->id == $auctioneer_id) || Auth::user('web')?->id == $winner[0]->id_bidder)
@@ -181,10 +180,12 @@
               </span>
             @endif
             </div>
-        
-            <div class="form-group mb-2">
-              <label for="ongoing">Ongoing</label>
+
+            <label for="ongoing">Ongoing</label>
+            <div class="h-100 d-flex">
+            <label for="ongoing">Yes</label>
             <input id="ongoing" type="checkbox" class="form-check-input"  name="ongoing" value="1" checked>
+              <label for="ongoing">No</label>
             <input id="ongoing" type="checkbox" class="form-check-input"  name="ongoing" value="0">
             @if ($errors->has('ongoing'))
               <span class="error">
@@ -192,7 +193,7 @@
               </span>
             @endif
             </div>
-            <div class="modal-footer border-top-0 d-flex justify-content-center">
+            <div class="d-flex justify-content-center align-items-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
@@ -209,17 +210,34 @@
         </div>
         @foreach($bids as $bid)
         @php $bidder = App\Http\Controllers\UserController::getUserById($bid['id_bidder']) @endphp
-        <p class="text mb-1">{{$bidder['username']}} | {{$bid['bid_value']}} $</p>
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Bidder</th>
+                <th scope="col">Bid</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">{{$bid->id}}</th>
+                <td>{{$bidder->username}}</td>
+                <td>{{$bid->bid_value}}</td>
+              </tr>
         @endforeach
+            </table>
+            </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="d-flex justify-content-center align-items-center my-5">
+
 <div class="modal fade" id="win" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
+        <div class="d-flex flex-column justify-content-center align-items-center my-5">
         <div class="modal-header border-bottom-0">
           <h5 class="modal-title" id="exampleModalLabel">Winner</h5>
         </div>
@@ -237,7 +255,12 @@
             <input id="id" type="hidden" name="id_auction" value="{{$id}}">
             <input id="id" type="hidden" name="value" value="{{$winner[0]->bid_value}}">
             <div class="modal-footer border-top-0 d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+                    <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                    <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
+                  </svg>
+                </button>
             </div>
         </form>
         @elseif((Auth::user('web')?->id == $auctioneer_id))

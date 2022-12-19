@@ -61,14 +61,15 @@
       <label for="password-confirm">Confirm Password</label>
     <input type="password" id="password-confirm" class="form-control"  name="password_confirmation" required>
     </div>
-
-    <button class="btn btn-primary" type="submit">
-      Register
-    </button>
     
-    <a href="{{route('login')}}">
-      <button type="button" class="btn btn-primary">Login</button>
-    <a>
+    <div class="d-flex justify-content-center align-items-center container">
+      <a href="{{route('login')}}">
+        <button type="button" class="btn btn-primary">Login</button>
+      <a>
+      <button class="btn btn-primary mx-2" type="submit">
+          Register
+      </button>
+    </div>
   
 </form>
     </div>

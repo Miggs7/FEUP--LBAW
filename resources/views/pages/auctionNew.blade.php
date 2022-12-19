@@ -96,10 +96,11 @@
     @endif
     
     <input id="id_auctioneer" type="hidden" name="id_auctioneer" value={{Auth::user()?->id}}>
-
-    <button type="submit" class="btn btn-primary justify-content-center">
+    <div class="d-flex justify-content-center align-items-center container">
+    <button type="submit" class="btn btn-primary">
       Create
     </button>
+    </div>
 </form>
           </div>
     </div>

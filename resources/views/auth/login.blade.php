@@ -29,12 +29,13 @@
       <input type="checkbox" class="form-check-input" id="exampleCheck1">
       <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div>
-    
-    <button type="submit" class="btn btn-primary">Login</button>
 
-    <a href="{{route('register')}}">
-    <button type="button" class="btn btn-primary">Register</button>
-    <a>
+    <div class="d-flex justify-content-center align-items-center container">
+      <button type="submit" class="btn btn-primary mx-2">Login</button>
+      <a href="{{route('register')}}">
+      <button type="button" class="btn btn-primary">Register</button>
+      <a>
+    </div>
   </form>
     </div>
   </div>

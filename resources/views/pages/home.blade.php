@@ -10,11 +10,13 @@
     $category = App\Http\Controllers\CategoryController::getCategoryById($j);
     $auctionArray = App\Http\Controllers\AuctionCategoryController::getAuctionByCategory($category->id);
     @endphp
-    <div class="h-100 d-flex align-items-center justify-content-center">
+    <div class="h-100 d-flex flex-column align-items-center justify-content-center">
+        <h1> Welcome!</h2>
     <h2 class="categories-titles my-3" id="{{$category['type']}}"> {{$category['type']}} </h2>
     </div>
     <hr class="mb-5">
     <div class="container">
+        <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="row">
     @foreach($auctionArray as $auction)
 
