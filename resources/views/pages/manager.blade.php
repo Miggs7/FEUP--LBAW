@@ -65,7 +65,7 @@
         <div class="modal-body">
           <div class="form-group mb-2">
             <label for="name">Name</label>
-          <input id="name" type="text" name="name" class="form-control"  value="{{ old('name') }}">
+          <input id="name" type="text" name="name" class="form-control" pattern="^[A-Za-z \s*]+$"  value="{{ old('name') }}">
           @if ($errors->has('name'))
             <span class="error">
                 {{ $errors->first('name') }}
@@ -100,7 +100,7 @@
 
           <div class="form-group mb-2">
             <label for="image">Image:</label>
-            <input id="image" type="file" name="image" class="form-control">
+            <input id="image" type="file" name="image" accept=".jpg,.png,.jpeg" class="form-control">
             </div>
             @if ($errors->has('image'))
             <span class="error">

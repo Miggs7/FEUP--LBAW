@@ -9,7 +9,7 @@
     
     <div class="form-group mb-2">
       <label for="name">Name</label>
-    <input id="name" type="text" name="name" class="form-control"  value="{{ old('name') }}" required autofocus>
+    <input id="name" type="text" name="name" class="form-control" pattern="^[A-Za-z \s*]+$"  value="{{ old('name') }}" required autofocus>
     @if ($errors->has('name'))
       <span class="error">
           {{ $errors->first('name') }}
@@ -29,7 +29,7 @@
 
     <div class="form-group mb-2">
       <label for="age" class="age">Age: </label>
-    <input id="age" type="number" name="age" class="form-control"  value="{{ old('age') }}" required>
+    <input id="age" type="number" name="age" class="form-control" min="17"  value="{{ old('age') }}" required>
     @if ($errors->has('age'))
       <span class="error">
           {{ $errors->first('age') }}
@@ -39,7 +39,7 @@
 
     <div class="form-group mb-2">
     <label for="username" class="username">Username</label>
-    <input id="username" type="text" name="username" class="form-control" value="{{ old('username') }}" required autofocus>
+    <input id="username" type="text" name="username" class="form-control"  pattern="[^' ']+" value="{{ old('username') }}" required autofocus>
     @if ($errors->has('username'))
       <span class="error">
           {{ $errors->first('username') }}

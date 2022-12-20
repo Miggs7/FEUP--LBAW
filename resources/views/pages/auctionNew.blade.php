@@ -22,7 +22,7 @@
 
     <div class="form-group">
     <label for="name">Name:</label>
-    <input id="name" type="text" class="form-control" name="name" required>
+    <input id="name" type="text" class="form-control" name="name" pattern="^[A-Za-z \s*]+$" required>
     @if ($errors->has('name'))
     <span class="error">
         {{ $errors->first('name') }}
@@ -32,7 +32,7 @@
 
     <div class="form-group">
     <label for="description">Description: </label>
-    <input id="description" type="text" class="form-control" name="description" required>
+    <input id="description" type="text" class="form-control" name="description" pattern="^[A-Za-z \s*]+$" required>
     @if ($errors->has('description'))
     <span class="error">
         {{ $errors->first('description') }}
@@ -42,10 +42,10 @@
     
     <div class="form-group">
     <label for="ending_date">Ending Date:</label>
-    <input id="ending_date" type="date" class="form-control" name="ending_date" required>
+    <input id="ending_date" type="date" class="form-control" name="ending_date" min="{{now()}}" required>
     @if ($errors->has('ending_date'))
     <span class="error">
-        {{ $errors->first('ending_date') }}
+         Invalid Date!
     </span>
     @endif
     </div>
@@ -53,7 +53,7 @@
     {{-- don't forget to hash passwords in the function of edit user --}}
     <div class="form-group">
     <label for="starting_bid">Starting Bid: </label>
-    <input id="starting_bid" type="number" class="form-control" name="starting_bid" required>
+    <input id="starting_bid" type="number" class="form-control" name="starting_bid" min="5" required>
     @if ($errors->has('starting_bid'))
     <span class="error">
         {{ $errors->first('starting_bid') }}
@@ -63,7 +63,7 @@
 
     <div class="form-group">
     <label for="item">Item:</label>
-    <input id="item" type="text" class="form-control" name="item">
+    <input id="item" type="text" class="form-control" pattern="^[A-Za-z \s*]+$" name="item">
     @if ($errors->has('item'))
     <span class="error">
         {{ $errors->first('item') }}
@@ -87,7 +87,7 @@
 
     <div class="form-group mb-2">
     <label for="image">Image:</label>
-    <input id="image" type="file" name="image" class="form-control">
+    <input id="image" type="file" name="image" class="form-control" accept=".jpg,.png,.jpeg" required>
     </div>
     @if ($errors->has('image'))
     <span class="error">
@@ -95,7 +95,9 @@
     </span>
     @endif
     
-    <input id="id_auctioneer" type="hidden" name="id_auctioneer" value={{Auth::user()?->id}}>
+    <input id="id_auctioneer" type="hidden" name="id_auctioneer" value={{Auth::user()?->id}} required>
+    <input id="today" type="hidden" name="today" value={{now()}} required>
+
     <div class="d-flex justify-content-center align-items-center container">
     <button type="submit" class="btn btn-primary">
       Create

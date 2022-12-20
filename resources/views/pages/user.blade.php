@@ -74,7 +74,7 @@
         <div class="modal-body">
           <div class="form-group mb-2">
             <label for="name">Name</label>
-          <input id="name" type="text" name="name" class="form-control"  value="{{ old('name') }}">
+          <input id="name" type="text" name="name" class="form-control" pattern="^[A-Za-z \s*]+$"  value="{{ old('name') }}">
           @if ($errors->has('name'))
             <span class="error">
                 {{ $errors->first('name') }}
@@ -94,7 +94,7 @@
       
           <div class="form-group mb-2">
           <label for="username" class="username">Username</label>
-          <input id="username" type="text" name="username" class="form-control" value="{{ old('username') }}">
+          <input id="username" type="text" name="username" class="form-control"  pattern="[^' ']+" value="{{ old('username') }}">
           @if ($errors->has('username'))
             <span class="error">
                 {{ $errors->first('username') }}
@@ -104,7 +104,7 @@
       
           <div class="form-group mb-2">
             <label for="password" class="password">Password</label>
-          <input id="password" type="password" class="form-control"  name="password">
+          <input id="password" type="password" class="form-control" name="password">
           @if ($errors->has('password'))
             <span class="error">
                 {{ $errors->first('password') }}
@@ -114,12 +114,12 @@
       
           <div class="form-group mb-2">
             <label for="password-confirm">Confirm Password</label>
-          <input type="password" id="password-confirm" class="form-control"  name="password_confirmation">
+          <input type="password" id="password-confirm" class="form-control" name="password_confirmation">
           </div>
 
           <div class="form-group mb-2">
             <label for="image">Image:</label>
-            <input id="image" type="file" name="image" class="form-control">
+            <input id="image" type="file" name="image" class="form-control" accept=".jpg,.png,.jpeg">
             </div>
             @if ($errors->has('image'))
             <span class="error">

@@ -110,7 +110,9 @@ class AuctionController extends Controller
       'ending_date' => 'required|date',  
       'starting_bid' => 'required|numeric', 
       'item' => 'required|string|max:255',
-      'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048' 
+      'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+      'today' => 'required|date',
+      'ending_date' => 'required|date|after:today'
     ));
 
     //return $request;
