@@ -21,9 +21,7 @@
     $now_time_stamp = date("Y-m-d H:i:s", $now);
 
     $bids = App\Http\Controllers\BidController::getAuctionBids($id);
-
     $winner = App\Http\Controllers\BidController::getWinningBid($id);
-
     $payed = App\Http\Controllers\PaymentController::checkPayment($id);
 
 @endphp
@@ -70,42 +68,40 @@
           </div>
             @else
             {{--this should only appear if ongoing--}}
-            @if($auction['ongoing'] && now() >= $auction['ending_date'])
-            <form method="post" action={{url('auction/'.$id.'/bid/')}}>
-                @csrf
-                @method('PUT')
-                <input type="hidden" name="id_bidder" value="{{Auth::user('web')?->id}}">
-                @if($errors->has('id_bidder'))
-                <span class="error">
-                     Please login! 
-                </span>
-                @endif
-                <input type="hidden" name="id" value="{{$id}}">
-                <input type="hidden" name="current_bid" value="{{$auction['current_bid']}}">
-                <label for="bid_value"> Bid Value:</label>
-                <div class="input-group mb-3">
-                    <input type="number" class="form-control" placeholder=" > {{$auction['current_bid']}}" name="bid_value">
-                    <button type="submit" class="btn btn-primary input-group-append">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="IconChangeColor" width="16" height="16"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M512 216.3c0-6.125-2.344-12.25-7.031-16.93L482.3 176.8c-4.688-4.686-10.84-7.028-16.1-7.028s-12.31 2.343-16.1 7.028l-5.625 5.625L329.6 69.28l5.625-5.625c4.687-4.688 7.03-10.84 7.03-16.1s-2.343-12.31-7.03-16.1l-22.62-22.62C307.9 2.344 301.8 0 295.7 0s-12.15 2.344-16.84 7.031L154.2 131.5C149.6 136.2 147.2 142.3 147.2 148.5s2.344 12.25 7.031 16.94l22.62 22.62c4.688 4.688 10.84 7.031 16.1 7.031c6.156 0 12.31-2.344 16.1-7.031l5.625-5.625l113.1 113.1l-5.625 5.621c-4.688 4.688-7.031 10.84-7.031 16.1s2.344 12.31 7.031 16.1l22.62 22.62c4.688 4.688 10.81 7.031 16.94 7.031s12.25-2.344 16.94-7.031l124.5-124.6C509.7 228.5 512 222.5 512 216.3zM227.8 238.1L169.4 297.4C163.1 291.1 154.9 288 146.7 288S130.4 291.1 124.1 297.4l-114.7 114.7c-6.25 6.248-9.375 14.43-9.375 22.62s3.125 16.37 9.375 22.62l45.25 45.25C60.87 508.9 69.06 512 77.25 512s16.37-3.125 22.62-9.375l114.7-114.7c6.25-6.25 9.376-14.44 9.376-22.62c0-8.185-3.125-16.37-9.374-22.62l58.43-58.43L227.8 238.1z" id="mainIconPathAttribute"></path>
-                        </svg>
-                    </div>
-                  </div>
-                  @if ($errors->has('bid_value'))
+              @if($auction['ongoing'] && now() <= $auction['ending_date'])
+              <form method="post" action={{url('auction/'.$id.'/bid/')}}>
+                  @csrf
+                  @method('PUT')
+                  <input type="hidden" name="id_bidder" value="{{Auth::user('web')?->id}}">
+                  {{--@if($errors->has('id_bidder'))
                   <span class="error">
-                      Your bid is too low!
+                      Please login! 
                   </span>
                   @endif
-            </form>
-            @if(!$is_watched)
+                  --}}
+                  <input type="hidden" name="id" value="{{$id}}">
+                  <input type="hidden" name="current_bid" value="{{$auction['current_bid']}}">
+                  <label for="bid_value"> Bid Value:</label>
+                  <div class="input-group mb-3">
+                      <input type="number" class="form-control" placeholder=" > {{$auction['current_bid']}}" name="bid_value">
+                      <button type="submit" class="btn btn-primary input-group-append">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="IconChangeColor" width="16" height="16"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M512 216.3c0-6.125-2.344-12.25-7.031-16.93L482.3 176.8c-4.688-4.686-10.84-7.028-16.1-7.028s-12.31 2.343-16.1 7.028l-5.625 5.625L329.6 69.28l5.625-5.625c4.687-4.688 7.03-10.84 7.03-16.1s-2.343-12.31-7.03-16.1l-22.62-22.62C307.9 2.344 301.8 0 295.7 0s-12.15 2.344-16.84 7.031L154.2 131.5C149.6 136.2 147.2 142.3 147.2 148.5s2.344 12.25 7.031 16.94l22.62 22.62c4.688 4.688 10.84 7.031 16.1 7.031c6.156 0 12.31-2.344 16.1-7.031l5.625-5.625l113.1 113.1l-5.625 5.621c-4.688 4.688-7.031 10.84-7.031 16.1s2.344 12.31 7.031 16.1l22.62 22.62c4.688 4.688 10.81 7.031 16.94 7.031s12.25-2.344 16.94-7.031l124.5-124.6C509.7 228.5 512 222.5 512 216.3zM227.8 238.1L169.4 297.4C163.1 291.1 154.9 288 146.7 288S130.4 291.1 124.1 297.4l-114.7 114.7c-6.25 6.248-9.375 14.43-9.375 22.62s3.125 16.37 9.375 22.62l45.25 45.25C60.87 508.9 69.06 512 77.25 512s16.37-3.125 22.62-9.375l114.7-114.7c6.25-6.25 9.376-14.44 9.376-22.62c0-8.185-3.125-16.37-9.374-22.62l58.43-58.43L227.8 238.1z" id="mainIconPathAttribute"></path>
+                          </svg>
+                      </div>
+                    </div>
+                    @if(Auth::check())
+                    @if ($errors->has('bid_value'))
+                    <span class="error">
+                        Your bid is too low!
+                    </span>
+                    @endif
+                    @endif
+              </form>
+              @if(!$is_watched)
                     <form method="post" action={{url('watchList/'.$id.'/add/')}}>
                         @csrf
                             <input type="hidden" name="id_auction" value={{$id}}>
                             <input type="hidden" name="id_bidder" value="{{Auth::user('web')?->id}}">
-                            @if($errors->has('id_bidder'))
-                            <span class="error">
-                                 Please login! 
-                            </span>
-                            @endif
                             <button submit="submit" class="btn btn-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                     <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
@@ -113,7 +109,12 @@
                                 </svg>
                             </button>
                     </form>
-            @else
+                    @if($errors->has('id_bidder'))
+                    <span class="error">
+                         Please login! 
+                    </span>
+                    @endif
+              @else
                 {{--implement a confirmation message here--}}
                 <form method="post" action={{url('watchList/'.$id.'/delete/')}}>
                     @csrf
@@ -127,7 +128,7 @@
                           </svg>
                     </button>
                 </form>
-            @endif 
+              @endif 
             @php 
             @endphp
             @else
@@ -216,8 +217,6 @@
         <div class="modal-header border-bottom-0">
           <h5 class="modal-title" id="exampleModalLabel">Bid History</h5>
         </div>
-        @foreach($bids as $bid)
-        @php $bidder = App\Http\Controllers\UserController::getUserById($bid['id_bidder']) @endphp
         <div class="table-responsive">
           <table class="table">
             <thead class="thead-dark">
@@ -227,6 +226,8 @@
                 <th scope="col">Bid</th>
               </tr>
             </thead>
+        @foreach($bids as $bid)
+          @php $bidder = App\Http\Controllers\UserController::getUserById($bid['id_bidder']) @endphp
             <tbody>
               <tr>
                 <th scope="row">{{$bid->id}}</th>
