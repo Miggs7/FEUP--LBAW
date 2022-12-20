@@ -54,9 +54,10 @@
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
         <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Help</h5>
+          <button type="button" class="btn-close close mx-0 my-0" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
       </div>
       <form form method="POST" action={{url('manager/'.$id.'/edit')}} enctype="multipart/form-data">
         {{ csrf_field() }}
@@ -121,12 +122,10 @@
 <div class="modal fade" id="users" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-        <div class="modal-header border-bottom-0">
-          <h5 class="modal-title " id="exampleModalLabel">Users</h5>
-          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>        
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Help</h5>
+          <button type="button" class="btn-close close mx-0 my-0" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>   
         <div class="table-responsive">
         <table class="table">
           <thead class="thead-dark">
@@ -183,9 +182,10 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="d-flex flex-column justify-content-center align-items-center">
-      <div class="modal-header border-bottom-0">
-        <h5 class="modal-title" id="exampleModalLabel">Help</h5>
-      </div>
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Help</h5>
+          <button type="button" class="btn-close close mx-0 my-0" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
       </div>
       <div class="table-responsive">
   

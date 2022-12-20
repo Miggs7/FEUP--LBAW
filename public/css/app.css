@@ -59,16 +59,11 @@ header .container .text-end button:hover{
   margin:0;
 }
 
-/*.help a{
-  color:#8f8e8e;
-  position: absolute;
-  top: 0;
-  right: 0;
+.btn-close:focus {
+  outline: none;
+  box-shadow: none;
 }
 
-.help a:hover, .help a:active{
-color:#797878;
-}*/
 
 /*footer*/
 
