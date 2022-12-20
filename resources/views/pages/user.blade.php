@@ -12,6 +12,8 @@
     $id = request()->route('id');
     $user = App\Http\Controllers\UserController::getUserById($id);
     $is_banned = App\Http\Controllers\UserController::checkIfBanned($id);
+    $received_feedback = App\Http\Controllers\ReviewController::getAuthorReviews($id);
+    $sent_feedback = App\Http\Controllers\ReviewController::getReceivedReviews($id);
     
 @endphp
 
@@ -45,7 +47,7 @@
           </button>  
           @endif
             {{--create reviews page--}}
-            <button type="button" class="btn btn-primary profile" data-bs-toggle="modal" data-bs-target="">
+            <button type="button" class="btn btn-primary profile" data-bs-toggle="modal" data-bs-target="#reviews">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="grey" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
                     <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
                   </svg>
@@ -61,13 +63,13 @@
 <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
+      <div class="d-flex flex-column justify-content-center align-items-center">
       <div class="modal-header border-bottom-0">
         <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close close mx-0 my-0" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form form method="POST" action={{url('user/'.$id.'/edit')}} enctype="multipart/form-data">
+      </div>
+      <form method="POST" action={{url('user/'.$id.'/edit')}} enctype="multipart/form-data">
         {{ csrf_field() }}
         @method('PUT')
         <input type="hidden" name="id" value="{{$id}}">
@@ -136,54 +138,14 @@
 </div>
 </div>
 
-<div class="modal fade" id="win" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="d-flex flex-column justify-content-center align-items-center my-5">
-      <div class="modal-header border-bottom-0">
-        <h5 class="modal-title" id="exampleModalLabel">Winner</h5>
-      </div>
-      @if(isset($winner[0]->id_bidder))
-      @php
-          $user_winner = App\Http\Controllers\UserController::getUserById($winner[0]->id_bidder)->username;
-      @endphp
-      <p>{{$user_winner}} who bid {{$winner[0]->bid_value}} $</p>
-      {{--form to pay--}}
-      @if(Auth::user('web')?->id == $winner[0]->id_bidder && !$payed)
-      <form method="POST" action={{url('auction/'.$id.'/pay')}}>
-          {{ csrf_field() }}
-          <input id="id" type="hidden" name="id_bidder" value="{{$winner[0]->id_bidder}}">
-          <input id="id" type="hidden" name="id_auctioneer" value="{{$auctioneer_id}}">
-          <input id="id" type="hidden" name="id_auction" value="{{$id}}">
-          <input id="id" type="hidden" name="value" value="{{$winner[0]->bid_value}}">
-          <div class="modal-footer border-top-0 d-flex justify-content-center">
-              <button type="submit" class="btn btn-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
-                  <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
-                  <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
-                </svg>
-              </button>
-          </div>
-      </form>
-      @elseif((Auth::user('web')?->id == $auctioneer_id))
-          @if(!$payed)<p class="text mb-1 text-muted">Payment Pending...</p>
-          @else
-              <p class="text mb-1 text-muted">Payed!</p>
-          @endif
-      @endif
-      @endif
-    </div>
-  </div>
-</div>
-</div>
-
 {{--change this to help auctioneer,bidder and manager--}}
 <div class="modal fade" id="help" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered" role="document">
   <div class="modal-content">
     <div class="d-flex flex-column justify-content-center align-items-center">
-    <div class="modal-header border-bottom-0">
+    <div class="modal-header">
       <h5 class="modal-title" id="exampleModalLabel">Help</h5>
+      <button type="button" class="btn-close close mx-0 my-0" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     </div>
     <div class="table-responsive">
@@ -221,6 +183,65 @@
   </div>
 </div>
 </div>
+</div>
+
+<div class="modal fade" id="reviews" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="d-flex flex-column justify-content-center align-items-center my-5">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Received Reviews</h5>
+        <button type="button" class="btn-close close mx-0 my-0" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      </div>
+      <div class="table-responsive">
+
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Receiver</th>
+              <th scope="col">Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($sent_feedback as $sent)
+            <tr>
+              @if($sent['id_bidder'] == $id)
+              <td>{{App\Http\Controllers\UserController::getUserById($sent['id_auctioneer'])}} </td>
+              @else
+              <td>{{App\Http\Controllers\UserController::getUserById($sent['id_bidder'])}} </td>
+              @endif
+              <td>{{$received['comment']}}</td>
+            </tr>
+            @endforeach
+          </table>
+          </div>
+          <div class="d-flex flex-column justify-content-center align-items-center my-5">
+            <div class="modal-header border-bottom-0">
+              <h5 class="modal-title" id="exampleModalLabel">Sent Reviews</h5>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Author</th>
+                  <th scope="col">Comment</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($received_feedback as $received)
+                <tr>
+                  <td>{{App\Http\Controllers\UserController::getUserById($received['author'])}} </td>
+                  <td>{{$received['comment']}}</td>
+                </tr>
+                @endforeach
+              </table>
+            </div>
+    </div>
+  </div>
 </div>
 
 </section>

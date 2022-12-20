@@ -149,11 +149,9 @@
 <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-        <div class="modal-header border-bottom-0">
-          <h5 class="modal-title" id="exampleModalLabel">Edit Auction</h5>
-          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+          <button type="button" class="btn-close close mx-0 my-0" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form form method="POST" action={{url('auction/'.$id.'/edit')}}>
           {{ csrf_field() }}
@@ -214,8 +212,9 @@
   <div class="modal fade" id="bids" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-        <div class="modal-header border-bottom-0">
+        <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Bid History</h5>
+          <button type="button" class="btn-close close mx-0 my-0" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="table-responsive">
           <table class="table">
@@ -247,9 +246,10 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="d-flex flex-column justify-content-center align-items-center my-5">
-        <div class="modal-header border-bottom-0">
-          <h5 class="modal-title" id="exampleModalLabel">Winner</h5>
-        </div>
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Winner</h5>
+            <button type="button" class="btn-close close mx-0 my-0" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
         @if(isset($winner[0]->id_bidder))
         @php
             $user_winner = App\Http\Controllers\UserController::getUserById($winner[0]->id_bidder)->username;
@@ -289,9 +289,10 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="d-flex flex-column justify-content-center align-items-center">
-      <div class="modal-header border-bottom-0">
-        <h5 class="modal-title" id="exampleModalLabel">Help</h5>
-      </div>
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Help</h5>
+          <button type="button" class="btn-close close mx-0 my-0" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
       </div>
       <div class="table-responsive">
        @if((Auth::user('web')?->id == $auctioneer_id) || (Auth::guard('manager'))?->user())

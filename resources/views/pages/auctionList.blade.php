@@ -24,11 +24,16 @@
             $counter++;
             @endphp
 
-<div class="col-sm">
-            <figure class="img-column">
-                <a href={{url("/auction/".$l->id_auction)}}><img src= "{{$img['link']}}" alt="Auction image" width="200" height="200"></a>
-                <figcaption>{{$auction['name']}}</figcaption>   
-            </figure>
+<div class="col-lg-4 align-items-stretch">
+    <div class="card mb-4">
+        <div class="card-body text-center">
+                <a href="{{url('/auction/'.$auction->id)}}">
+                    <img src= "{{$img['link']}}" class="figure-img img-fluid category" alt="Auction image" width="150" height="150">
+                </a>
+          <h5 class="my-3">{{$auction['name']}}</h5>
+          <p class="text mb-1">{{$auction['current_bid']}} $</p>
+        </div>
+      </div>
 </div>
 @if($counter % 3 == 0)
 <div class="row">

@@ -92,10 +92,12 @@ CREATE TABLE payment(
 
 CREATE TABLE review(
     id SERIAL PRIMARY KEY,
-	author TEXT NOT NULL,
+	author INTEGER NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
     comment TEXT NOT NULL,
+    review_date TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
     "id_bidder" INTEGER NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
-    "id_auctioneer" INTEGER NOT NULL REFERENCES _user(id) ON DELETE CASCADE
+    "id_auctioneer" INTEGER NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
+    CONSTRAINT author CHECK (author = "id_bidder" OR author = "id_auctioneer")
 );
 
 CREATE TABLE auction_list(
@@ -210,10 +212,10 @@ INSERT INTO auction VALUES(DEFAULT,'Makena', 'This is an auction','Friday, Octob
 
 --INSERT INTO transaction VALUES(DEFAULT, 25500, 'Buy',1,1);
 
-INSERT INTO review VALUES(DEFAULT, 'Annonymous clown', 'Product does not match the description! It is awful', 1, 6);
-INSERT INTO review VALUES(DEFAULT, 'Grandma', 'Amazing, this car will make my friends jealous', 1, 6);
+--INSERT INTO review VALUES(DEFAULT, 1, 'Product does not match the description! It is awful', 1, 6);
+--INSERT INTO review VALUES(DEFAULT, 1, 'Amazing, this car will make my friends jealous', 1, 6);
 
-INSERT INTO notification VALUES(DEFAULT, 'Saturday, October 1, 2022 9:42 PM', 'You won the auction', 'Auction Status Notification',1, 1, 1);
+--INSERT INTO notification VALUES(DEFAULT, 'Saturday, October 1, 2022 9:42 PM', 'You won the auction', 'Auction Status Notification',1, 1, 1);
 
 INSERT INTO auction_image VALUES(DEFAULT, 'https://cdn.shopify.com/s/files/1/0017/2100/8243/products/QX-1_FRONT_BrightRed_400x.jpg?v=1610646148',1);
 INSERT INTO auction_image VALUES(DEFAULT, 'https://france-export-fv-online.com/6484-large_default/absolut-vodka.jpg',2);

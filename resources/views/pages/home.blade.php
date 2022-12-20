@@ -11,12 +11,11 @@
     $auctionArray = App\Http\Controllers\AuctionCategoryController::getAuctionByCategory($category->id);
     @endphp
     <div class="h-100 d-flex flex-column align-items-center justify-content-center">
-        <h1> Welcome!</h2>
+        <h1> Welcome!</h1>
     <h2 class="categories-titles my-3" id="{{$category['type']}}"> {{$category['type']}} </h2>
     </div>
     <hr class="mb-5">
     <div class="container">
-        <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="row">
     @foreach($auctionArray as $auction)
 
@@ -26,23 +25,23 @@
         $counter++;
         @endphp
 
-        <div class="col-sm">
-        <figure class="img-column">
-            <a href="{{url('/auction/'.$auction->id)}}">
-                <img src= "{{$img['link']}}" alt="Auction image" width="200" height="200">
-            </a>
-                <figcaption>
-                    <div>{{$auction['name']}}</div>
-                    <div>{{$auction['current_bid']}} $</div>
-                </figcaption>
-        </figure>
+        <div class="col-lg-4 align-items-stretch">
+            <div class="card mb-4">
+                <div class="card-body text-center">
+                        <a href="{{url('/auction/'.$auction->id)}}">
+                            <img src= "{{$img['link']}}" class="figure-img img-fluid category" alt="Auction image" width="150" height="150">
+                        </a>
+                  <h5 class="my-3">{{$auction['name']}}</h5>
+                  <p class="text mb-1">{{$auction['current_bid']}} $</p>
+                </div>
+              </div>
         </div>
         {{--every row will have 3 --}}
         @if($counter % 3 == 0)
             <div class="row">
         @endif
     @endforeach 
+            </div>
         </div>
     </div>
-</div>
 @endsection

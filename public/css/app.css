@@ -6,6 +6,13 @@ body{
   min-height: 100vh;
 }
 
+/*home/category auction card*/
+
+.figure-img.img-fluid.category{
+  width: 200px;
+  height: 200px;
+}
+
 /*header*/
 header {
   background-color: rgb(129, 0, 0);
@@ -41,6 +48,27 @@ header .container .text-end button:hover{
   background-color: rgb(129, 0, 0);
   border-color: rgb(129, 0, 0);
 }
+
+.close {
+  color:#8f8e8e;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  margin:0;
+}
+
+/*.help a{
+  color:#8f8e8e;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.help a:hover, .help a:active{
+color:#797878;
+}*/
 
 /*footer*/
 
@@ -161,221 +189,3 @@ hr {
   margin: 0 auto;
 }
 
-
-#auction-content {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 100px;
-  justify-content: space-around;
-}
-
-#auction-content figure {
-  padding: 100px;
-  border: 1px solid #8f8e8e;
-  border-radius: 50px;
-  height: 700px;
-  width: 700px;
-}
-
-#auction-content img {
-  height: 500px;
-  width: 500px;
-}
-
-#auction-content figcaption {
-  text-align: center;
-  font-size: 40px;
-}
-
-#auction-content .auction-info {
-  display: flex;
-  flex-direction: column;
-  font-size: 25px;
-  justify-content: space-around;
-}
-
-#auction-content .auction-info a {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  gap: 50px;
-}
-
-#auction-content .auction-info label {
-  font-size: 30px;
-}
-
-#auction-content .auction-info > a > div {
-  display: flex;
-  gap: 20px;
-}
-
-#auction-content .auction-info > div {
-  display: flex;
-  gap: 20px;
-}
-
-#auctioneer-profile-href:hover {
-  color: #606060;
-  transform: scale(1.05);
-}
-
-#auction-content .auction-info > div > :first-child,
-#auction-content .auction-info > a > div > :first-child {
-  display: flex;
-  gap: 20px;
-  font-weight: bold;
-}
-
-.auction-form {
-  padding: 100px;
-}
-
-.auction-form form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding-top: 50px;
-}
-
-.auction-form p {
-  font-size: 30px;
-  font-weight: bold;
-}
-
-.auction-form div {
-  display: flex;
-  gap: 30px;
-}
-
-.auction-form div label{
-  font-size: 20px;
-}
-
-.auction-form input[type="submit"] {
-  margin-top: 50px;
-}
-
-#content input[type="submit"] {
-  background-color: #dfdede;
-}
-
-figcaption {
-  text-align: center;
-  padding-top: 20px;
-  font-size: 20px;
-}
-
-
-#auction-container p{
-    text-align: center;
-    font-weight: bold;
-    font-size: 30px;
-    padding-top: 20px;
-  }
-
-  .img-column {
-    float: left;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    padding-left: 70px;
-    padding-right: 70px;
-    border: 1px solid #8f8e8e;
-    border-radius: 50px;
-  }
-
-  .img-column:hover {
-    transition: all .3s ease-in-out;
-    transform: scale(1.05);
-  }
-
-  .img-row {
-    padding-top: 50px;
-    padding-left: 100px;
-    padding-right: 100px;
-  }
-
-  /* Clearfix (clear floats) */
-  .img-row::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-
-  /* PROFILE PAGE */
-  #about-section {
-    width: 100%;
-    background: rgba(32, 33, 36, 0.1);
-    position: relative;
-}
-
-#auction-container {
-  padding-bottom: 100px;
-}
-
-.blockabout {
-    padding: 20px;
-    background: white;
-}
-
-.potoaboutwrap{
-    width: 100%;
-    height: 50%;
-    position: relative;
-    overflow: hidden;
-
-}
-
-.blockabout-inner {
-    padding: 30px;
-    border: 1px solid rgba(32, 33, 36, 0.1);
-}
-
-.sosmed-horizontal a i {
-    border: 1px solid #070707;
-    border-radius: 50%;
-    color: #070707;
-    display: inline-block;
-    height: 30px;
-    width: 30px;
-    line-height: 30px;
-    margin: auto 3px;
-    font-size: 15px;
-    text-align: center;
-    transition: all 0.3s;
-}
-
-.rey-btn {
-    border: 2px solid #070707;
-    padding: 10px 40px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 13px;
-    font-weight: 700;
-    border-radius: 50px;
-    transition: all 0.3s;
-}
-/*Edit form*/
-
-form{
-  color:black;
-}
-
-form p{
-  text-align: center;
-}
-
-/*Watch List*/
-
-.watch-list h2{
-  font-size: 65px;
-  text-align: center;
-  margin-top: -4%;
-}
-
-.watch-list p{
-  font-size: 25px;
-  margin-left: 2%;
-}
-
-/* */
