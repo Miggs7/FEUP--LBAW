@@ -49,7 +49,9 @@ class AuctionController extends Controller
     $bid->bid_value = $request['bid_value'];
     $bid->save();
 
-    return redirect('/auction/'.$auction->id);
+    return response()->json(['success'=>'Bid has been made.']);
+
+    //return redirect('/auction/'.$auction->id);
   }
 
       /**

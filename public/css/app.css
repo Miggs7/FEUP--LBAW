@@ -130,6 +130,12 @@ tbody td a:active{
   color:rgb(88, 1, 1) !important;
 }
 
+/*watch*/
+
+#unwatchForm{
+  display: none;
+}
+
 
 /*profile*/
 

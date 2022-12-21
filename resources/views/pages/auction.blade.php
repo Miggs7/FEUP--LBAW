@@ -10,10 +10,6 @@
     $auctioneer = App\Http\Controllers\UserController::getUserById($auctioneer_id);
 
     /*check if auction is on watch_list*/
-    if(Auth::check()){
-        $is_watched = App\Http\Controllers\WatchListController::isOnWatchList($id,Auth::user()->id);
-    }
-    else $is_watched = false;
     
     /*button will be hidden if time has passed*/
     $date = ($auction['ending_date']);
@@ -26,7 +22,16 @@
 
 @endphp
 
+@php
+$is_watched = App\Http\Controllers\WatchListController::isOnWatchList($id,Auth::user()?->id);
+// case is logged out we want the same button...
+if(!Auth::check()){
+  $is_watched = false;
+}
+@endphp
+
 @section('content')
+<div id="dom-target" style="display:none">{{var_export($is_watched)}}</div>
 <div class="d-flex justify-content-center align-items-center my-5">
 <div class="row">
     <div class="col">
@@ -44,7 +49,7 @@
           <h5 class="my-3">{{$auction['name']}}</h5>
           <p class="text mb-1">Description: {{$auction['description']}}</p>
           <p class="text mb-1">Ending date: {{$auction['ending_date']}}</p>
-          <p class="text mb-1">Current bid: {{$auction['current_bid']}} $</p>
+          <p class="text mb-1 current">Current bid: {{$auction['current_bid']}} $</p>
           <p class="text mb-1">Auctioneer : {{$auctioneer['name']}}</p>
           <a href="#" data-bs-toggle="modal" data-bs-target="#bids">{{count($bids)}} bids</a>
           <div class="d-flex auction justify-content-center align-items-center">
@@ -69,16 +74,9 @@
             @else
             {{--this should only appear if ongoing--}}
               @if($auction['ongoing'] && now() <= $auction['ending_date'])
-              <form method="post" action={{url('auction/'.$id.'/bid/')}}>
+              <form id="bidForm" method="post">
                   @csrf
-                  @method('PUT')
                   <input type="hidden" name="id_bidder" value="{{Auth::user('web')?->id}}">
-                  {{--@if($errors->has('id_bidder'))
-                  <span class="error">
-                      Please login! 
-                  </span>
-                  @endif
-                  --}}
                   <input type="hidden" name="id" value="{{$id}}">
                   <input type="hidden" name="current_bid" value="{{$auction['current_bid']}}">
                   <label for="bid_value"> Bid Value:</label>
@@ -89,38 +87,32 @@
                           </svg>
                       </div>
                     </div>
-                    @if(Auth::check())
-                    @if ($errors->has('bid_value'))
-                    <span class="error">
+                    <span id="lowBid"class="error" style="display:none">
                         Your bid is too low!
                     </span>
-                    @endif
-                    @endif
+                    <span id="bidOff"class="error" style="display:none">
+                      Please Authenticate!
+                  </span>
+                  <span id="bidSucess"class="sucess" style="display:none">
+                    Bid made!
+                </span>
               </form>
-              @if(!$is_watched)
-                    <form method="post" action={{url('watchList/'.$id.'/add/')}}>
-                        @csrf
+              <form id="watchForm">
+                @csrf
                             <input type="hidden" name="id_auction" value={{$id}}>
-                            <input type="hidden" name="id_bidder" value="{{Auth::user('web')?->id}}">
+                            <input type="hidden" name="id_bidder"  value={{Auth::user('web')?->id}}>
                             <button submit="submit" class="btn btn-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                     <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
                                     <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
                                 </svg>
                             </button>
-                    </form>
-                    @if($errors->has('id_bidder'))
-                    <span class="error">
-                         Please login! 
-                    </span>
-                    @endif
-              @else
+              </form>
                 {{--implement a confirmation message here--}}
-                <form method="post" action={{url('watchList/'.$id.'/delete/')}}>
+                <form id="unwatchForm">
                     @csrf
-                    @method('DELETE')
                     <input type="hidden" name="id_auction" value={{$id}} >
-                    <input type="hidden" name="id_bidder" value={{Auth::user()->id}} >
+                    <input type="hidden" name="id_bidder" value={{Auth::user()?->id}} >
                     <button submit="submit" class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
@@ -128,7 +120,6 @@
                           </svg>
                     </button>
                 </form>
-              @endif 
             @php 
             @endphp
             @else
