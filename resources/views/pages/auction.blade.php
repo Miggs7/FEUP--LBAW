@@ -108,6 +108,7 @@ if(!Auth::check()){
                                 </svg>
                             </button>
               </form>
+              
                 {{--implement a confirmation message here--}}
                 <form id="unwatchForm">
                     @csrf
@@ -130,6 +131,8 @@ if(!Auth::check()){
             </button>
             @endif
             @endif
+            <span id="unwatchMsg"class="sucess" style="display:none">Removed from Watchlist!</span>
+            <span id="watchMsg" class="sucess" style="display:none">Added to Watchlist!</span>
           </div>
         </div>
       </div>

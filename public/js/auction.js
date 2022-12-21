@@ -1,7 +1,10 @@
     let watch = document.querySelector("#watchForm");
+    let watchMSG = document.querySelector("#watchMsg");
+
     let unwatch = document.querySelector("#unwatchForm");
+    let unwatchMSG = document.querySelector("#unwatchMsg");
+
     let watched = document.querySelector("#dom-target").innerHTML;
-    let count = 0;
 
     let id_bidder = $('input[name=id_bidder]').val();
     let id_auction = $('input[name=id_auction]').val();
@@ -9,7 +12,6 @@
 
     //unwatch 
     if(!watched.localeCompare('true')){
-      console.log(watched);
       unwatch.style.display = 'block';
       watch.style.display = 'none';
     }
@@ -22,9 +24,6 @@
     // add to watch list
     $(watch).on("submit",function(e){
     e.preventDefault();
-
-
-
         $.ajax({
           url: "/watchList/"+ id_bidder + "/add",
           type:"POST",
@@ -36,11 +35,9 @@
           success:function(response){
             watch.style.display = 'none';
             unwatch.style.display = 'block';
-            const warning = document.createElement("div");
-            warning.textContent = "Added to WatchList";
-            warning.className = "warning";
-            unwatch.appendChild(warning);
-    
+
+            watchMSG.style.display = 'block';
+            unwatchMSG.style.display = 'none';
           },
           error: function(response) {
             const warning = document.createElement("div");
@@ -71,12 +68,10 @@
                 id_auction: id_auction,
               },
               success:function(response){
-                const warning = document.createElement("div");
-                warning.textContent = "Removed from WatchList";
-                warning.className = "warning";
-                watch.appendChild(warning);
                 unwatch.style.display = 'none';
                 watch.style.display = 'block';
+                watchMSG.style.display = 'none';
+                unwatchMSG.style.display = 'block';
               },
               error: function(response) {
                 console.log("error");
@@ -100,8 +95,7 @@
       let current_bid = $('input[name=current_bid]').val();
       let bid_value = $('input[name=bid_value]').val();
       let token = $('input[name=_token]').val();
-  
-  
+
           $.ajax({
             url: "/auction/"+ id_auction + "/bid",
             type:"PUT",
@@ -123,5 +117,4 @@
               console.log("error");
             },
       });
-    
   });

@@ -18,8 +18,8 @@
     <script type="text/javascript">
     </script>
     <script type="text/javascript" src={{ asset('js/bootstrap.bundle.js') }} defer> </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-    <script type="text/javascript" src={{ asset('js/app.js') }} defer> </script>
+    <script  type="text/javascript" src={{asset('js/jquery-3.6.3.js')}} defer></script>
+    <script type="text/javascript" src={{ asset('js/auction.js') }} defer> </script>
     
   </head>
   <body>  
