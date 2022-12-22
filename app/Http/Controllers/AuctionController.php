@@ -49,9 +49,9 @@ class AuctionController extends Controller
     $bid->bid_value = $request['bid_value'];
     $bid->save();
 
-    return response()->json(['success'=>'Bid has been made.']);
+    return response()->json(['id_auction'=>$request['id'],'id_bidder'=>$request['id_bidder'],'bid_value'=>$request['bid_value']]);
 
-    //return redirect('/auction/'.$auction->id);
+
   }
 
       /**
@@ -72,11 +72,11 @@ class AuctionController extends Controller
     if($request->name) $auction->name = $request->name;
     if($request->description) $auction->description = $request->description;
     if($request->ending_date) $auction->ending_date = $request->ending_date;
-    if($request->ongoing) $auction->ongoing = $request->ongoing;
   
     $auction->save();
 
-    return redirect('/auction/'.$auction->id);
+    return response()->json(['name'=>$request['name'],'description'=>$request['description'],'ending_date'=>$request['ending_date']]);
+    //return redirect('/auction/'.$auction->id);
   }
 
         /**

@@ -18,7 +18,6 @@
     <script type="text/javascript">
     </script>
     <script type="text/javascript" src={{ asset('js/bootstrap.bundle.js') }} defer> </script>
-    <script  type="text/javascript" src={{asset('js/jquery-3.6.3.js')}} defer></script>
     <script type="text/javascript" src={{ asset('js/auction.js') }} defer> </script>
     
   </head>

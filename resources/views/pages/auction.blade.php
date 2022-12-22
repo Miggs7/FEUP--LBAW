@@ -46,9 +46,9 @@ if(!Auth::check()){
               </a>
             </div>
           <img src="{{url($img['link'])}}" alt="auction image" class="img-fluid" style="width: 150px;">
-          <h5 class="my-3">{{$auction['name']}}</h5>
-          <p class="text mb-1">Description: {{$auction['description']}}</p>
-          <p class="text mb-1">Ending date: {{$auction['ending_date']}}</p>
+          <h5 class="my-3 auctionName">{{$auction['name']}}</h5>
+          <p class="text mb-1 auctionDescription">Description: {{$auction['description']}}</p>
+          <p class="text mb-1 auctionEnd">Ending date: {{$auction['ending_date']}}</p>
           <p class="text mb-1 current">Current bid: {{$auction['current_bid']}} $</p>
           <p class="text mb-1">Auctioneer : {{$auctioneer['name']}}</p>
           <a href="#" data-bs-toggle="modal" data-bs-target="#bids">{{count($bids)}} bids</a>
@@ -147,9 +147,8 @@ if(!Auth::check()){
           <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
           <button type="button" class="btn-close close mx-0 my-0" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form form method="POST" action={{url('auction/'.$id.'/edit')}}>
-          {{ csrf_field() }}
-          @method('PUT')
+        <form id="formAuctionEdit">
+          @csrf
           <input id="id" type="hidden" name="id" value="{{$id}}">
           <div class="modal-body">
             <div class="form-group mb-2">
@@ -182,22 +181,13 @@ if(!Auth::check()){
             @endif
             </div>
 
-            <label for="ongoing">Ongoing</label>
-            <div class="h-100 d-flex">
-            <label for="ongoing">Yes</label>
-            <input id="ongoing" type="checkbox" class="form-check-input"  name="ongoing" value="1">
-              <label for="ongoing">No</label>
-            <input id="ongoing" type="checkbox" class="form-check-input"  name="ongoing" value="0">
-            @if ($errors->has('ongoing'))
-              <span class="error">
-                  {{ $errors->first('ongoing') }}
-              </span>
-            @endif
-            </div>
             <div class="d-flex justify-content-center align-items-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
+      </div>
+      <div id="auctionChanged" class="d-flex justify-content-center align-items-center" style="display:none">
+        <p>Sucess!</p>
       </div>
     </div>
   </div>
