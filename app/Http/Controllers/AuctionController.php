@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Auction;
 use App\Models\Bid;
 use Illuminate\Http\Request;
-use app\Http\Controllers\ItemController;
 use App\Models\AuctionImage;
+use App\Models\User;
 
 class AuctionController extends Controller
 {
@@ -49,7 +49,9 @@ class AuctionController extends Controller
     $bid->bid_value = $request['bid_value'];
     $bid->save();
 
-    return response()->json(['id_auction'=>$request['id'],'id_bidder'=>$request['id_bidder'],'bid_value'=>$request['bid_value']]);
+    $bidder = User::find($request['id_bidder']);
+
+    return response()->json(['id_auction'=>$request['id'],'id_bidder'=>$request['id_bidder'],'bid_value'=>$request['bid_value'],'bidder' => $bidder['username']]);
 
 
   }
@@ -111,7 +113,6 @@ class AuctionController extends Controller
       'description' => 'required|string|max:255',
       'ending_date' => 'required|date',  
       'starting_bid' => 'required|numeric', 
-      'item' => 'required|string|max:255',
       'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
       'today' => 'required|date',
       'ending_date' => 'required|date|after:today'
@@ -126,7 +127,6 @@ class AuctionController extends Controller
     /*at the start of bid the current and starting bid will be the same*/
     $auction-> current_bid = $request['starting_bid'];
     $auction-> starting_bid = $request['starting_bid'];
-    $auction->id_item = app('App\Http\Controllers\ItemController')->getOrCreate($request['item']);
     $auction->save();
 
     /*image to public folder*/

@@ -46,6 +46,7 @@ try{
 
 let unwatchMSG = document.querySelector("#unwatchMsg");
 let watchMsg = document.querySelector("#watchMsg");
+let watchLogin = document.querySelector("#watchLogin");
 
 function watchAuction(event) {
   event.preventDefault();
@@ -55,12 +56,24 @@ function watchAuction(event) {
 }
 
 function watchAuctionHandler() {
-  let item = JSON.parse(this.responseText);
-  unwatch.style.display = 'block';
-  watch.style.display = 'none';
+  try{
 
-  unwatchMSG.style.display = 'none';
-  watchMsg.style.display = 'block';
+    let item = JSON.parse(this.responseText);
+    console.log(item);
+
+    unwatch.style.display = 'block';
+    watch.style.display = 'none';
+  
+    unwatchMSG.style.display = 'none';
+    watchMsg.style.display = 'block';
+
+    watched = 'true';
+  }
+  catch(error){
+    unwatch.style.display = 'none';
+    watch.style.display = 'block';
+    watchLogin.style.display = 'block';
+  }
 }
 
 function unwatchAuction(event) {
@@ -71,6 +84,7 @@ function unwatchAuction(event) {
 }
 
 function unwatchAuctionHandler() {
+  try{
   let item = JSON.parse(this.responseText);
   let unwatchMSG = document.querySelector("#unwatchMsg");
   unwatch.style.display = 'none';
@@ -78,6 +92,12 @@ function unwatchAuctionHandler() {
 
   watchMsg.style.display = 'none';
   unwatchMSG.style.display = 'block';
+
+  watched = 'false';
+  }
+  catch(error){
+    watchLogin.style.display = 'block';
+  }
 }
 
     
@@ -88,6 +108,9 @@ function unwatchAuctionHandler() {
     let lowBid = document.querySelector("#lowBid");
     let bidOff = document.querySelector("#bidOff");
     let bidSucess = document.querySelector("#bidSucess");
+    let lastBid = document.querySelector("#bid-row");
+    let bidCount = document.querySelector("#target-bid-count").innerHTML;
+    let bidCountInt = parseInt(document.querySelector("#target-bid-count").innerHTML,10);
 
     function bidAuction(event){
       event.preventDefault();
@@ -100,11 +123,48 @@ function unwatchAuctionHandler() {
     }
 
     function auctionBidHandler() {
-      let item = JSON.parse(this.responseText);
-      bidSucess.style.display = 'block';
-      let currentBid = document.querySelector(".current");
-      console.log(currentBid);
-      currentBid.innerHTML = "Current Bid: " + item.bid_value + "$";
+      try{
+        let item = JSON.parse(this.responseText);
+        bidSucess.style.display = 'block';
+
+        if(!watched.localeCompare('false')){
+          unwatch.style.display = 'block';
+          unwatchMSG.style.display = 'none';
+  
+          watchMsg.style.display = 'block';
+          watch.style.display = 'none';
+        }
+
+        let currentBid = document.querySelector(".current");
+        currentBid.innerHTML = "Current Bid: " + item.bid_value + "$";
+
+
+        /*Increase auction minimum value*/
+        let input_bid_value = bidding.querySelector("input[name=bid_value]");
+        input_bid_value.setAttribute("min",parseInt(item.bid_value)+1);
+
+        let newBid = document.createElement("tr");
+        lastBid.appendChild(newBid);
+
+        let numberBid = document.createElement("th");
+        bidCountInt++;
+        numberBid.innerHTML = bidCountInt;
+        newBid.appendChild(numberBid);
+
+        document.querySelector("#target-bid-count").innerHTML = bidCountInt + " bids";
+
+        let bidderCell = document.createElement("td");
+        bidderCell.innerHTML = item.bidder;
+        newBid.appendChild(bidderCell);
+
+        let bidValue = document.createElement("td");
+        bidValue.innerHTML = item.bid_value + "$";
+        newBid.appendChild(bidValue);
+
+      }
+      catch(error){
+        watchLogin.style.display = 'block';
+      }
     }
   
 
@@ -121,10 +181,6 @@ function unwatchAuctionHandler() {
   function editAuction(event){
     event.preventDefault();
 
-    /*auctionChanged.style.display = "none";
-    formEdit.style.display = "block";
-    */
-
     let name = formEdit.querySelector("input[name=name]").value;
     let id_auction = formEdit.querySelector("input[name=id]").value;
     let description = formEdit.querySelector("input[name=description]").value;
@@ -136,7 +192,7 @@ function unwatchAuctionHandler() {
   function editAuctionHandler() {
     let item = JSON.parse(this.responseText);
     if(auctionName) auctionName.innerHTML = item.name;
-    if(auctionEnd) auctionEnd.innerHTML = "Ending date: " + item.ending_date;
+    if(auctionEnd != null) auctionEnd.innerHTML = "Ending date: " + item.ending_date;
     if(auctionDescription) auctionEnd.description = "Description: " + item.description;
     formEdit.style.display = "none";
     auctionChanged.style.display = "block";

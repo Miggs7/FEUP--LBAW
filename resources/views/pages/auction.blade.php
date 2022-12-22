@@ -13,8 +13,15 @@
     
     /*button will be hidden if time has passed*/
     $date = ($auction['ending_date']);
+    $ad = strtotime($date);
+    $end_stamp = date("Y-m-d H:i:s", $ad);
+
     $now = time();
     $now_time_stamp = date("Y-m-d H:i:s", $now);
+
+    if($end_stamp <= $now_time_stamp){
+      $auction['ongoing'] = false; 
+    }
 
     $bids = App\Http\Controllers\BidController::getAuctionBids($id);
     $winner = App\Http\Controllers\BidController::getWinningBid($id);
@@ -32,6 +39,7 @@ if(!Auth::check()){
 
 @section('content')
 <div id="dom-target" style="display:none">{{var_export($is_watched)}}</div>
+{{--<div id="dom-target-ongoing" style="display:none">{{var_export($auction['ongoing'])}}</div>--}}
 <div class="d-flex justify-content-center align-items-center my-5">
 <div class="row">
     <div class="col">
@@ -48,10 +56,10 @@ if(!Auth::check()){
           <img src="{{url($img['link'])}}" alt="auction image" class="img-fluid" style="width: 150px;">
           <h5 class="my-3 auctionName">{{$auction['name']}}</h5>
           <p class="text mb-1 auctionDescription">Description: {{$auction['description']}}</p>
-          <p class="text mb-1 auctionEnd">Ending date: {{$auction['ending_date']}}</p>
+          <p class="text mb-1 auctionEnd">Ending date: {{$end_stamp}}</p>
           <p class="text mb-1 current">Current bid: {{$auction['current_bid']}} $</p>
           <p class="text mb-1">Auctioneer : {{$auctioneer['name']}}</p>
-          <a href="#" data-bs-toggle="modal" data-bs-target="#bids">{{count($bids)}} bids</a>
+          <a href="#" id="target-bid-count" data-bs-toggle="modal" data-bs-target="#bids">{{count($bids)}} bids</a>
           <div class="d-flex auction justify-content-center align-items-center">
             @if(((Auth::user('web')?->id == $auctioneer_id) || (Auth::guard('manager'))?->user()) && $auction['ongoing'])
             <button type="button" class="btn btn-primary profile" data-bs-toggle="modal" data-bs-target="#form">
@@ -87,13 +95,13 @@ if(!Auth::check()){
                           </svg>
                       </div>
                     </div>
-                    <span id="lowBid"class="error" style="display:none">
+                    <span id="lowBid"class="text-danger" style="display:none">
                         Your bid is too low!
                     </span>
-                    <span id="bidOff"class="error" style="display:none">
+                    <span id="bidOff"class="text-danger" style="display:none">
                       Please Authenticate!
                   </span>
-                  <span id="bidSucess"class="sucess" style="display:none">
+                  <span id="bidSucess"class="text-danger" style="display:none">
                     Bid made!
                 </span>
               </form>
@@ -131,8 +139,9 @@ if(!Auth::check()){
             </button>
             @endif
             @endif
-            <span id="unwatchMsg"class="sucess" style="display:none">Removed from Watchlist!</span>
-            <span id="watchMsg" class="sucess" style="display:none">Added to Watchlist!</span>
+            <span id="unwatchMsg"class="text-danger" style="display:none">Removed from Watchlist!</span>
+            <span id="watchMsg" class="text-danger" style="display:none">Added to Watchlist!</span>
+            <span id="watchLogin" class="text-danger" style="display:none">Please Authenticate</span>
           </div>
         </div>
       </div>
@@ -173,7 +182,7 @@ if(!Auth::check()){
         
             <div class="form-group mb-2">
             <label for="ending_date">Ending Date</label>
-            <input id="ending_date" type="date" name="ending_date" class="form-control" min={{now()}} value="{{ old('ending_date') }}">
+            <input id="ending_date" type="datetime-local" name="ending_date" class="form-control" min={{$now_time_stamp}} value="{{ $end_stamp }}">
             @if ($errors->has('ending_date'))
               <span class="error">
                   {{ $errors->first('ending_date') }}
@@ -209,15 +218,23 @@ if(!Auth::check()){
                 <th scope="col">Bid</th>
               </tr>
             </thead>
-        @foreach($bids as $bid)
-          @php $bidder = App\Http\Controllers\UserController::getUserById($bid['id_bidder']) @endphp
-            <tbody>
+        @php
+        $bid_count = 0; 
+        @endphp
+        
+            <tbody id="bid-row">
+              @foreach($bids as $bid)
+              @php 
+                $bidder = App\Http\Controllers\UserController::getUserById($bid['id_bidder']); 
+                $bid_count++;
+              @endphp
               <tr>
-                <th scope="row">{{$bid->id}}</th>
+                <th scope="row">{{$bid_count}}</th>
                 <td>{{$bidder->username}}</td>
-                <td>{{$bid->bid_value}}</td>
+                <td>{{$bid->bid_value}} $</td>
               </tr>
-        @endforeach
+              @endforeach
+              </tbody>
             </table>
             </div>
       </div>

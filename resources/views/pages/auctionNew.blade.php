@@ -2,6 +2,8 @@
 
 @php 
    $categories = App\Http\Controllers\CategoryController::getCategories(); 
+   $now = time();
+    $now_time_stamp = date("Y-m-d H:i:s", $now);
 @endphp
 
 @section('content')
@@ -42,7 +44,7 @@
     
     <div class="form-group">
     <label for="ending_date">Ending Date:</label>
-    <input id="ending_date" type="date" class="form-control" name="ending_date" min="{{now()}}" required>
+    <input id="ending_date" type="datetime-local" class="form-control" name="ending_date" min={{$now_time_stamp}} required>
     @if ($errors->has('ending_date'))
     <span class="error">
          Invalid Date!
@@ -61,7 +63,7 @@
     @endif
     </div>
 
-    <div class="form-group">
+   {{-- <div class="form-group">
     <label for="item">Item:</label>
     <input id="item" type="text" class="form-control" pattern="^[A-Za-z \s*]+$" name="item">
     @if ($errors->has('item'))
@@ -70,7 +72,8 @@
     </span>
     @endif
     </div>
-
+    --}}
+    
     <div class="form-group">
     <label for="category"></label>Category:</label>
     <p class="m-0"></p>

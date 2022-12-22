@@ -59,12 +59,12 @@ CREATE TABLE _user(
     CONSTRAINT age CHECK (age >= 17)
 );
 
-CREATE TABLE item(
+/*CREATE TABLE item(
     id SERIAL PRIMARY KEY ,
     name TEXT NOT NULL,
     description TEXT,
     "id_bidder" INTEGER REFERENCES _user(id) ON DELETE CASCADE
-);
+);*/
 
 CREATE TABLE auction(
     id SERIAL PRIMARY KEY,
@@ -75,7 +75,7 @@ CREATE TABLE auction(
     current_bid FLOAT,
     starting_bid FLOAT,
     ongoing BOOLEAN DEFAULT TRUE,
-    "id_item" INTEGER NOT NULL REFERENCES item(id),
+    --"id_item" INTEGER NOT NULL REFERENCES item(id),
     CONSTRAINT current_bid check (current_bid>= starting_bid AND current_bid >= 0),
     CONSTRAINT starting_bid check (starting_bid>= 0),
     CONSTRAINT starting_date check (starting_date < ending_date)
@@ -194,7 +194,7 @@ INSERT INTO manager VALUES(DEFAULT,'Mike_Lee7536@ubusive.com','Mike Lee','$2y$10
 
 
 -- create items
-INSERT INTO item VALUES(DEFAULT, 'Makena','This is a medicine', 8);
+/*INSERT INTO item VALUES(DEFAULT, 'Makena','This is a medicine', 8);
 INSERT INTO item VALUES(DEFAULT,'Symbicort','This is a medicine', 10);
 INSERT INTO item VALUES(DEFAULT,'Zoloft', 'This is a medicine', 7);
 
@@ -205,10 +205,12 @@ INSERT INTO item VALUES(DEFAULT,'Malibu','This is a drink', 4);
 INSERT INTO item VALUES(DEFAULT,'Forever 21', 'This is clothing', 8);
 INSERT INTO item VALUES(DEFAULT,'Angels Jeanswear','This is clothing', 7);
 INSERT INTO item VALUES(DEFAULT,'SABA','This is clothing', 1);
+*/
 
-INSERT INTO auction VALUES(DEFAULT,'Orange Bird','This is an auction', 'Saturday, October 1, 2022 5:58 PM', 'Monday, December 3, 2022 5:58 PM',13333, 12136,DEFAULT, 7);
-INSERT INTO auction VALUES(DEFAULT,'Malibu', 'This is an auction','Saturday, October 1, 2022 9:42 PM', 'Monday, December 17, 2022 8:42 PM', 42289, 42289,DEFAULT, 4);
-INSERT INTO auction VALUES(DEFAULT,'Makena', 'This is an auction','Friday, October 7, 2022 5:01 PM', 'Monday, December 17, 2022 8:42 PM',53087, 51079,DEFAULT,1);
+INSERT INTO auction VALUES(DEFAULT,'Orange Bird','This is an auction', 'Saturday, October 1, 2022 5:58 PM', 'Monday, December 3, 2022 5:58 PM',13333, 12136,DEFAULT);
+INSERT INTO auction VALUES(DEFAULT,'Malibu', 'This is an auction','Saturday, October 1, 2022 9:42 PM', 'Monday, December 17, 2022 8:42 PM', 42289, 42289,DEFAULT);
+INSERT INTO auction VALUES(DEFAULT,'Makena', 'This is an auction','Friday, October 7, 2022 5:01 PM', 'Monday, December 17, 2022 8:42 PM',53087, 51079,DEFAULT);
+
 
 --INSERT INTO transaction VALUES(DEFAULT, 25500, 'Buy',1,1);
 
@@ -256,8 +258,8 @@ DROP INDEX IF EXISTS search_item CASCADE;
 
 CREATE INDEX bid_auction ON bid USING hash(id_auction);
 CREATE INDEX bid_v ON bid USING hash(bid_value);
-CREATE INDEX auction_item ON auction USING hash(id_item);
-CREATE INDEX search_item ON item USING GIST (to_tsvector('english', name));
+--CREATE INDEX auction_item ON auction USING hash(id_item);
+--CREATE INDEX search_item ON item USING GIST (to_tsvector('english', name));
 
 -----------------------------------------
 -- Triggers
