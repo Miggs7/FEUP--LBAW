@@ -30,7 +30,7 @@
                         <a href="{{url('/auction/'.$auction->id)}}">
                             <img src= "{{$img['link']}}" class="figure-img img-fluid category" alt="Auction image" width="150" height="150">
                         </a>
-                  <h5 class="my-3">{{$auction['name']}}</h5>
+                  <h5 class="my-3 auctionName">{{$auction['name']}}</h5>
                   <p class="text mb-1">{{$auction['current_bid']}} $</p>
                 </div>
               </div>

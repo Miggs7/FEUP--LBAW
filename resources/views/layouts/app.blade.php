@@ -18,7 +18,9 @@
     <script type="text/javascript">
     </script>
     <script type="text/javascript" src={{ asset('js/bootstrap.bundle.js') }} defer> </script>
-    <script type="text/javascript" src={{ asset('js/auction.js') }} defer> </script>
+    <script type="text/javascript" src={{ asset('js/app.js') }} defer> </script>
+    @stack('pageJS')
+
     
   </head>
   <body>  
@@ -32,7 +34,7 @@
             </ul>
     
             <form class="col col-lg-auto me-lg-auto mb-3 mb-lg-0 me-lg-3">
-              <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+              <input type="search" id="search-bar" class="form-control form-control-dark" onkeyup="search()" placeholder="Search..." aria-label="Search">
             </form>
 
             <div class="text-end">
