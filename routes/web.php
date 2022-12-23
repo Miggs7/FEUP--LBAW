@@ -40,6 +40,7 @@ Route::get('/user/{id}', function () {
 });
 Route::put('/user/{id}/edit', 'UserController@update')->name('edit');
 Route::put('/user/{id}/ban', 'UserController@ban');
+Route::put('/user/{id}/delete','UserController@delete');
 
 
 //Auction

@@ -74,4 +74,30 @@ class UserController extends Controller
     return $user->is_banned;
   }
 
+      /**
+   * Delete user's personal info.
+   *
+   * @param  Request  $request
+   * @param int $id
+   * @return redirect
+   */
+  public static function delete(Request $request){
+    $user = User::find($request->id);
+    $user->name = "user".$request->id;
+    $user->email = "user".$request->id;
+    $user->username = "user".$request->id;
+
+    $character = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $password = '';
+    for ($i = 0; $i < 10; $i++) {
+      $index = rand(0, strlen($character) - 1);
+      $password .= $character[$index];
+    }
+    $user->password = bcrypt($password);
+    $user->save();
+
+    return redirect('logout');
+
+  }
+
 }

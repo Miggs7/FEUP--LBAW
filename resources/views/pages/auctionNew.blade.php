@@ -18,9 +18,11 @@
           <div class="card-body">
 <form method="POST" action={{url('auction/new')}} enctype="multipart/form-data" >
     {{ csrf_field() }}
+    <div class="d-flex justify-content-center align-items-center ">
     <p class="description-p pe-0 pe-lg-0">
         Create New Auction
     </p>
+    </div>
 
     <div class="form-group">
     <label for="name">Name:</label>
@@ -62,17 +64,6 @@
     </span>
     @endif
     </div>
-
-   {{-- <div class="form-group">
-    <label for="item">Item:</label>
-    <input id="item" type="text" class="form-control" pattern="^[A-Za-z \s*]+$" name="item">
-    @if ($errors->has('item'))
-    <span class="error">
-        {{ $errors->first('item') }}
-    </span>
-    @endif
-    </div>
-    --}}
     
     <div class="form-group">
     <label for="category"></label>Category:</label>
@@ -94,12 +85,11 @@
     </div>
     @if ($errors->has('image'))
     <span class="error">
-        Please upload JPG,PNG or JPEG!
+        Please upload JPG,PNG or JPEG! And less than 2MB!
     </span>
     @endif
     
     <input id="id_auctioneer" type="hidden" name="id_auctioneer" value={{Auth::user()?->id}} required>
-    <input id="today" type="hidden" name="today" value={{now()}} required>
 
     <div class="d-flex justify-content-center align-items-center container">
     <button type="submit" class="btn btn-primary">

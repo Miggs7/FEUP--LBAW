@@ -15,8 +15,10 @@ class AuctionImageController extends Controller
    */
   public static function getAuctionImage($id_auction)
   {
-    $image = AuctionImage::find($id_auction);
-    return $image;
+    foreach(AuctionImage::all() as $image){
+      if($image->id_auction == $id_auction)
+        return $image;
+    }
   }
 
   public static function create($link,$id_auction){

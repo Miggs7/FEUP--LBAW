@@ -64,9 +64,12 @@ class AuctionController extends Controller
    */
   public static function updateAuction(Request $request){
 
+    $time = now();
+
     $request->validate(array(
       'name' => 'nullable|string|max:255',
       'description' => 'nullable|string|max:255',
+      'ending_date' => 'nullable|date|after_or_equal:'.$time,
     ));
 
     $auction = Auction::find($request->id);
@@ -91,7 +94,7 @@ class AuctionController extends Controller
 
     $input = $request->input();
     $auction = Auction::find($input['id']);
-    $auction_image = AuctionImage::find($auction->id);
+    $auction_image = AuctionImageController::getAuctionImage($auction->id);
     /*remove image from folder*/
     unlink(public_path().$auction_image['link']);
     /*delete from database*/
@@ -108,14 +111,15 @@ class AuctionController extends Controller
    */
   public static function create(Request $request){
 
+    $time = now();
+
     $request->validate(array(
       'name' => 'required|string|max:255',
       'description' => 'required|string|max:255',
       'ending_date' => 'required|date',  
       'starting_bid' => 'required|numeric', 
       'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-      'today' => 'required|date',
-      'ending_date' => 'required|date|after:today'
+      'ending_date' => 'required|date|after_or_equal:'.$time
     ));
 
     //return $request;
