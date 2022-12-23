@@ -42,7 +42,7 @@ class WatchListController extends Controller
     $watch_list->id_auction = $input['id_auction'];
     $watch_list->id_bidder = $input['id_bidder'];
     $watch_list->save();
-    return response()->json(['id_auction'=>$input['id_auction'],'id_bidder'=>$input['id_bidder']]);
+    return response()->json(['id_auction'=>$input['id_auction'],'id_bidder'=>$input['id_bidder']],200);
   }
 
      /**
@@ -61,7 +61,7 @@ class WatchListController extends Controller
             $auction->delete();
         }
     }
-    return response()->json(['id_auction'=>$input['id_auction'],'id_bidder'=>$input['id_bidder']]);
+    return response()->json(['id_auction'=>$input['id_auction'],'id_bidder'=>$input['id_bidder']],200);
   }
 
     /**

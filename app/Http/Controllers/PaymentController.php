@@ -21,7 +21,7 @@ class PaymentController extends Controller{
     $payment->id_auction = $request['id_auction'];
     $payment->save();
 
-    return redirect('/auction/'.$request->id);
+    return response()->json(['id_auction'=>$request['id_auction'],'id_bidder'=>$request['id_bidder'],'value'=>$request['value'],'id_bidder' => $request['id_bidder']],200);
   }
 
     /**

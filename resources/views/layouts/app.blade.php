@@ -94,7 +94,7 @@
           <li class="nav-item"><a href="{{url('/contact')}}" class="nav-link px-2">Contacts</a></li>
           <li class="nav-item"><a href="{{url('/about')}}" class="nav-link px-2">About Us</a></li>
         </ul>
-        <p class="text-center text-white">© 2022 LBAW 132, Inc</p>
+        <p class="text-center text-white">© 2022-2023 LBAW 132, Inc</p>
       </footer>
   </body>
 </html>

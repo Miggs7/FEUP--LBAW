@@ -51,7 +51,7 @@ class AuctionController extends Controller
 
     $bidder = User::find($request['id_bidder']);
 
-    return response()->json(['id_auction'=>$request['id'],'id_bidder'=>$request['id_bidder'],'bid_value'=>$request['bid_value'],'bidder' => $bidder['username']]);
+    return response()->json(['id_auction'=>$request['id'],'id_bidder'=>$request['id_bidder'],'bid_value'=>$request['bid_value'],'bidder' => $bidder['username']],200);
 
 
   }
@@ -80,7 +80,7 @@ class AuctionController extends Controller
   
     $auction->save();
 
-    return response()->json(['name'=>$request['name'],'description'=>$request['description'],'ending_date'=>$request['ending_date']]);
+    return response()->json(['name'=>$request['name'],'description'=>$request['description'],'ending_date'=>$request['ending_date']],200);
     //return redirect('/auction/'.$auction->id);
   }
 

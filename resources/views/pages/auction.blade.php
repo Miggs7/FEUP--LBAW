@@ -57,7 +57,7 @@ if(!Auth::check()){
               </a>
             </div>
           <img src="{{url($img['link'])}}" alt="auction image" class="img-fluid" style="width: 150px;">
-          <h5 class="my-3 auctionName">{{$auction['name']}}</h5>
+          <h5 class="my-3">{{$auction['name']}}</h5>
           <p class="text mb-1 auctionDescription">Description: {{$auction['description']}}</p>
           <p class="text mb-1 auctionEnd">Ending date: {{$end_stamp}}</p>
           <p class="text mb-1 current">Current bid: {{$auction['current_bid']}} $</p>
@@ -194,8 +194,10 @@ if(!Auth::check()){
             </div>
         </form>
       </div>
-      <div id="auctionChanged" class="d-flex justify-content-center align-items-center" style="display:none">
+      <div class="d-flex justify-content-center align-items-center">
+      <div id="auctionChanged" style="display:none">
         <p>Sucess!</p>
+      </div>
       </div>
     </div>
   </div>
@@ -257,8 +259,8 @@ if(!Auth::check()){
         <p>{{$user_winner}} who bid {{$winner[0]->bid_value}} $</p>
         {{--form to pay--}}
         @if(Auth::user('web')?->id == $winner[0]->id_bidder && !$payed)
-        <form method="POST" action={{url('auction/'.$id.'/pay')}}>
-            {{ csrf_field() }}
+        <form id="payForm">
+            @csrf
             <input id="id" type="hidden" name="id_bidder" value="{{$winner[0]->id_bidder}}">
             <input id="id" type="hidden" name="id_auctioneer" value="{{$auctioneer_id}}">
             <input id="id" type="hidden" name="id_auction" value="{{$id}}">
@@ -272,6 +274,7 @@ if(!Auth::check()){
                 </button>
             </div>
         </form>
+        <span id="payDone"class="text-danger" style="display:none">Payed!</span>
         @elseif((Auth::user('web')?->id == $auctioneer_id))
             @if(!$payed)<p class="text mb-1 text-muted">Payment Pending...</p>
             @else

@@ -197,3 +197,27 @@ function unwatchAuctionHandler() {
     formEdit.style.display = "none";
     auctionChanged.style.display = "block";
   }
+
+
+  let payForm = document.querySelector("#payForm");
+  if(payForm != null){
+    payForm.addEventListener('submit', payAuction);
+  }
+
+  function payAuction(event){
+    event.preventDefault();
+
+    let id_bidder = payForm.querySelector("input[name=id_bidder]").value;
+    let id_auctioneer = payForm.querySelector("input[name=id_auctioneer]").value;
+    let id_auction = payForm.querySelector("input[name=id_auction]").value;
+    let value = payForm.querySelector("input[name=value]").value;
+
+    sendAjaxRequest('post', '/auction/' + id_auction + '/pay',{id_bidder: id_bidder, id_auctioneer: id_auctioneer,id_auction: id_auction,value: value}, payAuctionHandler);
+  }
+
+  function payAuctionHandler() {
+    let item = JSON.parse(this.responseText);
+    let payDone = document.querySelector("#payDone");
+    payForm.style.display = "none";
+    payDone.style.display = "block";
+  }
