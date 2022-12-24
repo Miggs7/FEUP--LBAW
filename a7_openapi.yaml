@@ -546,6 +546,25 @@ paths:
                     ending_date:
                       type: string #<!-- Author
 
+  /auctionCategory/{id}:
+    get:
+      operationId: R406
+      summary: "R406: View Auction Category Page"
+      description: "Show the Auction Category page. Access: PUB"
+      tags:
+        - "M04: Auctions"
+
+      parameters:
+        - in: path
+          name: id_category
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        "200":
+          description: "Ok. Show Auction Category Page UI"
+
     
   /manager/{id}:
     get:

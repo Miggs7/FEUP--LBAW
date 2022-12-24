@@ -415,7 +415,7 @@ if(!Auth::check()){
     <div class="modal-content">
       <div class="d-flex flex-column justify-content-center align-items-center">
       <div class="modal-header border-bottom-0">
-        <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Delete Auction</h5>
       </div>
 
       <form action="{{url('auction/'.$id.'/delete/')}}" method="POST">

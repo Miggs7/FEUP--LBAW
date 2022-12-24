@@ -15,8 +15,7 @@
     <h2 class="categories-titles my-3" id="{{$user['username']}}"> {{$user['username']}}'s Watchlist </h2>
 </div>
     <hr class="mb-5">
-<div class="container">
-        <div class="row">
+<div class="container d-flex flex-wrap justify-content-center p-2">
         @foreach($watching as $watch)
             @php
             $auction = App\Http\Controllers\AuctionController::getAuction($watch->id_auction);
@@ -35,10 +34,6 @@
                 </div>
               </div>
         </div>
-@if($counter % 3 == 0)
-<div class="row">
-@endif
 @endforeach 
-    </div>
 </div>
 @endsection

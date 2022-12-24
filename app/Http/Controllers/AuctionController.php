@@ -31,6 +31,10 @@ class AuctionController extends Controller
   public static function bid(Request $request)
   { 
 
+    $time = now();
+
+    /*use a query to obtain current_bid from db and compare with bid_value */
+
     $request->validate(array(
       'id_bidder' => 'required|numeric',
       'current_bid' => 'required_with:bid_value|integer|min:1',

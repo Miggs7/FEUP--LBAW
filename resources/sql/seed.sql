@@ -34,7 +34,7 @@ DROP TYPE IF EXISTS category_name;
 
 CREATE TYPE notification_type AS ENUM  ('Auction Status Notification', 'Review Notification');
 --CREATE TYPE transaction_type AS ENUM ('Sell', 'Buy', 'Deposit', 'Cash Out');
-CREATE TYPE category_name AS ENUM ('Jewelry', 'Cars', 'Clothing', 'Furnitures', 'Memorabilia', 'Accessories', 'Other');
+CREATE TYPE category_name AS ENUM ('Jewelry', 'Cars', 'Clothing', 'Furnitures', 'Memorabilia', 'Accessories', 'Games');
 
 -----------------------------------------
 -- Tables
@@ -59,13 +59,6 @@ CREATE TABLE _user(
     CONSTRAINT age CHECK (age >= 17)
 );
 
-/*CREATE TABLE item(
-    id SERIAL PRIMARY KEY ,
-    name TEXT NOT NULL,
-    description TEXT,
-    "id_bidder" INTEGER REFERENCES _user(id) ON DELETE CASCADE
-);*/
-
 CREATE TABLE auction(
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -75,7 +68,6 @@ CREATE TABLE auction(
     current_bid FLOAT,
     starting_bid FLOAT,
     ongoing BOOLEAN DEFAULT TRUE,
-    --"id_item" INTEGER NOT NULL REFERENCES item(id),
     CONSTRAINT current_bid check (current_bid>= starting_bid AND current_bid >= 0),
     CONSTRAINT starting_bid check (starting_bid>= 0),
     CONSTRAINT starting_date check (starting_date < ending_date)
@@ -184,57 +176,105 @@ INSERT INTO _user VALUES(DEFAULT,'Chris_Wise1974@naiker.biz','hmanuellih','Chris
 INSERT INTO _user VALUES(DEFAULT,'Cherish_Waterhouse4762@qater.org','bbrainsbyi','Cherish Waterhouse','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',30,DEFAULT);
 INSERT INTO _user VALUES(DEFAULT,'Wendy_Jennson1741@yahoo.com','jmcgawj','Wendy Jennson','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',27,DEFAULT);
 
-
--- create admins
-
 INSERT INTO manager VALUES(DEFAULT,'example@admin.com','Admin','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W');
 INSERT INTO manager VALUES(DEFAULT,'Marvin_Marshall2818@typill.biz','Marvin Marshall','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W');
 INSERT INTO manager VALUES(DEFAULT,'Lauren_Reyes2900@irrepsy.com','Lauren Reyes','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W');
 INSERT INTO manager VALUES(DEFAULT,'Mike_Lee7536@ubusive.com','Mike Lee','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W');
 
-
--- create items
-/*INSERT INTO item VALUES(DEFAULT, 'Makena','This is a medicine', 8);
-INSERT INTO item VALUES(DEFAULT,'Symbicort','This is a medicine', 10);
-INSERT INTO item VALUES(DEFAULT,'Zoloft', 'This is a medicine', 7);
-
-INSERT INTO item VALUES(DEFAULT, 'Orange Bird', 'This is a drink', 5);
-INSERT INTO item VALUES(DEFAULT, 'Guaranito','This is a drink', 5);
-INSERT INTO item VALUES(DEFAULT,'Malibu','This is a drink', 4);
-
-INSERT INTO item VALUES(DEFAULT,'Forever 21', 'This is clothing', 8);
-INSERT INTO item VALUES(DEFAULT,'Angels Jeanswear','This is clothing', 7);
-INSERT INTO item VALUES(DEFAULT,'SABA','This is clothing', 1);
-*/
-
-INSERT INTO auction VALUES(DEFAULT,'Orange Bird','This is an auction', 'Saturday, October 1, 2022 5:58 PM', 'Monday, December 3, 2022 5:58 PM',13333, 12136,DEFAULT);
-INSERT INTO auction VALUES(DEFAULT,'Malibu', 'This is an auction','Saturday, October 1, 2022 9:42 PM', 'Monday, December 17, 2022 8:42 PM', 42289, 42289,DEFAULT);
-INSERT INTO auction VALUES(DEFAULT,'Makena', 'This is an auction','Friday, October 7, 2022 5:01 PM', 'Monday, December 17, 2022 8:42 PM',53087, 51079,DEFAULT);
-
-
---INSERT INTO transaction VALUES(DEFAULT, 25500, 'Buy',1,1);
-
---INSERT INTO review VALUES(DEFAULT, 1, 'Product does not match the description! It is awful', 1, 6);
---INSERT INTO review VALUES(DEFAULT, 1, 'Amazing, this car will make my friends jealous', 1, 6);
-
---INSERT INTO notification VALUES(DEFAULT, 'Saturday, October 1, 2022 9:42 PM', 'You won the auction', 'Auction Status Notification',1, 1, 1);
-
-INSERT INTO auction_image VALUES(DEFAULT, 'https://cdn.shopify.com/s/files/1/0017/2100/8243/products/QX-1_FRONT_BrightRed_400x.jpg?v=1610646148',1);
-INSERT INTO auction_image VALUES(DEFAULT, 'https://france-export-fv-online.com/6484-large_default/absolut-vodka.jpg',2);
-INSERT INTO auction_image VALUES(DEFAULT, 'https://s0.minipreco.pt/medias/h9b/hf3/9005083033630.jpg',3);
-
-
 INSERT INTO category VALUES(DEFAULT, 'Clothing');
-INSERT INTO category VALUES(DEFAULT, 'Other');
+INSERT INTO category VALUES(DEFAULT, 'Games');
 INSERT INTO category VALUES(DEFAULT, 'Cars');
 INSERT INTO category VALUES(DEFAULT, 'Jewelry');
 INSERT INTO category VALUES(DEFAULT, 'Furnitures');
 INSERT INTO category VALUES(DEFAULT, 'Accessories');
 INSERT INTO category VALUES(DEFAULT, 'Memorabilia');
 
+INSERT INTO auction VALUES(DEFAULT,'Black T-shirt','Quality Shirt', DEFAULT, 'Monday, January 10, 2023 5:58 PM',10, 10,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction1.png',1);
 INSERT INTO auction_category VALUES(DEFAULT,1, 1);
-INSERT INTO auction_category VALUES(DEFAULT,2, 2);
-INSERT INTO auction_category VALUES(DEFAULT,2, 3);
+
+INSERT INTO auction VALUES(DEFAULT,'Jacket', 'Nice Jacket',DEFAULT, 'Monday, January 10, 2023 5:58 PM', 30, 30,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction2.png',2);
+INSERT INTO auction_category VALUES(DEFAULT,1, 2);
+
+INSERT INTO auction VALUES(DEFAULT,'Suit', 'Very Stylish',DEFAULT, 'Monday, January 10,, 2023 8:42 PM',100, 100,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction3.jpg',3);
+INSERT INTO auction_category VALUES(DEFAULT,1, 3);
+
+INSERT INTO auction VALUES(DEFAULT,'Super Mario 64','A very nice classic', DEFAULT, 'Monday, January 10, 2023 5:58 PM',30, 30,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction4.jpg',4);
+INSERT INTO auction_category VALUES(DEFAULT,2, 4);
+
+INSERT INTO auction VALUES(DEFAULT,'Yakuza 0','A modern classic', DEFAULT, 'Monday, January 10, 2023 5:58 PM',10, 10,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction5.png',5);
+INSERT INTO auction_category VALUES(DEFAULT,2, 5);
+
+INSERT INTO auction VALUES(DEFAULT,'Pokemon HeartGold','Rare game', DEFAULT, 'Monday, January 10, 2023 5:58 PM',100, 100,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction6.jpg',6);
+INSERT INTO auction_category VALUES(DEFAULT,2, 6);
+
+INSERT INTO auction VALUES(DEFAULT,'Toyota AE86','Initial D', DEFAULT, 'Monday, January 10, 2023 5:58 PM',9876, 9876,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction7.jpg',7);
+INSERT INTO auction_category VALUES(DEFAULT,3, 7);
+
+INSERT INTO auction VALUES(DEFAULT,'Tesla','Electric Car', DEFAULT, 'Monday, January 10, 2023 5:58 PM',50000, 50000,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction8.png',8);
+INSERT INTO auction_category VALUES(DEFAULT,3, 8);
+
+INSERT INTO auction VALUES(DEFAULT,'Ferrari','Luxury Car', DEFAULT, 'Monday, January 10, 2023 5:58 PM',400000, 400000,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction9.png',9);
+INSERT INTO auction_category VALUES(DEFAULT,3, 9);
+
+INSERT INTO auction VALUES(DEFAULT,'Ring','Made of Iron', DEFAULT, 'Monday, January 10, 2023 5:58 PM',25, 25,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction10.jpg',10);
+INSERT INTO auction_category VALUES(DEFAULT,4,10);
+
+INSERT INTO auction VALUES(DEFAULT,'Bracelet','Made of Pearls', DEFAULT, 'Monday, January 10, 2023 5:58 PM',10, 10,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction11.jpg',11);
+INSERT INTO auction_category VALUES(DEFAULT,4, 11);
+INSERT INTO auction_category VALUES(DEFAULT,6, 11);
+
+INSERT INTO auction VALUES(DEFAULT,'Couch','Very Comfortable', DEFAULT, 'Monday, January 10, 2023 5:58 PM',200, 200,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction12.png',12);
+INSERT INTO auction_category VALUES(DEFAULT,5, 12);
+
+INSERT INTO auction VALUES(DEFAULT,'Office Chair','For long work', DEFAULT, 'Monday, January 10, 2023 5:58 PM',100, 100,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction13.png',13);
+INSERT INTO auction_category VALUES(DEFAULT,5, 13);
+
+INSERT INTO auction VALUES(DEFAULT,'Closet','Very Spaceful', DEFAULT, 'Monday, January 10, 2023 5:58 PM',150, 150,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction14.png',14);
+INSERT INTO auction_category VALUES(DEFAULT,5, 14);
+
+INSERT INTO auction VALUES(DEFAULT,'Charizard Card','Rare Card', DEFAULT, 'Monday, January 10, 2023 5:58 PM',500, 500,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction15.jpg',15);
+INSERT INTO auction_category VALUES(DEFAULT,7, 15);
+
+INSERT INTO auction VALUES(DEFAULT,'Pikachu Card','Common Card', DEFAULT, 'Monday, January 10, 2023 5:58 PM',10, 10,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction16.jpg',16);
+INSERT INTO auction_category VALUES(DEFAULT,7, 16);
+
+INSERT INTO auction VALUES(DEFAULT,'Squirtle Card','Common Card', DEFAULT, 'Monday, January 10, 2023 5:58 PM',15, 15,DEFAULT);
+INSERT INTO auction_image VALUES(DEFAULT, '/images/auction/auction17.jpg',17);
+INSERT INTO auction_category VALUES(DEFAULT,7, 17);
+
+INSERT INTO auction_list VALUES(DEFAULT,6, 1);
+INSERT INTO auction_list VALUES(DEFAULT,7, 2);
+INSERT INTO auction_list VALUES(DEFAULT,2, 3);
+INSERT INTO auction_list VALUES(DEFAULT,5, 4);
+INSERT INTO auction_list VALUES(DEFAULT,10, 5);
+INSERT INTO auction_list VALUES(DEFAULT,11, 6);
+INSERT INTO auction_list VALUES(DEFAULT,15, 7);
+INSERT INTO auction_list VALUES(DEFAULT,13, 8);
+INSERT INTO auction_list VALUES(DEFAULT,12, 9);
+INSERT INTO auction_list VALUES(DEFAULT,2, 10);
+INSERT INTO auction_list VALUES(DEFAULT,5, 11);
+INSERT INTO auction_list VALUES(DEFAULT,1, 12);
+INSERT INTO auction_list VALUES(DEFAULT,7, 13);
+INSERT INTO auction_list VALUES(DEFAULT,9, 14);
+INSERT INTO auction_list VALUES(DEFAULT,10, 15);
+INSERT INTO auction_list VALUES(DEFAULT,11, 16);
+INSERT INTO auction_list VALUES(DEFAULT,12, 17);
 
 INSERT INTO manage VALUES(DEFAULT,1, 3);
 INSERT INTO manage VALUES(DEFAULT,2, 1);
@@ -242,9 +282,7 @@ INSERT INTO manage VALUES(DEFAULT,2, 1);
 INSERT INTO moderate VALUES(DEFAULT,1, 2);
 INSERT INTO moderate VALUES(DEFAULT,2, 1);
 
-INSERT INTO auction_list VALUES(DEFAULT,6, 1);
-INSERT INTO auction_list VALUES(DEFAULT,7, 2);
-INSERT INTO auction_list VALUES(DEFAULT,1, 3);
+
 
 INSERT INTO watch_list VALUES(DEFAULT,1, 1);
 

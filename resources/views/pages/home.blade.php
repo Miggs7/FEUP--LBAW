@@ -15,8 +15,7 @@
     <h2 class="categories-titles my-3" id="{{$category['type']}}"> {{$category['type']}} </h2>
     </div>
     <hr class="mb-5">
-    <div class="container">
-        <div class="row">
+    <div class="container d-flex flex-wrap justify-content-center p-2">
     @foreach($auctionArray as $auction)
 
         @php
@@ -37,9 +36,6 @@
               </div>
         </div>
         {{--every row will have 3 --}}
-        @if($counter % 3 == 0)
-            <div class="row">
-        @endif
     @endforeach 
             </div>
         </div>
