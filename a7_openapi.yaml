@@ -303,25 +303,26 @@ paths:
                 - id_auction
 
       responses:
-        "302":
-          description: "Redirect after updating the watchlist."
-          headers:
-            Location:
+        "200":
+          description: Success
+          content:
+            application/json:
               schema:
-                type: string
-              examples:
-                302Success:
-                  description: "Successful update!"
-                  value: "/watchlist/{id_bidder}"
-                302Failure:
-                  description: "Failed update."
-                  value: "/watchlist/{id_bidder}"
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id_auction:
+                      type: integer
+                    id_bidder:
+                      type: integer
+
 
   /watchlist/{id}/delete:
     delete:
       operationId: R303
       summary: "R303: Delete auction from watchlist"
-      description: "Delete auction from watchlist. Access: AUC"
+      description: "Delete auction from watchlist. Access: USR"
       tags:
         - "M03: Reviews and Watchlist"
       
@@ -338,19 +339,19 @@ paths:
           required: true
           
       responses:
-        '302':
-          description: 'Redirect after auction removal from watchlist.'
-          headers:
-            Location:
+        "200":
+          description: Success
+          content:
+            application/json:
               schema:
-                type: string
-              examples:
-                302Success:
-                  description: 'Auction Removed! Redirect to watchlist'
-                  value: '/watchlist/{id_bidder}'
-                302Failure:
-                  description: 'Failed to remove auction. Redirect to watchlist'
-                  value: '/watchlist/{id_bidder}'
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id_auction:
+                      type: integer
+                    id_bidder:
+                      type: integer
 
   /review/new:
     post:
@@ -372,23 +373,31 @@ paths:
                   type: integer #<!-- Author
                 id_auctioneer:
                   type: integer #<!-- Author
+                rating:
+                  type: integer
               required:
                 - id_auction
 
       responses:
-        "302":
-          description: "Redirect after updating the watchlist."
-          headers:
-            Location:
+        "200":
+          description: Success
+          content:
+            application/json:
               schema:
-                type: string
-              examples:
-                302Success:
-                  description: "Successful update!"
-                  value: "/auction/{id_auction}"
-                302Failure:
-                  description: "Failed update."
-                  value: "/auction/{id_auction}"
+                type: array
+                items:
+                  type: object
+                  properties:              
+                    id_auction: # <!--- form field name
+                      type: integer
+                    id_bidder:
+                      type: integer #<!-- Author
+                    id_auctioneer:
+                      type: integer #<!-- Author
+                    rating:
+                      type: integer
+                required:
+                  - id_auction
 
   /auction/{id}:
     get:
@@ -431,19 +440,28 @@ paths:
           required: true
 
       responses:
-        "302":
-          description: "Redirect after bidding."
-          headers:
-            Location:
+        "200":
+          description: Success
+          content:
+            application/json:
               schema:
-                type: string
-              examples:
-                302Success:
-                  description: "Successful update!"
-                  value: "/auction/{id}"
-                302Failure:
-                  description: "Failed update."
-                  value: "/auction/{id}"
+                type: array
+                items:
+                  type: object
+                  properties:              
+                    id_auction: # <!--- form field name
+                      type: integer
+                    id_bidder:
+                      type: integer #<!-- Author
+                    bid_value:
+                      type: integer #<!-- Author
+                    bidder:
+                      type: string
+                required:
+                  - id_auction
+                  - id_bidder
+                  - bid_value
+                  - bidder
   
   /auction/new:
     get:
@@ -511,40 +529,23 @@ paths:
             type: integer
           required: true
 
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                auction_name:
-                  type: string
-                description:
-                  type: string
-                starting_bid:
-                  type: string
-                ongoing:
-                  type: boolean
-                ending_date:
-                  type: string
-                id_item:
-                  type: integer
-
       responses:
-        '302':
-          description: 'Redirect after auction edit.'
-          headers:
-            Location:
+        "200":
+          description: Success
+          content:
+            application/json:
               schema:
-                type: string
-              examples:
-                302Success:
-                  description: 'Auction Edit! Redirect to Auction page'
-                  value: '/auction/{id}'
-                302Failure:
-                  description: 'Failed to edit auction. Redirect to auction page'
-                  value: '/auction/{id}'
+                type: array
+                items:
+                  type: object
+                  properties:              
+                    name: # <!--- form field name
+                      type: string
+                    description:
+                      type: string #<!-- Author
+                    ending_date:
+                      type: string #<!-- Author
+
     
   /manager/{id}:
     get:

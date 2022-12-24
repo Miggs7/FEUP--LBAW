@@ -24,7 +24,7 @@
         @endphp
         
         
-        <div class="col-lg-4 align-items-stretch">
+        <div class="col-lg-4 align-items-stretch card-container">
             <div class="card mb-4">
                 <div class="card-body text-center">
                         <a href="{{url('/auction/'.$auction->id)}}">
