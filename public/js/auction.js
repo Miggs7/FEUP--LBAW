@@ -101,7 +101,7 @@ function unwatchAuctionHandler() {
 }
 
     
-    let bidding = document.querySelector("#bidForm");
+    /*let bidding = document.querySelector("#bidForm");
     if(bidding != null){
       bidding.addEventListener('submit', bidAuction);
     }
@@ -139,7 +139,7 @@ function unwatchAuctionHandler() {
         currentBid.innerHTML = "Current Bid: " + item.bid_value + "$";
 
 
-        /*Increase auction minimum value*/
+  
         let input_bid_value = bidding.querySelector("input[name=bid_value]");
         input_bid_value.setAttribute("min",parseInt(item.bid_value)+1);
 
@@ -166,8 +166,8 @@ function unwatchAuctionHandler() {
         watchLogin.style.display = 'block';
       }
     }
-  
-
+  */
+ 
   let formEdit = document.querySelector("#formAuctionEdit");
   if(formEdit != null){
     formEdit.addEventListener('submit', editAuction);

@@ -55,9 +55,7 @@ class AuctionController extends Controller
 
     $bidder = User::find($request['id_bidder']);
 
-    return response()->json(['id_auction'=>$request['id'],'id_bidder'=>$request['id_bidder'],'bid_value'=>$request['bid_value'],'bidder' => $bidder['username']],200);
-
-
+    return redirect('/auction/'.$auction['id']);
   }
 
       /**

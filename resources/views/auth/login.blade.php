@@ -25,12 +25,8 @@
       </span>
       @endif
     </div>
-    <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
 
-    <div class="d-flex justify-content-center align-items-center container">
+    <div class="d-flex justify-content-center align-items-center container my-2">
       <button type="submit" class="btn btn-primary mx-2">Login</button>
       <a href="{{route('register')}}">
       <button type="button" class="btn btn-primary">Register</button>
