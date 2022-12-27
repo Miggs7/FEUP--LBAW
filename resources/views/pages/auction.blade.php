@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('pageJS')
-<script type="text/javascript" src={{ asset('js/auction.js') }} defer> </script>
+<script src={{ asset('js/auction.js') }} defer> </script>
 @endpush
 
 @php
