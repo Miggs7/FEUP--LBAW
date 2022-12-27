@@ -100,75 +100,33 @@ function unwatchAuctionHandler() {
   }
 }
 
-    
-    /*let bidding = document.querySelector("#bidForm");
-    if(bidding != null){
-      bidding.addEventListener('submit', bidAuction);
-    }
-    let lowBid = document.querySelector("#lowBid");
-    let bidOff = document.querySelector("#bidOff");
-    let bidSucess = document.querySelector("#bidSucess");
-    let lastBid = document.querySelector("#bid-row");
-    let bidCount = document.querySelector("#target-bid-count").innerHTML;
-    let bidCountInt = parseInt(document.querySelector("#target-bid-count").innerHTML,10);
 
-    function bidAuction(event){
-      event.preventDefault();
-  
-      let id_bidder = bidding.querySelector("input[name=id_bidder]").value;
-      let id_auction = bidding.querySelector("input[name=id]").value;
-      let current_bid = bidding.querySelector("input[name=current_bid]").value;
-      let bid_value = bidding.querySelector("input[name=bid_value]").value;
-      sendAjaxRequest('put', '/auction/' + id_auction + '/bid',{id_bidder: id_bidder, id_auction: id_auction,current_bid: current_bid,bid_value: bid_value}, auctionBidHandler);
-    }
+let reviewForm = document.querySelector("#reviewForm");
+if(reviewForm != null){
+  reviewForm.addEventListener('submit',review);
+}
 
-    function auctionBidHandler() {
-      try{
-        let item = JSON.parse(this.responseText);
-        bidSucess.style.display = 'block';
+function review(event){
+  event.preventDefault();
 
-        if(!watched.localeCompare('false')){
-          unwatch.style.display = 'block';
-          unwatchMSG.style.display = 'none';
-  
-          watchMsg.style.display = 'block';
-          watch.style.display = 'none';
-        }
+  let comment = reviewForm.querySelector("input[name=comment]").value;
+  let author = reviewForm.querySelector("input[name=author]").value;
+  let id_bidder = reviewForm.querySelector("input[name=id_bidder]").value;
+  let id_auctioneer = reviewForm.querySelector("input[name=id_auctioneer]").value;
+  let rating = reviewForm.querySelector("#selectRating").value;
+  sendAjaxRequest('post', '/review/new',{id_bidder: id_bidder, id_auctioneer: id_auctioneer,comment: comment, author: author, rating: rating}, reviewHandler);
+}
 
-        let currentBid = document.querySelector(".current");
-        currentBid.innerHTML = "Current Bid: " + item.bid_value + "$";
+function reviewHandler(){
+  try{
+  reviewForm.style.display = "none";
+  }
+  catch(e){
+    console.log("error");
+  }
+}
 
-
-  
-        let input_bid_value = bidding.querySelector("input[name=bid_value]");
-        input_bid_value.setAttribute("min",parseInt(item.bid_value)+1);
-
-        let newBid = document.createElement("tr");
-        lastBid.appendChild(newBid);
-
-        let numberBid = document.createElement("th");
-        bidCountInt++;
-        numberBid.innerHTML = bidCountInt;
-        newBid.appendChild(numberBid);
-
-        document.querySelector("#target-bid-count").innerHTML = bidCountInt + " bids";
-
-        let bidderCell = document.createElement("td");
-        bidderCell.innerHTML = item.bidder;
-        newBid.appendChild(bidderCell);
-
-        let bidValue = document.createElement("td");
-        bidValue.innerHTML = item.bid_value + "$";
-        newBid.appendChild(bidValue);
-
-      }
-      catch(error){
-        watchLogin.style.display = 'block';
-      }
-    }
-  */
- 
-  let formEdit = document.querySelector("#formAuctionEdit");
+let formEdit = document.querySelector("#formAuctionEdit");
   if(formEdit != null){
     formEdit.addEventListener('submit', editAuction);
   }
@@ -200,11 +158,39 @@ function unwatchAuctionHandler() {
 
 
   let payForm = document.querySelector("#payForm");
+  
   if(payForm != null){
     payForm.addEventListener('submit', payAuction);
   }
 
-  function payAuction(event){
+
+let payed = document.querySelector("#pay-target").innerHTML;
+let reviewed = document.querySelector("#reviewed-target").innerHTML;
+
+/*check if auction is watched on reload*/ 
+try{
+  if(!payed.localeCompare('true')){
+    payForm.style.display = 'none';
+    if(!review.localeCompare('true')){
+      reviewForm.style.display = 'block';
+    }
+    else{
+      reviewForm.style.display = 'none';
+    }
+  }
+  else {
+    payForm.style.display = 'block';
+    //reviewForm.style.display = 'none';
+  }
+  }
+  catch(e){
+    console.log("error");
+  }
+
+
+
+
+function payAuction(event){
     event.preventDefault();
 
     let id_bidder = payForm.querySelector("input[name=id_bidder]").value;
@@ -215,9 +201,10 @@ function unwatchAuctionHandler() {
     sendAjaxRequest('post', '/auction/' + id_auction + '/pay',{id_bidder: id_bidder, id_auctioneer: id_auctioneer,id_auction: id_auction,value: value}, payAuctionHandler);
   }
 
-  function payAuctionHandler() {
+function payAuctionHandler() {
     let item = JSON.parse(this.responseText);
     let payDone = document.querySelector("#payDone");
     payForm.style.display = "none";
     payDone.style.display = "block";
+    reviewForm.style.display = "block";
   }

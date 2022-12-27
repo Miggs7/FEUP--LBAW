@@ -256,16 +256,19 @@ if(!Auth::check()){
         @if(isset($winner[0]->id_bidder))
         @php
             $user_winner = App\Http\Controllers\UserController::getUserById($winner[0]->id_bidder)->username;
+            $is_reviewed = App\Http\Controllers\ReviewController::checkReviewed($winner[0]->id_bidder,$auctioneer_id);
         @endphp
         <p>{{$user_winner}} who bid {{$winner[0]->bid_value}} $</p>
         {{--form to pay--}}
-        @if(Auth::user('web')?->id == $winner[0]->id_bidder && !$payed)
+        @if(Auth::user('web')?->id == $winner[0]->id_bidder)
+        <div id="pay-target" style="display: none">{{var_export($payed)}}</div>
+        <div id="reviewed-target" style="display:none">{{var_export($is_reviewed)}}</div>
         <form id="payForm">
             @csrf
-            <input id="id" type="hidden" name="id_bidder" value="{{$winner[0]->id_bidder}}">
-            <input id="id" type="hidden" name="id_auctioneer" value="{{$auctioneer_id}}">
-            <input id="id" type="hidden" name="id_auction" value="{{$id}}">
-            <input id="id" type="hidden" name="value" value="{{$winner[0]->bid_value}}">
+            <input id="id_bidder" type="hidden" name="id_bidder" value="{{$winner[0]->id_bidder}}">
+            <input id="id_auctioneer" type="hidden" name="id_auctioneer" value="{{$auctioneer_id}}">
+            <input id="id_auction" type="hidden" name="id_auction" value="{{$id}}">
+            <input id="value" type="hidden" name="value" value="{{$winner[0]->bid_value}}">
             <div class="modal-footer border-top-0 d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
@@ -276,6 +279,31 @@ if(!Auth::check()){
             </div>
         </form>
         <span id="payDone"class="text-danger" style="display:none">Payed!</span>
+        <form id="reviewForm" style="display:none">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Review</h5>
+          </div>
+          @csrf
+          <label for="comment">Comment: </label>
+          <input id="comment" type="text" name="comment" class="form-control my-2">
+          <input id="author" type="hidden" name="author" class="form-control" value="{{$winner[0]->id_bidder}}">
+          <input id="id_bidder" type="hidden" name="id_bidder" class="form-control" value="{{$winner[0]->id_bidder}}">
+          <input id="id_auctioneer" type="hidden" name="id_auctioneer" class="form-control" value="{{$auctioneer_id}}">
+          <label for="selectRating">Rating: </label>
+          <select id="selectRating" class="form-select" name="rating" aria-label="RateScale">
+            <option selected>From One to Five how satisfied you are?</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+            <option value="4">Four</option>
+            <option value="5">Five</option>
+          </select>
+          <div class="modal-footer border-top-0 d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">
+              Review
+            </button>
+        </div>
+        </form>
         @elseif((Auth::user('web')?->id == $auctioneer_id))
             @if(!$payed)<p class="text mb-1 text-muted">Payment Pending...</p>
             @else

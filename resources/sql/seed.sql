@@ -86,10 +86,12 @@ CREATE TABLE review(
     id SERIAL PRIMARY KEY,
 	author INTEGER NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
     comment TEXT NOT NULL,
+    rating INTEGER NOT NULL,
     review_date TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
     "id_bidder" INTEGER NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
     "id_auctioneer" INTEGER NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
-    CONSTRAINT author CHECK (author = "id_bidder" OR author = "id_auctioneer")
+    CONSTRAINT author CHECK (author = "id_bidder" OR author = "id_auctioneer"),
+    CONSTRAINT rating CHECK (rating >= 1 AND rating <= 5)
 );
 
 CREATE TABLE auction_list(
@@ -304,7 +306,7 @@ CREATE INDEX bid_v ON bid USING hash(bid_value);
 -----------------------------------------
 
 -- TRIGGER 1 Edit review comment by owner
-DROP FUNCTION IF EXISTS edit_review_comment CASCADE;
+/*DROP FUNCTION IF EXISTS edit_review_comment CASCADE;
 CREATE FUNCTION edit_review_comment() RETURNS trigger AS
 $BODY$
 BEGIN
@@ -319,6 +321,7 @@ CREATE TRIGGER edit_review_comment
 AFTER UPDATE ON review
 FOR EACH ROW
 EXECUTE PROCEDURE edit_review_comment();
+*/
 
 -- TRIGGER 2 stop auction from being ongoing (BR04)
 DROP FUNCTION IF EXISTS auction_time_expired CASCADE;

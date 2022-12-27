@@ -440,28 +440,19 @@ paths:
           required: true
 
       responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:              
-                    id_auction: # <!--- form field name
-                      type: integer
-                    id_bidder:
-                      type: integer #<!-- Author
-                    bid_value:
-                      type: integer #<!-- Author
-                    bidder:
-                      type: string
-                required:
-                  - id_auction
-                  - id_bidder
-                  - bid_value
-                  - bidder
+          "302":
+            description: "Redirect after bidding."
+            headers:
+              Location:
+                schema:
+                  type: string
+                examples:
+                  302Success:
+                    description: "Successful update!"
+                    value: "/auction/{id}"
+                  302Failure:
+                    description: "Failed update."
+                    value: "/auction/{id}"
   
   /auction/new:
     get:
@@ -501,7 +492,7 @@ paths:
 
        responses:
           "302":
-            description: "Redirect after bidding."
+            description: "Redirect after new auction."
             headers:
               Location:
                 schema:

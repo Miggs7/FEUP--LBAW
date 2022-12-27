@@ -42,6 +42,11 @@ class AuctionController extends Controller
     ));
     
     $auction = Auction::find($request['id']);
+
+    /*Case auction is over*/
+    if($time >= $auction['ending_date']){
+      return redirect('/auction/'.$auction['id']);
+    }
     
     /*Trigger will verify if value is valid*/
     $auction->current_bid  = $request['bid_value'];

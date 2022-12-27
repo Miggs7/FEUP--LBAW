@@ -93,3 +93,5 @@ Route::get('/auctionlist/{id}', function () {
 Route::get('/auctionCategory/{id}', function () {
     return view('pages.auctionCategory');
 });
+
+Route::post('/review/new','ReviewController@create');
