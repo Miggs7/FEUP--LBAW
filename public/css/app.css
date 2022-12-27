@@ -38,8 +38,8 @@ header .container .text-end button:hover{
 }
 
 .dropdown-menu li a:hover{
-  background-color:rgb(115, 112, 112);
-  border-color: rgb(115, 112, 112);
+  background-color:rgb(215, 211, 211);
+  border-color: rgb(215, 211, 211);
 }
 
 /*form bootstrap*/
@@ -112,6 +112,20 @@ header .container ul a{
 .btn-primary:hover, .btn-primary:active{
   background-color:rgb(88, 1, 1) !important;
   border-color:rgb(88, 1, 1) !important;
+}
+
+a{
+  color:rgb(129, 0, 0);
+  text-decoration: none;
+}
+
+a:hover{
+  color:rgb(88, 1, 1) !important;
+  transform: scale(1.05);
+}
+
+a:active{
+  color:rgb(88, 1, 1) !important;
 }
 
 /*tables */

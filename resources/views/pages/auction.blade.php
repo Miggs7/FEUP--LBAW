@@ -61,8 +61,10 @@ if(!Auth::check()){
           <p class="text mb-1 auctionDescription">Description: {{$auction['description']}}</p>
           <p class="text mb-1 auctionEnd">Ending date: {{$end_stamp}}</p>
           <p class="text mb-1 current">Current bid: {{$auction['current_bid']}} $</p>
+          <a href="{{url('/user/'.$id)}}" style="text-decoration: none">
           <p class="text mb-1">Auctioneer : {{$auctioneer['name']}}</p>
-          <a href="#" id="target-bid-count" data-bs-toggle="modal" data-bs-target="#bids">{{count($bids)}} bids</a>
+          </a>
+          <a href="#" id="target-bid-count" data-bs-toggle="modal" data-bs-target="#bids" style="text-decoration: none">{{count($bids)}} bids</a>
           <div class="d-flex auction justify-content-center align-items-center">
             @if(((Auth::user('web')?->id == $auctioneer_id) || (Auth::guard('manager'))?->user()) && $auction['ongoing'])
             <button type="button" class="btn btn-primary profile" data-bs-toggle="modal" data-bs-target="#form">
