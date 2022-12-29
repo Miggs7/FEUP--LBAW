@@ -183,6 +183,27 @@ paths:
       responses:
         "200":
           description: "Ok. Edit User Profile UI"
+  
+  /user/{id}/delete:
+    put:
+      operationId: R108
+      summary: "R108: Deactivate user profile Action"
+      description: "The user will deactivate his account and personal info will disappear. Access: USR"
+      tags:
+        - "M01: Authentication and Individual Profile"
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id_user:
+                  type: integer
+      responses:
+        "200":
+          description: "Ok. Edit User Profile UI"
 
   /item/{id}:
     get:
@@ -556,6 +577,74 @@ paths:
         "200":
           description: "Ok. Show Auction Category Page UI"
 
+  /auctionlist/{id}:
+    get:
+      operationId: R407
+      summary: "R407: View Auction List Page"
+      description: "Show the Auctioneer List page. Access: PUB"
+      tags:
+        - "M04: Auctions"
+
+      parameters:
+        - in: path
+          name: id_auctioneer
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        "200":
+          description: "Ok. Show Auction Category Page UI"
+    
+  /auction/{id}/pay:
+    post:
+      operationId: R408
+      summary: "R408: View Auction List Page"
+      description: "Show the Auctioneer List page. Access: PUB"
+      tags:
+        - "M04: Auctions"
+
+      parameters:
+        - in: path
+          name: value
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: id_bidder
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: id_auctioneer
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: id_auction
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:              
+                    id_auction: # <!--- form field name
+                      type: integer
+                    id_bidder:
+                      type: integer #<!-- Author
+                    value:
+                      type: integer #<!-- Author
+          
+
+
     
   /manager/{id}:
     get:
@@ -588,7 +677,7 @@ paths:
         "200":
           description: "Ok. Show Homepage UI01"
     
-  /FAQ:
+  /faq:
 
     get:
       operationId: R503
@@ -614,7 +703,7 @@ paths:
         "200":
           description: "Ok. Show About UI"  
 
-  /contacts:
+  /contact:
 
     get:
       operationId: R505
@@ -705,6 +794,7 @@ paths:
       description: "Ban Auction page. Access: MAN"
       tags:
         - "M05: User and Auction Administration and Static pages"
+        - "M04: Auctions"
       
       parameters:
         - in: path
