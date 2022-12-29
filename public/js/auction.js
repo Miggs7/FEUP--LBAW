@@ -113,17 +113,21 @@ function review(event){
   let author = reviewForm.querySelector("input[name=author]").value;
   let id_bidder = reviewForm.querySelector("input[name=id_bidder]").value;
   let id_auctioneer = reviewForm.querySelector("input[name=id_auctioneer]").value;
+  let id_auction = reviewForm.querySelector("input[name=id_auction]").value;
   let rating = reviewForm.querySelector("#selectRating").value;
-  sendAjaxRequest('post', '/review/new',{id_bidder: id_bidder, id_auctioneer: id_auctioneer,comment: comment, author: author, rating: rating}, reviewHandler);
+  sendAjaxRequest('post', '/review/new',{id_bidder: id_bidder, id_auctioneer: id_auctioneer,comment: comment, author: author, rating: rating,id_auction : id_auction}, reviewHandler);
 }
 
 function reviewHandler(){
-  try{
+  let item = JSON.parse(this.responseText);
+  let reviewWarning = reviewForm.querySelector("#reviewError");
+  let reviewSucess = document.querySelector("#reviewMade");
+  console.log("hello");
   reviewForm.style.display = "none";
-  }
-  catch(e){
-    console.log("error");
-  }
+  reviewSucess.style.display = "block";
+
+  
+  
 }
 
 let formEdit = document.querySelector("#formAuctionEdit");
@@ -166,16 +170,18 @@ let formEdit = document.querySelector("#formAuctionEdit");
 
 let payed = document.querySelector("#pay-target").innerHTML;
 let reviewed = document.querySelector("#reviewed-target").innerHTML;
+let reviewSucess = document.querySelector("#reviewMade");
 
 /*check if auction is watched on reload*/ 
 try{
   if(!payed.localeCompare('true')){
     payForm.style.display = 'none';
-    if(!review.localeCompare('true')){
+    if(!reviewed.localeCompare('false')){
       reviewForm.style.display = 'block';
     }
     else{
       reviewForm.style.display = 'none';
+      reviewSucess.style.display = 'block';
     }
   }
   else {

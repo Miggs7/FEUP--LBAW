@@ -91,7 +91,7 @@ if(!Auth::check()){
                   <input type="hidden" name="current_bid" value="{{$auction['current_bid']}}">
                   <label for="bid_value"> Bid Value:</label>
                   <div class="input-group mb-3">
-                      <input type="number" class="form-control" placeholder=" > {{$auction['current_bid']}}" min={{$auction['current_bid']+1}} name="bid_value">
+                      <input type="number" class="form-control" placeholder=" > {{$auction['current_bid']}}" min={{$auction['current_bid']+1}} name="bid_value" required>
                     </span>
                       <button type="submit" class="btn btn-primary input-group-append">
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="IconChangeColor" width="16" height="16"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M512 216.3c0-6.125-2.344-12.25-7.031-16.93L482.3 176.8c-4.688-4.686-10.84-7.028-16.1-7.028s-12.31 2.343-16.1 7.028l-5.625 5.625L329.6 69.28l5.625-5.625c4.687-4.688 7.03-10.84 7.03-16.1s-2.343-12.31-7.03-16.1l-22.62-22.62C307.9 2.344 301.8 0 295.7 0s-12.15 2.344-16.84 7.031L154.2 131.5C149.6 136.2 147.2 142.3 147.2 148.5s2.344 12.25 7.031 16.94l22.62 22.62c4.688 4.688 10.84 7.031 16.1 7.031c6.156 0 12.31-2.344 16.1-7.031l5.625-5.625l113.1 113.1l-5.625 5.621c-4.688 4.688-7.031 10.84-7.031 16.1s2.344 12.31 7.031 16.1l22.62 22.62c4.688 4.688 10.81 7.031 16.94 7.031s12.25-2.344 16.94-7.031l124.5-124.6C509.7 228.5 512 222.5 512 216.3zM227.8 238.1L169.4 297.4C163.1 291.1 154.9 288 146.7 288S130.4 291.1 124.1 297.4l-114.7 114.7c-6.25 6.248-9.375 14.43-9.375 22.62s3.125 16.37 9.375 22.62l45.25 45.25C60.87 508.9 69.06 512 77.25 512s16.37-3.125 22.62-9.375l114.7-114.7c6.25-6.25 9.376-14.44 9.376-22.62c0-8.185-3.125-16.37-9.374-22.62l58.43-58.43L227.8 238.1z" id="mainIconPathAttribute"></path>
@@ -258,7 +258,7 @@ if(!Auth::check()){
         @if(isset($winner[0]->id_bidder))
         @php
             $user_winner = App\Http\Controllers\UserController::getUserById($winner[0]->id_bidder)->username;
-            $is_reviewed = App\Http\Controllers\ReviewController::checkReviewed($winner[0]->id_bidder,$auctioneer_id);
+            $is_reviewed = App\Http\Controllers\ReviewController::checkReviewed($id);
         @endphp
         <p>{{$user_winner}} who bid {{$winner[0]->bid_value}} $</p>
         {{--form to pay--}}
@@ -291,6 +291,7 @@ if(!Auth::check()){
           <input id="author" type="hidden" name="author" class="form-control" value="{{$winner[0]->id_bidder}}">
           <input id="id_bidder" type="hidden" name="id_bidder" class="form-control" value="{{$winner[0]->id_bidder}}">
           <input id="id_auctioneer" type="hidden" name="id_auctioneer" class="form-control" value="{{$auctioneer_id}}">
+          <input id="id_auction" type="hidden" name="id_auction" value="{{$id}}">
           <label for="selectRating">Rating: </label>
           <select id="selectRating" class="form-select" name="rating" aria-label="RateScale">
             <option selected>From One to Five how satisfied you are?</option>
@@ -300,12 +301,14 @@ if(!Auth::check()){
             <option value="4">Four</option>
             <option value="5">Five</option>
           </select>
+          <span id="reviewError" class="text-danger" style="display:none">Please select 1 to 5!</span>
           <div class="modal-footer border-top-0 d-flex justify-content-center">
             <button type="submit" class="btn btn-primary">
               Review
             </button>
         </div>
         </form>
+        <span id="reviewMade" class="text-danger" style="display:none">Reviewed!</span>
         @elseif((Auth::user('web')?->id == $auctioneer_id))
             @if(!$payed)<p class="text mb-1 text-muted">Payment Pending...</p>
             @else
@@ -454,7 +457,7 @@ if(!Auth::check()){
         @method('DELETE')
         <input type="hidden" name="id" value={{$id}}>
         <p>Are you Sure?</p>
-        <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="modal-footer justify-content-center align-items-center">
         <button type="submit" class="btn btn-primary profile">Yes</button>
         </div>
       </form>

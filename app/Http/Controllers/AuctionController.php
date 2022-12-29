@@ -37,7 +37,7 @@ class AuctionController extends Controller
 
     $request->validate(array(
       'id_bidder' => 'required|numeric',
-      'current_bid' => 'required_with:bid_value|integer|min:1',
+      'current_bid' => 'required_with:bid_value|integer',
       'bid_value' => 'required_with:current_bid|integer|gt:current_bid',
     ));
     

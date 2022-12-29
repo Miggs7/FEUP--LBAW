@@ -56,6 +56,7 @@ CREATE TABLE _user(
     age INT,
     profile_picture TEXT,
     is_banned BOOLEAN DEFAULT FALSE,
+    remember_token VARCHAR,
     CONSTRAINT age CHECK (age >= 17)
 );
 
@@ -90,6 +91,7 @@ CREATE TABLE review(
     review_date TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
     "id_bidder" INTEGER NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
     "id_auctioneer" INTEGER NOT NULL REFERENCES _user(id) ON DELETE CASCADE,
+    "id_auction" INTEGER NOT NULL REFERENCES auction(id) ON DELETE CASCADE,
     CONSTRAINT author CHECK (author = "id_bidder" OR author = "id_auctioneer"),
     CONSTRAINT rating CHECK (rating >= 1 AND rating <= 5)
 );

@@ -276,7 +276,7 @@
         @method('PUT')
         <input type="hidden" name="id" value={{$id}}>
         <p>Are you Sure?</p>
-        <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="modal-footer justify-content-center align-items-center">
         <button type="submit" class="btn btn-primary profile">Yes</button>
         </div>
       </form>

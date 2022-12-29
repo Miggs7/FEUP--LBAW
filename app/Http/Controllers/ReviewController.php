@@ -38,10 +38,10 @@ class ReviewController extends Controller
         return $reviews;
     }
 
-    public static function checkReviewed($id_bidder,$id_auctioneer){
+    public static function checkReviewed($id_auction){
         
         foreach(Review::all() as $review){
-            if($review->author == $id_bidder && $review->id_bidder == $id_bidder && $review->id_auctioneer = $id_auctioneer){
+            if($review->id_auction == $id_auction){
                 return true;
             }
         }
@@ -69,6 +69,7 @@ class ReviewController extends Controller
           'id_bidder' => 'required|numeric', 
           'id_auctioneer'=> 'required|numeric',
           'rating' => 'required|numeric',
+          'id_auction' => 'required|numeric',
         ));
         $review = NEW Review;
         $review->author = $request['author'];
@@ -76,6 +77,7 @@ class ReviewController extends Controller
         $review->id_bidder = $request['id_bidder'];
         $review->id_auctioneer = $request['id_auctioneer'];
         $review->rating = $request['rating'];
+        $review->id_auction = $request['id_auction'];
         $review->save();
         return response()->json(['author'=>$request['author'],'comment'=>$request['comment'],'id_auctioneer'=>$request['id_auctioneer'],'rating'=>$request['rating']],200);
     }

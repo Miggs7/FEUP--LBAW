@@ -204,3 +204,11 @@ hr {
   margin: 0 auto;
 }
 
+#passwordReseted {
+  display: none;
+}
+
+#passwordReseted.show {
+  display: block;
+}
+

@@ -95,3 +95,7 @@ Route::get('/auctionCategory/{id}', function () {
 });
 
 Route::post('/review/new','ReviewController@create');
+
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+Route::post('password/email', 'Auth\ForgotPasswordController@getEmail')->name('password.email');
