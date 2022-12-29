@@ -66,7 +66,7 @@ class UserController extends Controller
     $user->is_banned = $input['ban'];
     $user->save();
 
-    return redirect('/user/'.$user->id);
+    return redirect('/manager/'.$request['manager_id']);
   }
 
   public static function checkIfBanned($id){

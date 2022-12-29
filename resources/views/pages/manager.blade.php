@@ -146,6 +146,7 @@
               <form form method="POST" action={{url('user/'.$id.'/ban')}} enctype="multipart/form-data">
                 {{ csrf_field() }}
                 @method('PUT')
+                <input type="hidden" name="manager_id" value={{Auth::guard('manager')->user()?->id}}>
                 <input type="hidden" name="id" value={{$user->id}}>
               @if(!$user->is_banned)
                 <input type="hidden" name="ban" value="1">

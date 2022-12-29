@@ -22,7 +22,29 @@
 
     
   </head>
-  <body>  
+  <body> 
+    
+  @if(Auth::guard('web')->user()?->is_banned)
+    <div class="modal show" id="bannedMessage" tabindex="-1" role="dialog" aria-labelledby="bannedMessage" aria-hidden="true" style="display:block">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="d-flex flex-column justify-content-center align-items-center">
+          <div class="modal-header border-bottom-0">
+            <h5 class="modal-title" id="exampleModalLabel">Ban Warning!</h5>
+          </div>
+
+            <p>Your Banned! Contact an admin if there's an issue.</p>
+            <div class="modal-footer justify-content-center align-items-center">
+              <a href="{{url('/logout')}}">
+                <button type="submit" class="btn btn-primary profile">Okay</button>
+              </a>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    @endif
 
       <header class="p-3 text-white">
         <div class="container">
