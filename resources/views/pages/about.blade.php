@@ -18,7 +18,7 @@
             <div class="card mb-4">
                 <div class="card-body text-center">
                     <img src= "/images/profile/default.png" class="figure-img img-fluid category" alt="Dev Image" width="150" height="150">
-                    <h5>???</h5>
+                    <h5>Domingos Santos</h5>
                 </div>
               </div>
         </div>
@@ -28,7 +28,7 @@
             <div class="card mb-4">
                 <div class="card-body text-center">
                     <img src= "/images/profile/default.png" class="figure-img img-fluid category" alt="Dev Image" width="150" height="150">
-                        <h5>???</h5>
+                        <h5>João Félix</h5>
                 </div>
               </div>
         </div>
@@ -36,7 +36,7 @@
             <div class="card mb-4">
                 <div class="card-body text-center">
                     <img src= "/images/profile/default.png" class="figure-img img-fluid category" alt="Dev Image" width="150" height="150">
-                        <h5>???</h5>
+                        <h5>Gonçalo Ferreira</h5>
                 </div>
               </div>
         </div>
